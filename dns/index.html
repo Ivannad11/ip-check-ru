@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#cc785c">
+<title>Утечка DNS — проверка</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../common/site.css">
+<script src="../common/site.js"></script>
+<style>
+.feats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;text-align:center}
+.feat b{display:block;font-size:.9em;margin-top:2px}
+.feat span{color:var(--muted);font-size:.8em}
+.test-area{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0 14px}
+.btn-ghost{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer}
+.btn-ghost:disabled{opacity:.5;cursor:default}
+.status-bar{text-align:center;color:var(--muted);font-size:.92em;margin-bottom:14px;line-height:1.7}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:-1px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.verdict{border-radius:12px;padding:12px 16px;margin-bottom:14px;font-weight:600}
+.verdict-safe{background:var(--safe-bg);color:var(--safe)}
+.verdict-danger{background:var(--danger-bg);color:var(--danger)}
+.verdict-warn{background:var(--warn-bg);color:var(--warn)}
+.articles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;align-items:start;margin-top:10px}
+details.fold{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px}
+details.fold summary{cursor:pointer;font-weight:600}
+details.fold .article p,details.fold .article ul{margin:8px 0}
+.article code{background:var(--neutral-bg);border-radius:4px;padding:0 4px;font-size:.9em;word-break:break-all}
+.article table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.article th,.article td{border:1px solid var(--border);padding:6px 8px;text-align:left;vertical-align:top}
+@media (max-width:860px){.feats{grid-template-columns:repeat(2,1fr)}.articles{grid-template-columns:1fr}}
+@media (max-width:560px){.tbl .col-isp{display:none}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head">
+    <div>
+      <h1>Утечка DNS</h1>
+      <p class="desc">DNS может сдать, где ты на самом деле, даже когда VPN включён. Жми тест — увидишь, какие DNS-серверы резолвят твои запросы.</p>
+    </div>
+    <label class="toggle">Скрыть IP <input type="checkbox" id="ipMaskToggle"><span class="slider"></span></label>
+  </div>
+
+  <div class="feats">
+    <div class="feat">🔒<b>Свои поддомены</b><span>уникальные на каждый тест</span></div>
+    <div class="feat">⚡<b>Быстро</b><span>результат за ~10 секунд</span></div>
+    <div class="feat">🎯<b>Видно резолвер</b><span>IP, страна, оператор</span></div>
+    <div class="feat">🛡️<b>Без хранения</b><span>история не пишется</span></div>
+  </div>
+
+  <div class="test-area">
+    <button class="btn-primary" id="btnStandard" onclick="runTest('standard')">Быстрый тест</button>
+    <button class="btn-ghost" id="btnExtended" onclick="runTest('extended')">Глубокий тест</button>
+  </div>
+
+  <div class="status-bar" id="statusBar">Нажми кнопку — проверим, не утекает ли DNS</div>
+  <div id="verdictArea"></div>
+
+  <div class="card tbl-wrap" id="dnsTable" style="display:none;margin-bottom:12px">
+    <table class="tbl">
+      <thead><tr><th>#</th><th>IP резолвера</th><th>Где</th><th class="col-isp">Оператор</th><th>Статус</th></tr></thead>
+      <tbody id="dnsBody"></tbody>
+    </table>
+  </div>
+
+  <h2 style="font-size:1.1em;margin:28px 0 4px">Почитать</h2>
+  <div class="articles">
+    <details class="fold">
+      <summary>Что такое утечка DNS</summary>
+      <div class="article">
+        <p>Перед тем как открыть сайт, браузер спрашивает у DNS-сервера его адрес. Список таких вопросов — по сути история твоих посещений.</p>
+        <p>VPN шифрует трафик, но DNS-запросы иногда идут мимо него — прямо к DNS провайдера. Тогда провайдер видит, куда ты ходишь, а сервисы по резолверу понимают, из какой ты страны. Это и есть утечка.</p>
+        <p>Некоторые провайдеры ещё и перехватывают запросы на 53-й порт: прописал 8.8.8.8, а отвечает всё равно провайдер.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Нашёл утечку — что делать</summary>
+      <div class="article">
+        <p><strong>Правило одно:</strong> при включённом VPN DNS должен идти через туннель или через зашифрованный DoH.</p>
+        <p><strong>Браузер.</strong> «Безопасный DNS» в Chrome / Edge / Яндекс Браузере иногда ходит мимо VPN-клиента. Если клиент сам управляет DNS — выключи эту настройку.</p>
+        <p><strong>Система.</strong> Windows: <code>ipconfig /flushdns</code>. macOS: <code>sudo dscacheutil -flushcache</code>. Убери вручную прописанные DNS в настройках сети.</p>
+        <p><strong>VPN-клиент.</strong> Включи перехват DNS (DNS hijack / fake-ip) или TUN-режим — тогда все запросы пойдут через клиент.</p>
+        <p>Поправил — запусти тест ещё раз.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Почему DNS течёт, даже когда VPN включён</summary>
+      <div class="article">
+        <p><strong>Клиент не забирает DNS.</strong> HTTP/SOCKS-прокси передаёт только TCP. Имя сайта браузер резолвит заранее — и если в клиенте не включён удалённый DNS, запрос уходит провайдеру.</p>
+        <p><strong>Система и клиент живут отдельно.</strong> Часть программ берёт DNS из системы, часть — у клиента. Выходов становится два.</p>
+        <p><strong>IPv6.</strong> Многие правила ловят только IPv4, а AAAA-запросы уходят напрямую.</p>
+        <p><strong>Раздельная маршрутизация.</strong> Если российские сайты идут напрямую, их DNS-запросы тоже могут уходить российскому DNS — это нормально. Плохо, когда российский DNS резолвит и зарубежные сайты: тогда страна видна.</p>
+        <ul>
+          <li><strong>TUN-режим</strong> — весь трафик, включая UDP-запросы DNS, через клиент;</li>
+          <li><strong>DNS внутри клиента</strong> — fake-ip или перехват DNS;</li>
+          <li><strong>DoH / DoT</strong> — провайдер не видит содержимое запросов;</li>
+          <li><strong>выключить IPv6</strong>, если клиент его не обрабатывает.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Обычный DNS, DoT, DoH — в чём разница</summary>
+      <div class="article">
+        <p><strong>Обычный DNS (порт 53)</strong> — открытым текстом, его видят и подменяют. <strong>DoT (853)</strong> — зашифрован, но порт выдаёт, что это DNS, его легко заблокировать. <strong>DoH (443)</strong> — выглядит как обычный HTTPS, отделить от сайтов сложно.</p>
+        <table>
+          <tr><th>Сервис</th><th>DNS</th><th>DoT</th><th>DoH</th></tr>
+          <tr><td>Cloudflare</td><td><code>1.1.1.1</code></td><td><code>one.one.one.one</code></td><td><code>https://1.1.1.1/dns-query</code></td></tr>
+          <tr><td>Google</td><td><code>8.8.8.8</code></td><td><code>dns.google</code></td><td><code>https://dns.google/dns-query</code></td></tr>
+          <tr><td>Quad9</td><td><code>9.9.9.9</code></td><td><code>dns.quad9.net</code></td><td><code>https://dns.quad9.net/dns-query</code></td></tr>
+          <tr><td>AliDNS</td><td><code>223.5.5.5</code></td><td><code>dns.alidns.com</code></td><td><code>https://dns.alidns.com/dns-query</code></td></tr>
+          <tr><td>Tencent DNSPod</td><td><code>119.29.29.29</code></td><td><code>dot.pub</code></td><td><code>https://doh.pub/dns-query</code></td></tr>
+          <tr><td>Яндекс DNS</td><td><code>77.88.8.8</code></td><td><code>common.dot.dns.yandex.net</code></td><td><code>https://common.dot.dns.yandex.net/dns-query</code></td></tr>
+        </table>
+        <p>AliDNS и DNSPod — китайские, Яндекс DNS — российский: при выходе в другой стране тест пометит их как утечку. Яндекс DNS есть смысл оставлять только для российских доменов при раздельной маршрутизации.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>А WebRTC тут при чём</summary>
+      <div class="article">
+        <p>WebRTC — встроенные в браузер звонки. Чтобы узнать свой внешний адрес, он шлёт UDP-запрос на STUN-сервер, и этот запрос часто идёт мимо VPN. Странице не нужно никаких разрешений, чтобы так узнать твой IP.</p>
+        <p>DNS выдаёт, <em>куда</em> ты ходишь, WebRTC — <em>кто</em> ты. Проверь оба: <a href="../webrtc/">утечка WebRTC</a>.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="foot">Логика повторяет ip.net.coffee/dns: браузер резолвит уникальные поддомены, авторитетный DNS запоминает, какие резолверы пришли, потом читаем список. У оригинала свой авторитетный DNS, закрытый для чужих сайтов, поэтому здесь bash.ws — принцип тот же. Утечка — резолвер в Китае или в РФ, когда выход в другой стране.</div>
+</div>
+
+<script>
+async function getUserIP() {
+  try { const e = await trace('https://1.1.1.1/cdn-cgi/trace', 5000); return e.ip || null; } catch { return null; }
+}
+async function getGeoForIP(ip) { try { return await geoip(ip, 5000); } catch { return null; } }
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+let testing = false;
+async function runTest(type) {
+  if (testing) return;
+  testing = true;
+  const btnS = document.getElementById('btnStandard'), btnE = document.getElementById('btnExtended');
+  btnS.disabled = btnE.disabled = true;
+  const statusBar = document.getElementById('statusBar'), verdictArea = document.getElementById('verdictArea');
+  const table = document.getElementById('dnsTable'), tbody = document.getElementById('dnsBody');
+  verdictArea.innerHTML = ''; tbody.innerHTML = ''; table.style.display = 'none';
+
+  // Быстрый тест — 5 раундов, глубокий — 8 (как у оригинала)
+  const rounds = type === 'extended' ? 8 : 5;
+  const id = [...crypto.getRandomValues(new Uint8Array(8))].map(b => b.toString(16).padStart(2, '0')).join('');
+  statusBar.innerHTML = `<span class="spinner"></span>Резолвим тестовые поддомены… (0/${rounds})`;
+
+  const userIP = await getUserIP();
+  const userGeo = userIP ? await getGeoForIP(userIP) : null;
+
+  // Шаг 1: заставляем браузер резолвить уникальные поддомены
+  for (let i = 1; i <= rounds; i++) {
+    statusBar.innerHTML = `<span class="spinner"></span>Резолвим тестовые поддомены… (${i}/${rounds})`;
+    await new Promise(res => {
+      const img = new Image(); const t = setTimeout(res, 3000);
+      img.onload = img.onerror = () => { clearTimeout(t); res(); };
+      img.src = `https://${i}.${id}.bash.ws/?_=${Date.now()}`;
+    });
+    if (i < rounds) await sleep(600);
+  }
+
+  // Шаг 2: ждём, пока авторитетный DNS запишет резолверы, и забираем список (до 3 попыток)
+  statusBar.innerHTML = '<span class="spinner"></span>Ждём записи DNS…';
+  await sleep(2000);
+  let servers = [];
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const r = await fetch(`https://bash.ws/dnsleak/test/${id}?json`, { signal: AbortSignal.timeout(5000) });
+      if (r.ok) {
+        const data = await r.json();
+        servers = data.filter(x => x.type === 'dns');
+        if (servers.length) break;
+      }
+    } catch {}
+    if (attempt < 2) { statusBar.innerHTML = '<span class="spinner"></span>Ещё ждём результат…'; await sleep(2000); }
+  }
+
+  // Шаг 3: геолокация каждого резолвера
+  statusBar.innerHTML = '<span class="spinner"></span>Определяем, где резолверы…';
+  const uniq = new Map(); servers.forEach(s => { if (!uniq.has(s.ip)) uniq.set(s.ip, s); });
+  const results = [];
+  for (const [ip, s] of uniq) {
+    const g = await getGeoForIP(ip);
+    results.push({
+      ip,
+      country: g?.country || s.country_name || '',
+      city: g?.city || '',
+      isp: g?.isp || s.org || '',
+      countryCode: (g?.country_code || s.country || '').toLowerCase(),
+    });
+  }
+
+  // Шаг 4: вердикт. Как у оригинала (китайский резолвер при выходе не из Китая) + то же для РФ
+  const userCC = (userGeo?.country_code || '').toLowerCase();
+  const LEAK_CC = { cn: 'Китая', ru: 'России' };
+  const isLeakRow = r => !!LEAK_CC[r.countryCode] && !!userCC && userCC !== r.countryCode;
+  const leakRows = results.filter(isLeakRow);
+  const isLeaked = leakRows.length > 0;
+
+  if (!results.length) verdictArea.innerHTML = '<div class="verdict verdict-safe">✓ Резолверы не видны — похоже, DNS зашифрован (DoH / DoT)</div>';
+  else if (isLeaked) verdictArea.innerHTML = `<div class="verdict verdict-danger">⚠️ Утечка DNS! Твои запросы резолвит DNS-сервер ${[...new Set(leakRows.map(r => LEAK_CC[r.countryCode]))].join(' и ')}, хотя выход в другой стране</div>`;
+  else verdictArea.innerHTML = '<div class="verdict verdict-safe">✓ Всё чисто — утечки DNS нет</div>';
+
+  tbody.innerHTML = results.map((r, i) => {
+    const leaked = isLeakRow(r);
+    return `<tr>
+      <td>${i + 1}</td>
+      <td style="font-weight:600"><span class="ip-mask-target">${esc(r.ip)}</span></td>
+      <td>${flagImg(r.countryCode)} ${esc(r.country)} ${esc(r.city)}</td>
+      <td class="col-isp small">${esc(r.isp)}</td>
+      <td>${leaked ? '<span class="tag tag-danger">утечка</span>' : '<span class="tag tag-safe">норма</span>'}</td>
+    </tr>`;
+  }).join('');
+  table.style.display = results.length ? '' : 'none';
+
+  statusBar.innerHTML = userIP
+    ? `Твой выход: ${flagImg(userGeo?.country_code)} <strong>${displayIP(userIP)}</strong>${userGeo?.country ? ' (' + esc(userGeo.country) + ')' : ''}<br>Найдено DNS-резолверов: ${results.length}`
+    : `Найдено DNS-резолверов: ${results.length}`;
+
+  testing = false;
+  btnS.disabled = btnE.disabled = false;
+}
+
+// Как у оригинала: на широком экране статьи в одной строке открываются парой
+(function () {
+  const items = [...document.querySelectorAll('details.fold')];
+  items.forEach((el, i) => el.addEventListener('toggle', () => {
+    if (window.innerWidth <= 860) return;
+    const p = i % 2 === 0 ? items[i + 1] : items[i - 1];
+    if (p && p.open !== el.open) p.open = el.open;
+  }));
+})();
+</script>
+</body>
+</html>

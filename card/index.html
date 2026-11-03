@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#cc785c">
+<title>IP-карточка</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../common/site.css">
+<script src="../common/site.js"></script>
+<style>
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:999px;padding:4px 11px;font:inherit;font-size:.86em;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;font-weight:600}
+.chip .sdot{width:12px;height:12px;border-radius:50%;flex:0 0 12px;border:1px solid rgba(0,0,0,.1)}
+.stickers{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:12px}
+.st-label{color:var(--muted);font-size:.85em;margin-right:4px}
+.st-sep{width:1px;height:22px;background:var(--border);margin:0 4px}
+.st-chip{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--card);border-radius:8px;font-size:18px;cursor:pointer;padding:3px;color:var(--text)}
+.st-chip svg{width:100%;height:100%}
+.st-chip.rect{width:56px}
+.st-chip.word{width:auto;padding:0 10px;font:inherit;font-size:.82em}
+.st-chip:hover{border-color:var(--accent)}
+.st-chip.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.actions .btn{font-size:.88em;padding:7px 12px;text-decoration:none;display:inline-flex;align-items:center}
+.status{color:var(--muted);font-size:.85em}
+.stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;margin-bottom:22px}
+.stage-label{font-weight:600;font-size:.92em;margin-bottom:8px}
+.stage-sub{color:var(--muted);font-weight:400;font-size:.88em;margin-left:4px}
+.preview-wrap{position:relative;background:repeating-conic-gradient(var(--neutral-bg) 0 25%,transparent 0 50%) 0 0/16px 16px;border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;justify-content:center;min-height:200px}
+.preview-wrap img{width:100%;max-width:480px;height:auto;display:block}
+.preview-wrap.loading img{opacity:.35}
+.preview-wrap.loading:after{content:"Загрузка…";position:absolute;color:var(--muted);font-size:.9em}
+.code{display:block;background:var(--neutral-bg);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;cursor:pointer;color:var(--text)}
+.code:hover{border-color:var(--accent)}
+.code.copied{border-color:var(--safe);background:var(--safe-bg)}
+.side-link{display:flex;align-items:center;gap:8px;margin-top:10px;border:1px solid var(--border);background:var(--card);border-radius:10px;padding:10px 12px;text-decoration:none;color:inherit;font-size:.9em}
+.side-link:hover{border-color:var(--accent)}
+.side-link .arr{margin-left:auto;color:var(--accent)}
+.side-link .sub{display:block;color:var(--muted);font-size:.85em}
+.share{grid-column:1/-1;font-size:.88em;color:var(--muted);cursor:pointer;word-break:break-all}
+.share b{color:var(--text);font-weight:600}
+.share.copied b{color:var(--safe)}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:22px}
+.g-item{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:6px;cursor:pointer;text-align:center;min-width:0}
+.g-item:hover{border-color:var(--accent)}
+.g-item.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.g-item img{width:100%;height:auto;aspect-ratio:720/340;display:block;border-radius:6px;background:var(--neutral-bg)}
+.g-item span{display:block;font-size:.8em;color:var(--muted);margin-top:4px}
+.embed{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.embed-w{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 12px;font-size:.88em}
+.ew-btn{border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:7px;padding:3px 10px;font:inherit;cursor:pointer}
+.ew-btn.active{border-color:var(--accent);color:var(--text);font-weight:600}
+.embed-row{margin-bottom:10px}
+.embed-label{display:block;color:var(--muted);font-size:.84em;margin-bottom:4px}
+.faq{margin-top:22px}
+.faq h3{font-size:.98em;margin:14px 0 4px}
+.faq p{color:var(--muted);margin:0;font-size:.92em}
+#copyToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:.88em;opacity:0;pointer-events:none;transition:.2s}
+#copyToast.show{opacity:1;transform:translateX(-50%)}
+@media (max-width:860px){.stage{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.st-chip{width:30px;height:30px}.st-chip.rect{width:50px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head"><div>
+    <h1>IP-карточка</h1>
+    <p class="desc">Картинка с IP для сайта, блога, README или подписи на форуме. Каждый, кто откроет страницу, увидит на ней <strong>свой</strong> IP, страну и сеть. Выбери стиль и стикер, скопируй код.</p>
+  </div>
+  <label class="toggle">Скрыть IP <input type="checkbox" id="ipMaskToggle"><span class="slider"></span></label></div>
+
+  <div class="chips" id="chips"></div>
+  <div class="stickers" id="stickers"></div>
+  <div class="actions">
+    <button class="btn-primary" id="refreshBtn">🎲 Случайный стиль + стикер</button>
+    <button class="btn" id="copyBtn">📋 Скопировать IP</button>
+    <a class="btn" id="lookupBtn" href="../ip/" target="_blank" rel="noopener">🔍 Проверить мой IP</a>
+    <span class="status" id="status">Загрузка…</span>
+  </div>
+
+  <div class="stage">
+    <div>
+      <div class="stage-label">Как будет выглядеть <span class="stage-sub">та же картинка, что увидят посетители</span></div>
+      <div class="preview-wrap loading" id="previewWrap"><img id="preview" alt="Превью IP-карточки" decoding="async"></div>
+    </div>
+    <div>
+      <div class="stage-label">Markdown <span class="stage-sub">GitHub, Hexo, Notion, Obsidian</span></div>
+      <code class="code" data-format="md"></code>
+      <a class="side-link" href="#embedBox"><span>📝</span><span>Код для HTML и BBCode, выбор ширины</span><span class="arr">→</span></a>
+      <a class="side-link" id="ipScoreLink" href="../ip/" target="_blank" rel="noopener"><span>🎯</span>
+        <span>Оценка IP <b id="ipScoreIp" class="ip-mask-target">—</b><span class="sub">чистота · риск · тип адреса · чёрные списки</span></span><span class="arr">→</span></a>
+      <div class="side-link" id="ipInfo" style="cursor:default"><span>🌍</span><span id="ipInfoText" class="small">Определяю, где ты…</span></div>
+    </div>
+    <div class="share" id="shareLink" title="Нажми, чтобы скопировать">🔗 Ссылка на эту настройку: <b id="shareUrl"></b></div>
+  </div>
+
+  <h2 style="font-size:1.05em;margin:0 0 10px">Все стили <span class="small">— нажми, чтобы выбрать</span></h2>
+  <div class="gallery" id="gallery"></div>
+
+  <div class="embed" id="embedBox">
+    <b>Вставить на сайт, в блог или подпись на форуме</b>
+    <div class="small" style="margin-top:4px">Выбери формат и нажми на код — он скопируется. Картинка — SVG, чёткая при любом масштабе.</div>
+    <div class="embed-w" id="ewOpts"><span class="small">Ширина:</span>
+      <button class="ew-btn" data-w="240">240</button><button class="ew-btn" data-w="360">360</button>
+      <button class="ew-btn active" data-w="480">480 (лучше всего)</button><button class="ew-btn" data-w="560">560</button>
+      <button class="ew-btn" data-w="0">оригинал 720</button>
+      <span class="small">высота считается сама, 720:340</span></div>
+    <div class="embed-row"><span class="embed-label">HTML — блог, свой сайт</span><code class="code" data-format="html"></code></div>
+    <div class="embed-row"><span class="embed-label">Markdown — GitHub, Hexo, Notion</span><code class="code" data-format="md"></code></div>
+    <div class="embed-row"><span class="embed-label">BBCode — phpBB, Discuz, старые форумы</span><code class="code" data-format="bb"></code></div>
+  </div>
+
+  <div class="faq">
+    <h3>Чей IP увидят на моём сайте — мой или посетителя?</h3>
+    <p>Посетителя. Код вставки ссылается на <code>card.net.coffee/v1/card.svg</code> без IP: их сервер смотрит, с какого адреса пришёл запрос картинки, и рисует карточку для него (проверено: отвечает редиректом на <code>?ip=&lt;адрес запросившего&gt;</code>). Превью здесь собирается с твоим IP — так же, как у оригинала.</p>
+    <h3>Чей это сервер?</h3>
+    <p>Картинку рисует сервер оригинала — <a href="https://card.net.coffee/ip/" target="_blank" rel="noopener">card.net.coffee</a> (Net.Coffee), у нас своего генератора нет. Здесь — только конструктор на русском: стили, стикеры, превью и готовый код. Данные об IP (страна, сеть, Trust) — из их базы, текст на карточке английский.</p>
+    <h3>Какой IP попадёт на карточку, если у меня VPN с раздельной маршрутизацией?</h3>
+    <p>Тот, через который браузер ходит на card.net.coffee (это зарубежный сайт на Cloudflare, обычно — выход VPN). Российский IP туда не попадёт.</p>
+    <h3>Регистрация, ключи, оплата?</h3>
+    <p>Не нужны. Китайские стикеры (来了老弟 — «Заходи, братан», 绝密 — «Совершенно секретно», 好评+1 — «Лайк», 三网优化 — «Оптимизация для трёх операторов КНР», CN2 / 9929 / CMIN2 — магистрали китайских операторов) оставлены как в оригинале.</p>
+  </div>
+  <div class="foot">Конструктор повторяет card.net.coffee/ip. Картинки: card.net.coffee/v1/card.svg (Net.Coffee). IP для превью — /cdn-cgi/trace того же сервера.</div>
+</div>
+<div id="copyToast">✓ Скопировано</div>
+
+<script>
+// ===== Стили — тот же реестр id, что у оригинала (сервер понимает только их) =====
+const STYLES = [
+  { id: 'random', name: '🎲 Случайный', dot: 'linear-gradient(45deg,#ff006e,#8338ec,#3a86ff,#06d6a0)' },
+  { id: 'minimal', name: 'Минимализм', dot: '#1a1a1a' },
+  { id: 'aurora', name: 'Северное сияние 🌌', dot: 'linear-gradient(45deg,#34d399,#818cf8,#f472b6)' },
+  { id: 'terminal', name: 'Терминал', dot: '#00ff41' },
+  { id: 'meteor', name: 'Звездопад ☄', dot: 'linear-gradient(45deg,#0f172a,#7c3aed)' },
+  { id: 'laser', name: 'Лазерный киберпанк ⌬', dot: 'linear-gradient(45deg,#ff00ff,#00e5ff)' },
+  { id: 'anime-sky', name: 'Сакура 🌸', dot: 'linear-gradient(45deg,#bae6fd,#fde2e4,#fce7f3)' },
+  { id: 'paper', name: 'Крафт-бумага', dot: '#d4a14b' },
+  { id: 'neon', name: 'Неон', dot: 'linear-gradient(45deg,#ff006e,#8338ec)' },
+  { id: 'cyber', name: 'Киберпанк', dot: '#00f5ff' },
+  { id: 'passport', name: 'Паспорт', dot: '#d4a14b' },
+  { id: 'cafe', name: 'Кофейня', dot: '#6b3e1f' },
+  { id: 'sunset', name: 'Закат', dot: 'linear-gradient(45deg,#ff9a56,#ff6a88,#c471ed)' },
+  { id: 'ocean', name: 'Океан', dot: 'linear-gradient(180deg,#7dd3fc,#0369a1)' },
+  { id: 'galaxy', name: 'Млечный путь', dot: 'radial-gradient(circle,#fff,#c4b5fd,#1e1b4b)' },
+  { id: 'anime-pink', name: 'Розовый градиент', dot: 'linear-gradient(45deg,#ffd6e8,#ffb3d1,#c5e1ff)' },
+  { id: 'pixel', name: 'Пиксели', dot: '#ffec27' },
+  { id: 'rainy', name: 'Дождливая ночь ☔', dot: 'linear-gradient(180deg,#1a2747,#0f1830)' },
+  { id: 'snowy', name: 'Снежная ночь ❄', dot: 'linear-gradient(180deg,#0f1e3d,#1e293b)' },
+  { id: 'firefly', name: 'Светлячки 🌟', dot: 'radial-gradient(circle,#fde047,#0f172a)' },
+  { id: 'vapor', name: 'Вейпорвейв 🌆', dot: 'linear-gradient(180deg,#f472b6,#8b5cf6,#fbbf24)' },
+  { id: 'bubble', name: 'Пузыри 🫧', dot: 'linear-gradient(180deg,#7dd3fc,#0369a1)' },
+  { id: 'starry', name: 'Звёздная ночь ✦', dot: 'radial-gradient(circle,#fff,#0a0f2a)' },
+];
+
+// ===== Стикеры — те же id и те же SVG-печати, что у оригинала =====
+// SVG печатей скопированы из оригинала без изменений: id и вид совпадают с тем, что рисует их сервер
+const STAMP_VIP =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+  '<defs>' +
+    '<linearGradient id="vipGold" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="#fde68a"/>' +
+      '<stop offset="45%" stop-color="#f59e0b"/>' +
+      '<stop offset="100%" stop-color="#b45309"/>' +
+    '</linearGradient>' +
+  '</defs>' +
+  '<text x="50" y="68" text-anchor="middle" fill="url(#vipGold)" stroke="#78350f" stroke-width="0.8" font-weight="900" font-size="44" font-family="\'Arial Black\',\'Helvetica Neue\',\'Franklin Gothic Heavy\',Impact,sans-serif" letter-spacing="2">VIP</text>' +
+  '</svg>';
+const STAMP_OK =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+  '<circle cx="50" cy="50" r="42" fill="none" stroke="#1f8f2f" stroke-width="3.2" opacity="0.92"/>' +
+  '<path d="M 28 46 L 42 60 L 70 30" fill="none" stroke="#1f8f2f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>' +
+  '<text x="50" y="78" text-anchor="middle" fill="#1f8f2f" font-weight="900" font-size="12" font-family="Arial,sans-serif" letter-spacing="3">YES</text>' +
+  '</svg>';
+const STAMP_COFFEE =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+  '<circle cx="50" cy="50" r="42" fill="none" stroke="#6b3e1f" stroke-width="2.8" opacity="0.88"/>' +
+  '<circle cx="50" cy="50" r="35" fill="none" stroke="#6b3e1f" stroke-width="0.8" opacity="0.5"/>' +
+  '<text x="50" y="46" text-anchor="middle" fill="#6b3e1f" font-style="italic" font-weight="700" font-size="22" font-family="\'Pacifico\',\'Brush Script MT\',\'Kaushan Script\',\'Lucida Handwriting\',\'Caveat\',cursive">Net</text>' +
+  '<text x="50" y="72" text-anchor="middle" fill="#6b3e1f" font-style="italic" font-weight="700" font-size="22" font-family="\'Pacifico\',\'Brush Script MT\',\'Kaushan Script\',\'Lucida Handwriting\',\'Caveat\',cursive">Coffee</text>' +
+  '<path d="M 18 52 L 30 52 M 70 52 L 82 52" stroke="#6b3e1f" stroke-width="1.2" opacity="0.6"/>' +
+  '</svg>';
+
+const STAMP_BOSS =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+  '<circle cx="50" cy="50" r="42" fill="none" stroke="#b91c1c" stroke-width="3.5" opacity="0.92"/>' +
+  '<circle cx="50" cy="50" r="34" fill="none" stroke="#b91c1c" stroke-width="1" opacity="0.55"/>' +
+  '<text x="50" y="58" text-anchor="middle" fill="#b91c1c" font-weight="900" font-size="20" font-family="Impact,Oswald,sans-serif" letter-spacing="2" transform="rotate(-6 50 50)">BOSS</text>' +
+  '</svg>';
+
+const STAMP_NODESEEK =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80">' +
+  '<rect x="6" y="10" width="148" height="60" fill="none" stroke="#6d28d9" stroke-width="3.5" transform="rotate(-4 80 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="136" height="48" fill="none" stroke="#6d28d9" stroke-width="1" transform="rotate(-4 80 40)" opacity="0.6"/>' +
+  '<text x="80" y="50" text-anchor="middle" fill="#6d28d9" font-weight="900" font-size="24" font-family="Impact,Oswald,sans-serif" letter-spacing="2" transform="rotate(-4 80 40)">NODESEEK</text>' +
+  '</svg>';
+
+const STAMP_LINUX =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 80">' +
+  '<rect x="6" y="10" width="118" height="60" fill="none" stroke="#c2410c" stroke-width="3.5" transform="rotate(3 65 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="106" height="48" fill="none" stroke="#c2410c" stroke-width="1" transform="rotate(3 65 40)" opacity="0.55"/>' +
+  '<text x="65" y="54" text-anchor="middle" fill="#c2410c" font-weight="900" font-size="32" font-family="Impact,Oswald,sans-serif" letter-spacing="4" transform="rotate(3 65 40)">LINUX</text>' +
+  '</svg>';
+
+const STAMP_CODER =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 80">' +
+  '<rect x="6" y="10" width="158" height="60" fill="none" stroke="#047857" stroke-width="3.5" transform="rotate(-5 85 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="146" height="48" fill="none" stroke="#047857" stroke-width="1" transform="rotate(-5 85 40)" opacity="0.55"/>' +
+  '<text x="85" y="55" text-anchor="middle" fill="#047857" font-weight="900" font-size="32" font-family="\'PingFang SC\',\'Microsoft YaHei\',\'Heiti SC\',\'Noto Sans CJK SC\',\'Source Han Sans CN\',sans-serif" letter-spacing="2" transform="rotate(-5 85 40)">来了老弟</text>' +
+  '</svg>';
+
+const STAMP_DEVELOPER =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 80">' +
+  '<rect x="6" y="10" width="158" height="60" fill="none" stroke="#1d4ed8" stroke-width="3.5" transform="rotate(4 85 40)" opacity="0.92"/>' +
+  '<text x="85" y="38" text-anchor="middle" fill="#1d4ed8" font-weight="900" font-size="16" font-family="Impact,Oswald,sans-serif" letter-spacing="2" transform="rotate(4 85 40)">CERTIFIED</text>' +
+  '<text x="85" y="60" text-anchor="middle" fill="#1d4ed8" font-weight="900" font-size="20" font-family="Impact,Oswald,sans-serif" letter-spacing="3" transform="rotate(4 85 40)">DEVELOPER</text>' +
+  '</svg>';
+
+const STAMP_PASSED =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80">' +
+  '<rect x="6" y="10" width="148" height="60" fill="none" stroke="#15803d" stroke-width="3.5" transform="rotate(-3 80 40)" opacity="0.92"/>' +
+  '<path d="M 22 42 L 32 52 L 50 32" fill="none" stroke="#15803d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-3 80 40)"/>' +
+  '<text x="100" y="52" text-anchor="middle" fill="#15803d" font-weight="900" font-size="26" font-family="Impact,Oswald,sans-serif" letter-spacing="3" transform="rotate(-3 80 40)">PASSED</text>' +
+  '</svg>';
+
+const STAMP_666 =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80">' +
+  '<rect x="6" y="10" width="128" height="60" fill="none" stroke="#a855f7" stroke-width="3.5" transform="rotate(-4 70 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="116" height="48" fill="none" stroke="#a855f7" stroke-width="1" transform="rotate(-4 70 40)" opacity="0.5"/>' +
+  '<text x="70" y="58" text-anchor="middle" textLength="84" lengthAdjust="spacing" fill="#a855f7" font-weight="900" font-size="44" font-family="Impact,Oswald,sans-serif" transform="rotate(-4 70 40)">666</text>' +
+  '</svg>';
+
+const STAMP_SECRET =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 80">' +
+  '<rect x="6" y="10" width="158" height="60" fill="none" stroke="#991b1b" stroke-width="4" transform="rotate(-6 85 40)" opacity="0.95"/>' +
+  '<rect x="14" y="18" width="142" height="44" fill="none" stroke="#991b1b" stroke-width="1.4" transform="rotate(-6 85 40)" opacity="0.6"/>' +
+  '<text x="85" y="56" text-anchor="middle" textLength="88" lengthAdjust="spacing" fill="#991b1b" font-weight="900" font-size="40" font-family="\'STKaiti\',\'KaiTi\',\'Kaiti SC\',\'华文楷体\',\'楷体\',cursive" transform="rotate(-6 85 40)">绝密</text>' +
+  '</svg>';
+
+const STAMP_GOOD =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 80">' +
+  '<rect x="6" y="10" width="158" height="60" fill="none" stroke="#16a34a" stroke-width="3.5" transform="rotate(3 85 40)" opacity="0.92"/>' +
+  '<text x="85" y="56" text-anchor="middle" fill="#16a34a" font-weight="900" font-size="36" font-family="\'PingFang SC\',\'Microsoft YaHei\',\'Heiti SC\',\'Noto Sans CJK SC\',\'Source Han Sans CN\',sans-serif" letter-spacing="3" transform="rotate(3 85 40)">好评+1</text>' +
+  '</svg>';
+
+const STAMP_3NET =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">' +
+  '<rect x="6" y="10" width="188" height="60" fill="none" stroke="#dc2626" stroke-width="3.5" transform="rotate(-4 100 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="176" height="48" fill="none" stroke="#dc2626" stroke-width="1" transform="rotate(-4 100 40)" opacity="0.55"/>' +
+  '<text x="100" y="55" text-anchor="middle" textLength="148" lengthAdjust="spacing" fill="#dc2626" font-weight="900" font-size="34" font-family="\'PingFang SC\',\'Microsoft YaHei\',\'Heiti SC\',\'Noto Sans CJK SC\',\'Source Han Sans CN\',sans-serif" transform="rotate(-4 100 40)">三网优化</text>' +
+  '</svg>';
+
+const STAMP_GEN2 =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 80">' +
+  '<rect x="6" y="10" width="123" height="60" fill="none" stroke="#ea580c" stroke-width="3.5" transform="rotate(3 67.5 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="111" height="48" fill="none" stroke="#ea580c" stroke-width="1" transform="rotate(3 67.5 40)" opacity="0.55"/>' +
+  '<text x="67.5" y="56" text-anchor="middle" fill="#ea580c" font-weight="900" font-size="36" font-family="Impact,Oswald,sans-serif" letter-spacing="6" transform="rotate(3 67.5 40)">GEN2</text>' +
+  '</svg>';
+
+const STAMP_CN2 =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80">' +
+  '<rect x="6" y="10" width="128" height="60" fill="none" stroke="#0369a1" stroke-width="3.5" transform="rotate(-5 70 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="116" height="48" fill="none" stroke="#0369a1" stroke-width="1" transform="rotate(-5 70 40)" opacity="0.55"/>' +
+  '<text x="70" y="58" text-anchor="middle" textLength="88" lengthAdjust="spacing" fill="#0369a1" font-weight="900" font-size="42" font-family="Impact,Oswald,sans-serif" transform="rotate(-5 70 40)">CN2</text>' +
+  '</svg>';
+
+const STAMP_9929 =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80">' +
+  '<rect x="6" y="10" width="128" height="60" fill="none" stroke="#16a34a" stroke-width="3.5" transform="rotate(4 70 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="116" height="48" fill="none" stroke="#16a34a" stroke-width="1" transform="rotate(4 70 40)" opacity="0.55"/>' +
+  '<text x="70" y="57" text-anchor="middle" fill="#16a34a" font-weight="900" font-size="38" font-family="Impact,Oswald,sans-serif" letter-spacing="4" transform="rotate(4 70 40)">9929</text>' +
+  '</svg>';
+
+const STAMP_CMIN2 =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155 80">' +
+  '<rect x="6" y="10" width="143" height="60" fill="none" stroke="#0891b2" stroke-width="3.5" transform="rotate(-3 77.5 40)" opacity="0.92"/>' +
+  '<rect x="12" y="16" width="131" height="48" fill="none" stroke="#0891b2" stroke-width="1" transform="rotate(-3 77.5 40)" opacity="0.55"/>' +
+  '<text x="77.5" y="56" text-anchor="middle" fill="#0891b2" font-weight="900" font-size="32" font-family="Impact,Oswald,sans-serif" letter-spacing="3" transform="rotate(-3 77.5 40)">CMIN2</text>' +
+  '</svg>';
+
+const STAMP_DMIT =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 72">' +
+  '<rect x="6" y="8" width="158" height="56" fill="none" stroke="#2563eb" stroke-width="3.2" transform="rotate(5 85 36)" opacity="0.92"/>' +
+  '<rect x="12" y="14" width="146" height="44" fill="none" stroke="#2563eb" stroke-width="1" transform="rotate(5 85 36)" opacity="0.55"/>' +
+  '<text x="85" y="49" text-anchor="middle" textLength="96" lengthAdjust="spacing" fill="#2563eb" font-weight="900" font-size="34" font-family="Impact,Oswald,sans-serif" transform="rotate(5 85 36)">DMIT</text>' +
+  '</svg>';
+const STICKERS = [
+  { id: 'none', kind: 'none', label: 'Без стикера' },
+  { id: 'random', kind: 'random', label: '🎲 Случайный' },
+  ...[['rainbow','🌈'],['sakura','🌸'],['bow','🎀'],['unicorn','🦄'],['bear','🧸'],['cat','🐱'],['fox','🦊'],['dango','🍡'],['moon','🌙'],['dog','🐶'],['rabbit','🐰'],['panda','🐼'],['pig','🐷'],['chick','🐥'],['penguin','🐧']].map(([id, ch]) => ({ id, kind: 'emoji', ch, cat: 'милые' })),
+  ...[['rocket','🚀'],['fire','🔥'],['light','⚡'],['alien','👾'],['robot','🤖'],['ghost','👻'],['dragon','🐉'],['dino','🦖'],['shark','🦈'],['skull','💀'],['ufo','🛸'],['crown','👑'],['trophy','🏆']].map(([id, ch]) => ({ id, kind: 'emoji', ch, cat: 'крутые' })),
+  ...[['rose','🌹'],['sunflower','🌻'],['hibiscus','🌺'],['sparkle','🌟'],['gem','💎']].map(([id, ch]) => ({ id, kind: 'emoji', ch, cat: 'красивые' })),
+  ...[['lollipop','🍭'],['donut','🍩'],['cake','🍰'],['icecream','🍦'],['strawberry','🍓'],['coffee','☕']].map(([id, ch]) => ({ id, kind: 'emoji', ch, cat: 'вкусные' })),
+  { id: 'st-vip', kind: 'svg', svg: STAMP_VIP, cat: 'печати', shape: 'circle', label: 'VIP' },
+  { id: 'st-ok', kind: 'svg', svg: STAMP_OK, cat: 'печати', shape: 'circle', label: 'YES' },
+  { id: 'st-boss', kind: 'svg', svg: STAMP_BOSS, cat: 'печати', shape: 'circle', label: 'BOSS' },
+  { id: 'st-cof', kind: 'svg', svg: STAMP_COFFEE, cat: 'печати', shape: 'circle', label: 'Net Coffee' },
+  { id: 'st-ns', kind: 'svg', svg: STAMP_NODESEEK, cat: 'печати', shape: 'rect', label: 'NODESEEK' },
+  { id: 'st-lnx', kind: 'svg', svg: STAMP_LINUX, cat: 'печати', shape: 'rect', label: 'LINUX' },
+  { id: 'st-code', kind: 'svg', svg: STAMP_CODER, cat: 'печати', shape: 'rect', label: '来了老弟 — «Заходи, братан»' },
+  { id: 'st-dev', kind: 'svg', svg: STAMP_DEVELOPER, cat: 'печати', shape: 'rect', label: 'CERTIFIED DEVELOPER' },
+  { id: 'st-pass', kind: 'svg', svg: STAMP_PASSED, cat: 'печати', shape: 'rect', label: 'PASSED' },
+  { id: 'st-666', kind: 'svg', svg: STAMP_666, cat: 'печати', shape: 'rect', label: '666' },
+  { id: 'st-secret', kind: 'svg', svg: STAMP_SECRET, cat: 'печати', shape: 'rect', label: '绝密 — «Совершенно секретно»' },
+  { id: 'st-good', kind: 'svg', svg: STAMP_GOOD, cat: 'печати', shape: 'rect', label: '好评+1 — «Лайк»' },
+  { id: 'st-3net', kind: 'svg', svg: STAMP_3NET, cat: 'печати', shape: 'rect', label: '三网优化 — «Оптимизация для трёх операторов»' },
+  { id: 'st-gen2', kind: 'svg', svg: STAMP_GEN2, cat: 'печати', shape: 'rect', label: 'GEN2' },
+  { id: 'st-cn2', kind: 'svg', svg: STAMP_CN2, cat: 'печати', shape: 'rect', label: 'CN2 — магистраль China Telecom' },
+  { id: 'st-9929', kind: 'svg', svg: STAMP_9929, cat: 'печати', shape: 'rect', label: '9929 — магистраль China Unicom' },
+  { id: 'st-cmin2', kind: 'svg', svg: STAMP_CMIN2, cat: 'печати', shape: 'rect', label: 'CMIN2 — магистраль China Mobile' },
+  { id: 'st-dmit', kind: 'svg', svg: STAMP_DMIT, cat: 'печати', shape: 'rect', label: 'DMIT' },
+];
+const stickerById = id => STICKERS.find(s => s.id === id) || STICKERS[0];
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const realStyles = () => STYLES.filter(s => s.id !== 'random');
+const realStickers = () => STICKERS.filter(s => s.kind === 'emoji' || s.kind === 'svg');
+
+// ===== Состояние =====
+const CARD = 'https://card.net.coffee';
+const VER = '1'; // тот же токен версии, что у оригинала (кэш их CDN)
+const LS_STYLE = 'cardStyleV1', LS_STICKER = 'cardStickerV1';
+function lsGet(k) { try { return localStorage.getItem(k); } catch { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, v); } catch {} }
+const state = {
+  ip: null, data: null,
+  styleId: lsGet(LS_STYLE) || 'random', activeStyleId: 'minimal',
+  stickerId: lsGet(LS_STICKER) || 'rainbow', activeStickerId: 'none',
+  embedW: 480,
+};
+const $ = id => document.getElementById(id);
+
+// ===== IP =====
+// Оригинал спрашивает свой /api/me. У нас — /cdn-cgi/trace того же card.net.coffee (CORS открыт):
+// это ровно тот адрес, с которым их сервер нарисует карточку.
+async function loadIP() {
+  try { const t = await trace(CARD + '/cdn-cgi/trace', 6000); if (t.ip) return t.ip; } catch {}
+  try { const t = await trace('https://1.1.1.1/cdn-cgi/trace', 5000); if (t.ip) return t.ip; } catch {}
+  return null;
+}
+async function loadData(ip) {
+  try {
+    const c = JSON.parse(sessionStorage.getItem('ipcard_' + ip) || 'null');
+    if (c && Date.now() - c.t < 30 * 60e3) return c.d;
+  } catch {}
+  const r = await fetch(`${CARD}/api/ip/lookup/${encodeURIComponent(ip)}`, { signal: AbortSignal.timeout(10000) });
+  if (!r.ok) return null;
+  const d = await r.json();
+  try { sessionStorage.setItem('ipcard_' + ip, JSON.stringify({ t: Date.now(), d })); } catch {}
+  return d;
+}
+
+// ===== Рендер =====
+function renderCard() {
+  const styleObj = state.styleId === 'random' ? pick(realStyles()) : (STYLES.find(s => s.id === state.styleId) || STYLES[1]);
+  state.activeStyleId = styleObj.id;
+  let stk = stickerById(state.stickerId);
+  if (stk.kind === 'random') stk = pick(realStickers());
+  state.activeStickerId = stk.id;
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.style === state.styleId));
+  document.querySelectorAll('.g-item').forEach(c => c.classList.toggle('active', c.dataset.style === state.activeStyleId));
+  document.querySelectorAll('.st-chip').forEach(c => c.classList.toggle('active', c.dataset.stickerId === state.stickerId));
+  const nm = styleObj.name.replace(/[^\p{L}\p{N} -]/gu, '').trim();
+  const sn = stk.kind === 'none' ? 'без стикера' : 'стикер ' + (stk.ch || stk.label.split(' — ')[0]);
+  $('status').textContent = `Сейчас: ${nm}${state.styleId === 'random' ? ' (случайно)' : ''}, ${sn}${state.stickerId === 'random' ? ' (случайно)' : ''}`;
+  updateEmbedCode();
+  updatePreview();
+}
+function cardQS(withIp, w) {
+  const qs = new URLSearchParams();
+  if (withIp && state.ip) qs.set('ip', state.ip);
+  if (state.activeStyleId && state.activeStyleId !== 'random') qs.set('style', state.activeStyleId);
+  if (state.activeStickerId && !['none', 'random'].includes(state.activeStickerId)) qs.set('sticker', state.activeStickerId);
+  if (w) qs.set('w', w);
+  return qs;
+}
+function updatePreview() {
+  const img = $('preview'), wrap = $('previewWrap');
+  if (!state.ip) return;
+  const qs = cardQS(true); qs.set('v', VER);
+  const url = `${CARD}/v1/card.svg?${qs}`;
+  if (img.dataset.lastUrl === url) return;
+  img.dataset.lastUrl = url;
+  wrap.classList.add('loading');
+  img.onload = img.onerror = () => wrap.classList.remove('loading');
+  img.src = url;
+}
+function absUrl(p) { return new URL(p, location.href).href; }
+function updateEmbedCode() {
+  // Как у оригинала: в коде вставки нет IP — сервер подставит IP того, кто открыл страницу
+  const imgQs = cardQS(false, state.embedW && state.embedW !== 720 ? state.embedW : 0).toString();
+  const imgUrl = `${CARD}/v1/card.svg${imgQs ? '?' + imgQs : ''}`;
+  const linkUrl = absUrl(ROOT + 'ip/'); // ссылка с картинки ведёт на нашу «Оценку IP» (у оригинала — на их /ip/)
+  const snippets = {
+    html: `<a href="${linkUrl}"><img src="${imgUrl}" alt="IP-карточка" title="Проверить IP"></a>`,
+    md: `[![IP-карточка](${imgUrl})](${linkUrl} "Проверить IP")`,
+    bb: `[url=${linkUrl}][img]${imgUrl}[/img][/url]`,
+  };
+  Object.entries(snippets).forEach(([fmt, text]) => document.querySelectorAll(`code[data-format="${fmt}"]`).forEach(el => {
+    el.textContent = text; el.title = 'Нажми, чтобы скопировать';
+    if (!el._wired) { el._wired = true; el.addEventListener('click', () => copyText(el.textContent, el)); }
+  }));
+  const pq = new URLSearchParams();
+  if (state.activeStyleId) pq.set('style', state.activeStyleId);
+  if (state.activeStickerId && state.activeStickerId !== 'random') pq.set('sticker', state.activeStickerId);
+  const u = new URL(location.href); u.search = pq.toString(); u.hash = '';
+  $('shareUrl').textContent = u.href;
+}
+let toastT = null;
+function copyText(text, el) {
+  const done = () => {
+    if (el) { el.classList.add('copied'); setTimeout(() => el.classList.remove('copied'), 800); }
+    const t = $('copyToast'); t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 1400);
+  };
+  const fallback = () => {
+    try { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); } catch {}
+  };
+  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done).catch(fallback); else fallback();
+}
+
+// ===== UI =====
+function buildChips() {
+  $('chips').innerHTML = STYLES.map(s => `<button class="chip" data-style="${s.id}"><span class="sdot" style="background:${s.dot}"></span>${esc(s.name)}</button>`).join('');
+  $('chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; state.styleId = b.dataset.style; lsSet(LS_STYLE, state.styleId); renderCard(); });
+}
+function buildStickers() {
+  let html = '<span class="st-label">Стикер</span>';
+  html += STICKERS.filter(s => s.kind === 'none' || s.kind === 'random').map(s => `<button class="st-chip word" data-sticker-id="${s.id}">${s.label}</button>`).join('');
+  ['милые', 'крутые', 'красивые', 'вкусные', 'печати'].forEach(cat => {
+    html += '<span class="st-sep"></span>';
+    html += STICKERS.filter(s => s.cat === cat).map(s => `<button class="st-chip${s.shape === 'rect' ? ' rect' : ''}" data-sticker-id="${s.id}" title="${esc(s.label || s.ch)}">${s.kind === 'emoji' ? s.ch : s.svg}</button>`).join('');
+  });
+  $('stickers').innerHTML = html;
+  $('stickers').addEventListener('click', e => { const b = e.target.closest('.st-chip'); if (!b) return; state.stickerId = b.dataset.stickerId; lsSet(LS_STICKER, state.stickerId); renderCard(); });
+}
+// Галерея: у оригинала — CSS-заглушки с 1.2.3.4; у нас — настоящие миниатюры с твоим IP с того же сервера
+function buildGallery() {
+  $('gallery').innerHTML = realStyles().map(s => `<div class="g-item" data-style="${s.id}"><img alt="${esc(s.name)}" loading="lazy" decoding="async"><span>${esc(s.name)}</span></div>`).join('');
+  $('gallery').addEventListener('click', e => {
+    const p = e.target.closest('.g-item'); if (!p) return;
+    state.styleId = p.dataset.style; lsSet(LS_STYLE, state.styleId); renderCard();
+    $('previewWrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+function fillGallery() {
+  if (!state.ip) return;
+  document.querySelectorAll('.g-item').forEach(it => {
+    it.querySelector('img').src = `${CARD}/v1/card.svg?ip=${encodeURIComponent(state.ip)}&style=${it.dataset.style}&w=240&v=${VER}`;
+  });
+}
+function wireActions() {
+  $('refreshBtn').addEventListener('click', () => {
+    const ps = state.activeStyleId, pk = state.activeStickerId;
+    state.styleId = pick(realStyles().filter(s => s.id !== ps)).id;
+    state.stickerId = pick(realStickers().filter(s => s.id !== pk)).id;
+    lsSet(LS_STYLE, state.styleId);
+    renderCard();
+  });
+  $('copyBtn').addEventListener('click', () => { if (!state.ip) return; copyText(state.ip); $('copyBtn').textContent = '✓ Скопировано'; setTimeout(() => $('copyBtn').textContent = '📋 Скопировать IP', 1500); });
+  $('ewOpts').addEventListener('click', e => {
+    const b = e.target.closest('.ew-btn'); if (!b) return;
+    state.embedW = parseInt(b.dataset.w, 10) || 0;
+    $('ewOpts').querySelectorAll('.ew-btn').forEach(x => x.classList.toggle('active', x === b));
+    updateEmbedCode();
+  });
+  $('shareLink').addEventListener('click', () => copyText($('shareUrl').textContent, $('shareLink')));
+}
+
+async function init() {
+  const p = new URLSearchParams(location.search);
+  if (STYLES.some(s => s.id === p.get('style'))) state.styleId = p.get('style');
+  if (STICKERS.some(s => s.id === p.get('sticker'))) state.stickerId = p.get('sticker');
+  buildChips(); buildStickers(); buildGallery(); wireActions();
+  renderCard();
+  state.ip = await loadIP();
+  if (!state.ip) {
+    $('previewWrap').classList.remove('loading');
+    $('ipInfoText').textContent = 'Не удалось узнать IP — card.net.coffee не ответил из твоей сети';
+    return;
+  }
+  const lookup = `${ROOT}ip/?q=${encodeURIComponent(state.ip)}`;
+  $('lookupBtn').href = lookup; $('ipScoreLink').href = lookup;
+  $('ipScoreIp').textContent = state.ip;
+  updatePreview(); fillGallery();
+  try {
+    const d = state.data = await loadData(state.ip);
+    if (d) {
+      const kind = d.isResidential ? 'домашний' : d.is_datacenter ? 'серверный' : '';
+      $('ipInfoText').innerHTML = `${flagImg(d.countryCode)} ${esc([d.country, d.city].filter(Boolean).join(', '))}` +
+        `<span class="sub" style="display:block">${esc(['AS' + d.asn, d.asOrganization].filter(Boolean).join(' · '))}${kind ? ' · ' + kind : ''}${typeof d.trust_score === 'number' ? ' · Trust ' + d.trust_score : ''}</span>`;
+    } else $('ipInfoText').textContent = 'Данных по IP нет';
+  } catch { $('ipInfoText').textContent = 'Данных по IP нет'; }
+}
+init();
+</script>
+</body>
+</html>

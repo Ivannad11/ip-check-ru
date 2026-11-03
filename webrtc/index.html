@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#cc785c">
+<title>Утечка WebRTC — проверка</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../common/site.css">
+<script src="../common/site.js"></script>
+<style>
+.feats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;text-align:center}
+.feat b{display:block;font-size:.9em;margin-top:2px}
+.feat span{color:var(--muted);font-size:.8em}
+.test-row{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.hint{text-align:center;color:var(--muted);font-size:.88em;margin-bottom:14px}
+.status-bar{text-align:center;color:var(--muted);font-size:.92em;margin-bottom:14px}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:-1px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.verdict{border-radius:12px;padding:12px 16px;margin-bottom:10px;font-weight:600}
+.verdict-safe{background:var(--safe-bg);color:var(--safe)}
+.verdict-warn{background:var(--warn-bg);color:var(--warn)}
+.verdict-danger{background:var(--danger-bg);color:var(--danger)}
+.note{color:var(--muted);font-size:.85em;line-height:1.5;margin:0 0 14px}
+.exits{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px}
+.articles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;align-items:start;margin-top:10px}
+details.fold{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px}
+details.fold summary{cursor:pointer;font-weight:600}
+details.fold .article p,details.fold .article ul{margin:8px 0}
+.article code{background:var(--neutral-bg);border-radius:4px;padding:0 4px;font-size:.9em;word-break:break-all}
+.article table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+.article th,.article td{border:1px solid var(--border);padding:6px 8px;text-align:left;vertical-align:top}
+@media (max-width:860px){.articles,.exits{grid-template-columns:1fr}}
+@media (max-width:560px){.feats{grid-template-columns:1fr}.tbl .col-srv{display:none}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head">
+    <div>
+      <h1>Утечка WebRTC</h1>
+      <p class="desc">WebRTC — встроенные в браузер звонки. Он умеет обходить VPN и показывать сайтам твой настоящий IP. Жми проверку — увидишь, куда на самом деле ходит UDP.</p>
+    </div>
+    <label class="toggle">Скрыть IP <input type="checkbox" id="ipMaskToggle"><span class="slider"></span></label>
+  </div>
+
+  <div class="feats">
+    <div class="feat">🔍<b>Несколько STUN-серверов</b><span>Google, Cloudflare и российские — Яндекс, Sipnet</span></div>
+    <div class="feat">🛡️<b>Проверка UDP-маршрутов</b><span>идёт ли UDP через VPN и работает ли раздельная маршрутизация</span></div>
+  </div>
+
+  <div class="exits">
+    <div class="card"><div class="label">Выход Cloudflare (TCP)</div><div class="ip-addr" id="cfIP"><span class="loading" style="width:170px;height:22px"></span></div></div>
+    <div class="card"><div class="label">Российский выход (STUN Яндекса)</div><div class="ip-addr" id="ruIP"><span class="loading" style="width:170px;height:22px"></span></div></div>
+  </div>
+
+  <div class="test-row">
+    <button class="btn-primary" id="testBtn" onclick="runTest()">Начать проверку</button>
+    <span id="rtcStatus" class="small">Ждём проверку</span>
+  </div>
+  <div class="hint">Нажми кнопку — проверим, не утекает ли IP через WebRTC</div>
+
+  <div class="status-bar" id="statusBar"></div>
+  <div id="verdictArea"></div>
+
+  <div class="card tbl-wrap" id="resultTable" style="display:none;margin-bottom:12px">
+    <table class="tbl">
+      <thead><tr><th>#</th><th>IP</th><th>Тип</th><th>Где</th><th class="col-srv">STUN</th><th>Статус</th></tr></thead>
+      <tbody id="resultBody"></tbody>
+    </table>
+  </div>
+
+  <h2 style="font-size:1.1em;margin:28px 0 4px">Почитать</h2>
+  <div class="articles">
+    <details class="fold">
+      <summary>Что за утечка WebRTC</summary>
+      <div class="article">
+        <p>WebRTC даёт браузеру звонки и передачу файлов без плагинов. Чтобы соединиться напрямую, он спрашивает у STUN-сервера: «какой у меня внешний IP?». Запрос идёт по UDP, а многие VPN и прокси пропускают только TCP.</p>
+        <p>Итог: ты думаешь, что под VPN, а WebRTC отдаёт сайту адрес провайдера. Странице для этого не нужно никаких разрешений.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Что показывает эта проверка</summary>
+      <div class="article">
+        <p>Страница шлёт UDP-запросы сразу на несколько STUN-серверов и собирает, какой IP увидел каждый:</p>
+        <ul>
+          <li><strong>забирает ли VPN UDP</strong> — если STUN видит адрес VPN, всё хорошо;</li>
+          <li><strong>есть ли утечка</strong> — если STUN видит адрес провайдера, UDP идёт мимо;</li>
+          <li><strong>работает ли раздельная маршрутизация</strong> — российские STUN (Яндекс, Sipnet) при split-туннеле должны видеть домашний IP, зарубежные — адрес VPN;</li>
+          <li><strong>IPv6</strong> — если клиент обрабатывает только IPv4, IPv6 может светиться напрямую.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>STUN и UDP на пальцах</summary>
+      <div class="article">
+        <p><strong>UDP</strong> — протокол без установки соединения: быстро, но без гарантий. На нём звонки, игры, голос.</p>
+        <p><strong>STUN</strong> — сервер-«зеркало»: шлёшь ему UDP-пакет, он отвечает, с какого IP пакет пришёл. Если пакет ушёл мимо VPN, зеркало покажет настоящий адрес.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Как понять, что утечка есть</summary>
+      <div class="article">
+        <p>Сравни выход VPN и то, что увидели STUN-серверы:</p>
+        <ul>
+          <li>совпадают, или WebRTC выключен и адресов нет — всё в порядке;</li>
+          <li>зарубежный STUN увидел <strong>другой</strong> адрес, и это адрес провайдера — утечка.</li>
+        </ul>
+        <p>Страница сравнивает это сама.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Нашёл утечку — что делать</summary>
+      <div class="article">
+        <p><strong>Firefox:</strong> <code>about:config</code> → <code>media.peerconnection.enabled</code> → <code>false</code>. WebRTC выключится целиком.</p>
+        <p><strong>Chrome / Edge / Яндекс Браузер:</strong> штатного выключателя нет. Поставь uBlock Origin и включи в настройках «Предотвращать утечку локальных IP через WebRTC».</p>
+        <p><strong>Brave:</strong> Настройки → Конфиденциальность → Политика WebRTC → «Отключить непроксированный UDP».</p>
+        <p><strong>Safari</strong> и так ограничивает WebRTC, риск ниже.</p>
+        <p><strong>Тоньше — маршрутизировать UDP.</strong> Если звонки в браузере нужны, не выключай WebRTC, а в VPN-клиенте направь UDP к зарубежным STUN (Google, Cloudflare) через VPN. Российские сервисы (Телемост, звонки VK) пусть идут напрямую.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Несколько IP — не всегда утечка</summary>
+      <div class="article">
+        <p>При раздельной маршрутизации (российское напрямую, остальное через VPN) разные STUN-серверы видят разные адреса — так и задумано:</p>
+        <ul>
+          <li>Google / Cloudflare STUN → через VPN → адрес VPN (например, Нидерланды);</li>
+          <li>Яндекс / Sipnet STUN → напрямую → домашний российский IP.</li>
+        </ul>
+        <p>Тревожно, когда <strong>зарубежные</strong> STUN видят твой российский IP — значит, UDP к ним идёт мимо VPN. Смотри колонку «STUN» и страну.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>DNS утекает не менее опасно</summary>
+      <div class="article">
+        <p>WebRTC выдаёт, <em>кто</em> ты (IP), DNS — <em>куда</em> ты ходишь. Если DNS-запросы уходят провайдеру, он видит все домены, а сервисы по резолверу понимают твою страну.</p>
+        <p>Проверь и это: <a href="../dns/">утечка DNS</a>.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Почему в режиме прокси и в TUN результаты разные</summary>
+      <div class="article">
+        <p><strong>Режим прокси (HTTP/SOCKS)</strong> передаёт только TCP. UDP-запрос к STUN вообще не уходит — и страница пишет «утечки нет». Это может быть иллюзия.</p>
+        <p><strong>TUN-режим</strong> забирает весь трафик, включая UDP. Если сервер не умеет UDP, или UDP идёт другой линией, или правила не покрывают STUN — адреса TCP и UDP разойдутся, и проверка покажет утечку.</p>
+        <table>
+          <tr><th>Режим</th><th>UDP к STUN</th><th>Результат</th></tr>
+          <tr><td>Прокси</td><td>не уходит</td><td>«утечки нет» — может быть иллюзией</td></tr>
+          <tr><td>TUN</td><td>уходит</td><td>честная картина UDP</td></tr>
+        </table>
+        <p>Проверяй в TUN-режиме.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="foot">Логика повторяет ip.net.coffee/webrtc: STUN-запросы, сбор публичных адресов, вердикт «больше одного публичного адреса — проверь». К STUN оригинала (Google ×2, Cloudflare) добавлены российские — Яндекс и Sipnet, чтобы видеть раздельную маршрутизацию UDP.</div>
+</div>
+
+<script>
+// STUN оригинала + российские
+const STUNS = [
+  { url: 'stun:stun.l.google.com:19302', name: 'Google', ru: false },
+  { url: 'stun:stun.cloudflare.com:3478', name: 'Cloudflare', ru: false },
+  { url: 'stun:stun1.l.google.com:19302', name: 'Google 2', ru: false },
+  { url: 'stun:stun.rtc.yandex.net:3478', name: 'Яндекс', ru: true },
+  { url: 'stun:stun.sipnet.ru:3478', name: 'Sipnet', ru: true },
+];
+const PRIVATE = /^(0\.|127\.|10\.|172\.|192\.168\.|198\.1[89]\.|100\.64\.)/;
+
+let cfIP = '', cfCC = '';
+(async () => {
+  const el = document.getElementById('cfIP');
+  try {
+    const e = await trace('https://1.1.1.1/cdn-cgi/trace', 5000);
+    cfIP = e.ip || '';
+    if (!cfIP) throw 0;
+    el.innerHTML = displayIP(cfIP);
+    try { const g = await geoip(cfIP); cfCC = (g.country_code || '').toLowerCase(); el.innerHTML = `${flagImg(cfCC)} ${displayIP(cfIP)}`; } catch {}
+  } catch { el.textContent = 'не получен'; }
+})();
+(async () => {
+  const el = document.getElementById('ruIP');
+  const ru = await fetchRUIP();
+  if (!ru) { el.innerHTML = '<span class="small">не получен — UDP заблокирован или WebRTC выключен</span>'; return; }
+  el.innerHTML = displayIP(ru.ip);
+  try { const g = await geoip(ru.ip); el.innerHTML = `${flagImg(g.country_code)} ${displayIP(ru.ip)}`; } catch {}
+})();
+
+// Один STUN-сервер — отдельное соединение, чтобы знать, кто какой адрес увидел
+function probe(stun, ips) {
+  return new Promise(async resolve => {
+    let pc;
+    try {
+      pc = new RTCPeerConnection({ iceServers: [{ urls: stun.url }] });
+      pc.createDataChannel('');
+      await pc.setLocalDescription(await pc.createOffer());
+    } catch { try { pc && pc.close(); } catch {} return resolve(); }
+    const t = setTimeout(() => { pc.close(); resolve(); }, 6000);
+    pc.onicecandidate = e => {
+      if (!e.candidate) { clearTimeout(t); pc.close(); resolve(); return; }
+      const c = e.candidate.candidate;
+      const add = (ip, type) => {
+        if (!ips.has(ip)) ips.set(ip, { type, servers: new Set() });
+        if (type === 'stun') ips.get(ip).servers.add(stun);
+      };
+      const m4 = c.match(/([0-9]{1,3}\.){3}[0-9]{1,3}/);
+      if (m4 && m4[0] !== '0.0.0.0' && !PRIVATE.test(m4[0]))
+        add(m4[0], c.includes('srflx') ? 'stun' : c.includes('relay') ? 'relay' : 'local');
+      const m6 = c.match(/([a-f0-9]{1,4}:){2,7}[a-f0-9]{1,4}/i);
+      if (m6 && !m6[0].startsWith('::1') && !/^fe80/i.test(m6[0]))
+        add(m6[0], c.includes('srflx') ? 'stun' : 'local6');
+    };
+  });
+}
+
+const TYPE_LBL = { stun: 'публичный (STUN)', relay: 'ретранслятор (TURN)', local: 'локальный', local6: 'локальный IPv6' };
+
+let testing = false;
+async function runTest() {
+  if (testing) return;
+  testing = true;
+  const btn = document.getElementById('testBtn');
+  btn.disabled = true; btn.textContent = 'Проверяем…';
+  const statusBar = document.getElementById('statusBar'), verdictArea = document.getElementById('verdictArea');
+  const table = document.getElementById('resultTable'), tbody = document.getElementById('resultBody');
+  verdictArea.innerHTML = ''; tbody.innerHTML = ''; table.style.display = 'none';
+  statusBar.innerHTML = '<span class="spinner"></span>Опрашиваем STUN-серверы…';
+
+  const ips = new Map();
+  await Promise.all(STUNS.map(s => probe(s, ips)));
+  // Публичные — первыми; как у оригинала, показываем не больше 5 адресов
+  const ipArr = [...ips.entries()].sort((a, b) => (a[1].type === 'stun' ? 0 : 1) - (b[1].type === 'stun' ? 0 : 1)).slice(0, 5);
+
+  const done = () => { statusBar.textContent = ''; testing = false; btn.disabled = false; btn.textContent = 'Проверить ещё раз'; };
+
+  if (!ipArr.length) {
+    document.getElementById('rtcStatus').innerHTML = '<span class="tag tag-safe">выключен</span>';
+    verdictArea.innerHTML = '<div class="verdict verdict-safe">✓ WebRTC выключен или ничего не отдаёт — утечки нет</div>'
+      + '<p class="note">Если VPN-клиент работает в режиме прокси, UDP может просто не уходить. Для честного результата проверь в TUN-режиме. Если не прокси — не обращай внимания.</p>';
+    return done();
+  }
+
+  document.getElementById('rtcStatus').innerHTML = `<span class="tag tag-info">включён</span> найдено адресов: ${ipArr.length}`;
+  statusBar.innerHTML = '<span class="spinner"></span>Определяем, где адреса…';
+
+  const results = [];
+  for (const [ip, info] of ipArr) {
+    let geo = null; try { geo = await geoip(ip); } catch {}
+    results.push({ ip, ...info, geo, cc: (geo?.country_code || '').toLowerCase() });
+  }
+
+  // Вердикт как у оригинала: больше одного разного публичного STUN-адреса → возможна утечка
+  const pub = results.filter(r => r.type === 'stun');
+  const hasMultiplePublic = new Set(pub.map(r => r.ip)).size > 1;
+
+  // Российская расшифровка: кто что увидел
+  const foreignSeen = pub.filter(r => [...r.servers].some(s => !s.ru));
+  const ruOnly = pub.filter(r => [...r.servers].every(s => s.ru));
+  const foreignRU = foreignSeen.filter(r => r.cc === 'ru' && cfCC !== 'ru');
+  let note = '';
+  if (foreignRU.length) note = '<div class="verdict verdict-danger">⚠️ Зарубежные STUN видят российский IP — UDP к ним идёт мимо VPN. Это настоящая утечка.</div>';
+  else if (hasMultiplePublic && ruOnly.length && foreignSeen.length)
+    note = '<p class="note">Похоже на раздельную маршрутизацию: российские STUN (Яндекс, Sipnet) идут напрямую, зарубежные — через VPN. Если так и настроено — всё нормально.</p>';
+
+  verdictArea.innerHTML = (hasMultiplePublic
+    ? '<div class="verdict verdict-warn">⚠️ Возможна утечка WebRTC!<br><span style="font-weight:400">Найдено несколько разных публичных адресов. Если ты сам настроил раздельную маршрутизацию — сверь адреса с правилами.</span></div>'
+    : '<div class="verdict verdict-safe">✓ Отлично! Утечки WebRTC нет</div>') + note;
+
+  tbody.innerHTML = results.map((r, i) => {
+    const geoStr = r.geo ? [r.geo.country, r.geo.city].filter(Boolean).join(' · ') : '';
+    const srv = [...r.servers].map(s => s.name).join(', ') || '—';
+    const tag = r.type === 'stun'
+      ? (hasMultiplePublic ? '<span class="tag tag-warn">проверь</span>' : '<span class="tag tag-safe">норма</span>')
+      : '<span class="tag tag-neutral">локальный</span>';
+    return `<tr>
+      <td>${i + 1}</td>
+      <td style="font-weight:600">${displayIP(r.ip)}</td>
+      <td><span class="tag tag-info">${TYPE_LBL[r.type]}</span></td>
+      <td>${flagImg(r.cc)} ${esc(geoStr)}</td>
+      <td class="col-srv small">${esc(srv)}</td>
+      <td>${tag}</td>
+    </tr>`;
+  }).join('');
+  table.style.display = '';
+  done();
+}
+
+(function () {
+  const items = [...document.querySelectorAll('details.fold')];
+  items.forEach((el, i) => el.addEventListener('toggle', () => {
+    if (window.innerWidth <= 860) return;
+    const p = i % 2 === 0 ? items[i + 1] : items[i - 1];
+    if (p && p.open !== el.open) p.open = el.open;
+  }));
+})();
+</script>
+</body>
+</html>

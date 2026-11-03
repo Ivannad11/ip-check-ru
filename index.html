@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#cc785c">
+<title>Мой IP — проверка</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="common/site.css">
+<script src="common/site.js"></script>
+<style>
+.exit-block{padding:10px 0;border-bottom:1px dashed var(--border)}
+.exit-block:first-child{padding-top:0}
+.exit-block:last-child{border-bottom:0;padding-bottom:0}
+.ip-src{font-size:.82em;color:var(--muted);margin-top:2px;min-height:18px}
+.ping-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ping-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;min-width:0}
+.ping-icon{width:18px;height:18px;border-radius:4px;flex:0 0 auto;object-fit:contain}
+.ping-name{font-size:.85em;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ping-name .flag{width:14px;margin-left:3px;vertical-align:-1px}
+.ping-dots{display:flex;gap:2px;margin-top:4px;flex-wrap:wrap}
+.ping-dot{width:6px;height:6px;border-radius:2px}
+.dot-pending{background:var(--border)}.dot-good{background:#1b8a2d}.dot-warn{background:#6fcf7c}.dot-bad{background:#f0c040}.dot-fail{background:#e17055}
+.ping-ms{font-size:.85em;font-weight:700;flex:0 0 auto;min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+.more-link{font-size:.85em;font-weight:400;color:var(--muted);text-decoration:none;white-space:nowrap}
+.more-link:hover{color:var(--text)}
+.split-ip-grid{display:flex;flex-wrap:wrap;gap:8px}
+.split-ip-cell{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--border);border-radius:8px;text-decoration:none;font-size:.9em;font-variant-numeric:tabular-nums}
+.split-ip-cell:hover{border-color:var(--accent)}
+.split-ip-cell .flag{width:18px}
+h2.sec{font-size:1.2em;margin:26px 0 4px}
+.site-cell{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.favicon{width:16px;height:16px;border-radius:3px;object-fit:contain}
+.site-name{font-weight:600}
+.badge{font-size:.72em;padding:1px 6px;border-radius:5px;font-weight:600;white-space:nowrap;background:var(--neutral-bg);color:var(--neutral)}
+.badge-cn{background:var(--danger-bg);color:var(--danger)}
+.badge-ru{background:#e6eefc;color:#2a5bd7}
+.badge-intl{background:var(--info-bg);color:var(--info)}
+.badge-blocked{background:var(--warn-bg);color:var(--warn)}
+:root[data-theme="dark"] .badge-ru{background:#1d2a45;color:#8fb3ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .badge-ru{background:#1d2a45;color:#8fb3ff}}
+.ip-cell{font-variant-numeric:tabular-nums;word-break:break-all}
+.geo-cell{color:var(--muted);font-size:.9em}
+.err-text{color:#e17055;font-size:.9em}
+.tbl td.flag-td{width:30px}
+@media (max-width:860px){.ping-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.geo-col{display:none}.tbl{font-size:.85em}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head">
+    <div>
+      <h1>Мой IP</h1>
+      <p class="desc">Какой у тебя IP, откуда он, как ходят запросы к разным сайтам и работает ли раздельная маршрутизация</p>
+    </div>
+    <label class="toggle">Скрыть IP <input type="checkbox" id="ipMaskToggle"><span class="slider"></span></label>
+  </div>
+
+  <div class="grid2">
+    <div class="card" id="ipCard">
+      <div class="exit-block" id="cnBlock">
+        <div class="label">Китайский выход <span class="small">(как тебя видят сайты Китая)</span></div>
+        <div class="ip-addr" id="ipValue"><span class="loading" style="width:170px;height:22px"></span></div>
+        <div class="ip-geo" id="ipGeo"><span class="loading" style="width:220px"></span></div>
+        <div class="ip-src" id="ipSource"></div>
+      </div>
+      <div class="exit-block" id="ruBlock">
+        <div class="label">Российский выход <span class="small">(как тебя видят сайты РФ)</span></div>
+        <div class="ip-addr" id="ipValueRU"><span class="loading" style="width:170px;height:22px"></span></div>
+        <div class="ip-geo" id="ipGeoRU"><span class="loading" style="width:220px"></span></div>
+        <div class="ip-src" id="ipSourceRU"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Связь с сайтами <a class="more-link" href="link/">Все сайты ›</a></h2>
+      <div class="ping-grid" id="pingGrid"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Все выходы <span class="small">нажми на IP, чтобы оценить его</span></h2>
+    <div class="split-ip-grid" id="splitIpGrid"><span class="small">Собираю…</span></div>
+  </div>
+
+  <h2 class="sec">Раздельная маршрутизация</h2>
+  <p class="desc" style="margin-bottom:12px">Если трафик делится по правилам (часть через VPN, часть напрямую), здесь видно, с какого IP ты приходишь на каждый сайт. «Не получен» не значит, что с сетью беда: сайт мог просто не ответить.</p>
+  <div class="card tbl-wrap">
+    <table class="tbl" id="mainTable">
+      <thead><tr><th>Сайт</th><th></th><th>IP</th><th class="geo-col">Где</th></tr></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="foot">Логика проверок повторяет ip.net.coffee. Китайский выход — iP138.com и IP.cn, российский — STUN Яндекса и Sipnet (российские адреса идут мимо VPN при раздельной маршрутизации). IP к сайтам — их /cdn-cgi/trace (Cloudflare), заголовки CDN NetEase и ByteDance, STUN для российских сервисов. Гео и тип IP — открытый API ip.net.coffee.</div>
+</div>
+
+<script>
+const ASSET = NC + '/favicons/';
+
+// ================================================================
+//  Блок 1: выходы + связь с сайтами
+// ================================================================
+const pingTargets = [
+  { name: 'ByteDance', icon: ASSET + 'bytedance.webp', url: 'https://perfops.byte-test.com/500b-bench.jpg', cc: 'cn' },
+  { name: 'Taobao',    icon: ASSET + 'taobao.webp', url: 'https://www.taobao.com/favicon.ico', cc: 'cn' },
+  { name: 'WeChat',    icon: ASSET + 'weixin.webp', url: 'https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico', cc: 'cn' },
+  { name: 'Яндекс',    icon: 'https://ya.ru/favicon.ico', url: 'https://ya.ru/favicon.ico', cc: 'ru' },
+  { name: 'VK',        icon: 'https://vk.com/favicon.ico', url: 'https://vk.com/favicon.ico', cc: 'ru' },
+  { name: 'Mail.ru',   icon: 'https://mail.ru/favicon.ico', url: 'https://e.mail.ru/favicon.ico', cc: 'ru' },
+  { name: 'GitHub',    icon: ASSET + 'github.webp', url: 'https://github.com/generate_204' },
+  { name: 'Cloudflare', icon: ASSET + 'cloudflare.webp', url: 'https://1.1.1.1/cdn-cgi/trace' },
+  { name: 'YouTube',   icon: ASSET + 'youtube.webp', url: 'https://www.youtube.com/generate_204' },
+];
+const PING_ROUNDS = 12, PING_MIN_INTERVAL = 80;
+
+function renderPingGrid() {
+  document.getElementById('pingGrid').innerHTML = pingTargets.map((t, i) => `
+    <div class="ping-item" id="ping-${i}">
+      <img class="ping-icon" src="${t.icon}" alt="" onerror="this.style.visibility='hidden'">
+      <div style="flex:1;min-width:0">
+        <div class="ping-name" title="${esc(t.name)}">${esc(t.name)}${t.cc ? flagImg(t.cc) : ''}</div>
+        <div class="ping-dots" id="ping-dots-${i}">${'<div class="ping-dot dot-pending"></div>'.repeat(PING_ROUNDS)}</div>
+      </div>
+      <div class="ping-ms" id="ping-ms-${i}" style="color:var(--muted)">-- мс</div>
+    </div>`).join('');
+}
+
+// Один замер: no-cors fetch, тайм-аут 2,5 с
+async function singlePing(url) {
+  const start = performance.now();
+  try {
+    await fetch(url, { mode: 'no-cors', cache: 'no-store', signal: AbortSignal.timeout(2500) });
+    return Math.round(performance.now() - start);
+  } catch { return -1; }
+}
+function dotClass(ms) { return ms < 0 ? 'dot-fail' : ms < 100 ? 'dot-good' : ms < 400 ? 'dot-warn' : 'dot-bad'; }
+
+// 1 прогрев (не показываем) + 12 замеров, на экране медиана
+const pingHistory = pingTargets.map(() => []);
+async function runPings() {
+  await Promise.allSettled(pingTargets.map(t => singlePing(t.url)));
+  await Promise.allSettled(pingTargets.map(async (t, i) => {
+    for (let round = 0; round < PING_ROUNDS; round++) {
+      const roundStart = performance.now();
+      const ms = await singlePing(t.url);
+      document.getElementById(`ping-dots-${i}`).children[round].className = 'ping-dot ' + dotClass(ms);
+      const msEl = document.getElementById(`ping-ms-${i}`);
+      if (ms >= 0) pingHistory[i].push(ms);
+      const valid = pingHistory[i].slice().sort((a, b) => a - b);
+      if (valid.length) {
+        const median = valid[Math.floor(valid.length / 2)];
+        msEl.textContent = Math.min(median, 999) + ' мс';
+        msEl.style.color = median < 100 ? '#1b8a2d' : median < 400 ? '#6fcf7c' : '#f0c040';
+      } else if (ms < 0) {
+        msEl.textContent = 'тайм-аут';
+        msEl.style.color = '#e17055';
+      }
+      const elapsed = performance.now() - roundStart;
+      if (elapsed < PING_MIN_INTERVAL && round < PING_ROUNDS - 1) await new Promise(r => setTimeout(r, PING_MIN_INTERVAL - elapsed));
+    }
+  }));
+}
+
+// ----- Китайский выход: iP138 и IP.cn (как у оригинала) -----
+async function fetchIP138() {
+  try {
+    const html = await (await fetch('https://2026.ip138.com/', { signal: AbortSignal.timeout(8000) })).text();
+    const ipMatch = html.match(/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/);
+    const geoMatch = html.match(/来自：([^<\n]+)/);
+    if (ipMatch) return { ip: ipMatch[1], geo: geoMatch ? geoMatch[1].trim() : '', source: 'iP138.com' };
+  } catch {}
+  return null;
+}
+async function fetchIPCN() {
+  try {
+    const text = await (await fetch('https://my.ip.cn/', { signal: AbortSignal.timeout(8000) })).text();
+    const ipMatch = text.match(/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/);
+    const geoMatch = text.match(/归属地：(.+)/);
+    if (ipMatch) return { ip: ipMatch[1], geo: geoMatch ? geoMatch[1].trim() : '', source: 'IP.cn' };
+  } catch {}
+  return null;
+}
+
+// Китайские базы часто врут по странам. Сверяем их текст с кодом страны с бэкенда:
+// совпало — верим источнику, нет — берём гео из GeoIP (как у оригинала).
+const CC_TO_CN_PREFIX = {
+  cn:['中国'], hk:['香港','中国香港'], mo:['澳门','中国澳门'], tw:['台湾','中国台湾'],
+  jp:['日本'], kr:['韩国'], sg:['新加坡'], my:['马来西亚'], th:['泰国'], vn:['越南'], id:['印度尼西亚','印尼'],
+  ph:['菲律宾'], in:['印度'], pk:['巴基斯坦'], bd:['孟加拉'], ir:['伊朗'], il:['以色列'], ae:['阿联酋','阿拉伯联合酋长国'],
+  sa:['沙特'], tr:['土耳其'], us:['美国'], ca:['加拿大'], mx:['墨西哥'], br:['巴西'], ar:['阿根廷'], cl:['智利'],
+  gb:['英国'], ie:['爱尔兰'], fr:['法国'], de:['德国'], it:['意大利'], es:['西班牙'], pt:['葡萄牙'], nl:['荷兰'],
+  be:['比利时'], ch:['瑞士'], at:['奥地利'], se:['瑞典'], no:['挪威'], dk:['丹麦'], fi:['芬兰'],
+  pl:['波兰'], cz:['捷克'], ru:['俄罗斯','俄国'], ua:['乌克兰'], au:['澳大利亚','澳洲'], nz:['新西兰'],
+  za:['南非'], eg:['埃及'], ng:['尼日利亚'], ke:['肯尼亚']
+};
+async function pickValidatedGeo(ip, candidates) {
+  const g = await lookupGeo(ip);
+  const cc = (g?.countryCode || '').toLowerCase();
+  const prefixes = cc ? (CC_TO_CN_PREFIX[cc] || null) : null;
+  const matches = text => !!prefixes && !!text && prefixes.some(p => {
+    if (!text.startsWith(p)) return false;
+    const next = text[p.length];
+    return !next || next === ' ' || next === '　';
+  });
+  if (!cc) {
+    const longest = candidates.filter(c => c && c.geo).reduce((a, b) => (a.geo.length >= b.geo.length ? a : b), { geo: '', source: '' });
+    return longest.geo ? { ...longest, ok: true } : { ...(candidates[0] || { geo: '', source: '' }), ok: true };
+  }
+  const valid = candidates.filter(c => c && c.geo && matches(c.geo));
+  if (valid.length) return { ...valid.reduce((a, b) => a.geo.length >= b.geo.length ? a : b), ok: true };
+  return { geo: '', source: 'GeoIP', ok: false };
+}
+
+// Тип IP по оценке риска — те же правила, что у оригинала
+async function fillIPType(ip, el) {
+  try {
+    const r = await fetch(`${NC}/api/iprisk/${ip}`, { signal: AbortSignal.timeout(5000) });
+    if (!r.ok) return;
+    const d = await r.json();
+    const t = d.company_type || '';
+    const tStr = { isp: 'ISP', hosting: 'Hosting', business: 'Business', education: 'Education' }[t] || t;
+    let prop;
+    if (d.isResidential === true && t === 'business') prop = 'бизнес-интернет (Business)';
+    else if (d.isResidential === true) prop = 'домашний интернет' + (tStr ? ` (${tStr})` : '');
+    else if (d.is_datacenter === true && t === 'business') prop = 'выделенная бизнес-линия (Business)';
+    else if (d.is_datacenter === true) prop = 'IP дата-центра' + (tStr ? ` (${tStr})` : '');
+    else if (t === 'education') prop = 'учебная сеть (Education)';
+    else prop = tStr ? `неизвестно (${tStr})` : 'неизвестно';
+    el.dataset.prop = prop;
+    el.innerHTML = `${esc(el.dataset.src || '')}${el.dataset.src ? ' · ' : ''}<b>${esc(prop)}</b>`;
+  } catch {}
+}
+
+async function renderIPResult(ip, providerGeo, source, valueEl, geoEl, sourceEl) {
+  const g = await lookupGeo(ip);
+  valueEl.innerHTML = `${flagImg(g?.countryCode)} ${linkIP(ip)}`;
+  // Гео показываем по-русски из GeoIP; текст китайского источника — во всплывашке
+  const geoText = g?.geoString || providerGeo || '';
+  geoEl.textContent = geoText;
+  geoEl.title = providerGeo ? `${geoText}\n${source}: ${providerGeo}` : geoText;
+  sourceEl.dataset.src = 'источник: ' + source;
+  sourceEl.textContent = sourceEl.dataset.src;
+  await fillIPType(ip, sourceEl);
+}
+
+function addBackupBlock(afterId, idSuffix, label) {
+  const b = document.createElement('div');
+  b.className = 'exit-block';
+  b.innerHTML = `<div class="label">${label}</div><div class="ip-addr" id="ipValue${idSuffix}"></div><div class="ip-geo" id="ipGeo${idSuffix}"></div><div class="ip-src" id="ipSource${idSuffix}"></div>`;
+  document.getElementById(afterId).after(b);
+  return ['ipValue', 'ipGeo', 'ipSource'].map(p => document.getElementById(p + idSuffix));
+}
+
+// Два источника: оба упали / один / оба с одним IP / с разными IP (тогда вторая карточка)
+async function runIPQuery() {
+  const [r138, rCN] = await Promise.allSettled([fetchIP138(), fetchIPCN()]);
+  const ip138 = r138.value || null, ipCN = rCN.value || null;
+  const v = document.getElementById('ipValue'), g = document.getElementById('ipGeo'), s = document.getElementById('ipSource');
+  if (!ip138 && !ipCN) { v.textContent = 'не получен'; g.textContent = 'Китайские сервисы проверки IP не отвечают'; return; }
+  if (!ip138 || !ipCN) {
+    const r = ip138 || ipCN;
+    const p = await pickValidatedGeo(r.ip, [{ geo: r.geo, source: r.source }]);
+    return renderIPResult(r.ip, r.geo, p.ok ? r.source : r.source + ' (страна исправлена по GeoIP)', v, g, s);
+  }
+  if (ip138.ip === ipCN.ip) {
+    const p = await pickValidatedGeo(ip138.ip, [{ geo: ip138.geo, source: 'iP138.com' }, { geo: ipCN.geo, source: 'IP.cn' }]);
+    return renderIPResult(ip138.ip, p.geo || ip138.geo, p.ok ? 'iP138.com / IP.cn' : 'iP138.com / IP.cn (страна исправлена по GeoIP)', v, g, s);
+  }
+  const p1 = await pickValidatedGeo(ip138.ip, [{ geo: ip138.geo, source: 'iP138.com' }]);
+  await renderIPResult(ip138.ip, ip138.geo, p1.ok ? 'iP138.com' : 'iP138.com (страна исправлена по GeoIP)', v, g, s);
+  const [v2, g2, s2] = addBackupBlock('cnBlock', 'CN2', 'Китайский выход (запасной)');
+  const p2 = await pickValidatedGeo(ipCN.ip, [{ geo: ipCN.geo, source: 'IP.cn' }]);
+  await renderIPResult(ipCN.ip, ipCN.geo, p2.ok ? 'IP.cn' : 'IP.cn (страна исправлена по GeoIP)', v2, g2, s2);
+}
+
+// ----- Российский выход: STUN Яндекса и Sipnet, та же логика двух источников -----
+async function runRUQuery() {
+  const [ya, sip] = await Promise.all(RU_STUN.map(u => stunIP(u, 4000)));
+  const v = document.getElementById('ipValueRU'), g = document.getElementById('ipGeoRU'), s = document.getElementById('ipSourceRU');
+  if (!ya && !sip) { v.textContent = 'не получен'; g.textContent = 'Российские STUN-серверы не ответили (WebRTC выключен или UDP режется)'; return; }
+  if (!ya || !sip) return renderIPResult(ya || sip, '', ya ? 'STUN Яндекса' : 'STUN Sipnet', v, g, s);
+  if (ya === sip) return renderIPResult(ya, '', 'STUN Яндекса / Sipnet', v, g, s);
+  await renderIPResult(ya, '', 'STUN Яндекса', v, g, s);
+  const [v2, g2, s2] = addBackupBlock('ruBlock', 'RU2', 'Российский выход (запасной)');
+  await renderIPResult(sip, '', 'STUN Sipnet', v2, g2, s2);
+}
+
+// ================================================================
+//  Блок 2: раздельная маршрутизация
+// ================================================================
+const tests = [
+  // ---- Китай (как у оригинала) ----
+  { name: 'NetEase',          type: 'cn', method: 'netease', iconPath: 'netease.png' },
+  { name: 'ByteDance',        type: 'cn', method: 'bytedance', url: 'https://perfops.byte-test.com/500b-bench.jpg', icon: 'bytedance' },
+  { name: 'Cloudflare Китай', type: 'cn', method: 'cftrace', domain: 'www.cloudflare-cn.com', icon: 'cloudflare' },
+  { name: 'Qualcomm Китай',   type: 'cn', method: 'cftrace', domain: 'www.qualcomm.cn', iconPath: 'qualcomm.png' },
+
+  // ---- Россия (добавлено) ----
+  { name: 'Яндекс (STUN)', type: 'ru', method: 'stun', stun: 'stun:stun.rtc.yandex.net:3478', iconUrl: 'https://ya.ru/favicon.ico' },
+  { name: 'Sipnet (STUN)', type: 'ru', method: 'stun', stun: 'stun:stun.sipnet.ru:3478', iconUrl: 'https://www.sipnet.ru/favicon.ico' },
+  { name: 'goha.ru',       type: 'ru', method: 'cftrace', domain: 'www.goha.ru', iconUrl: 'https://www.goha.ru/favicon.ico' },
+  { name: '4pda.to',       type: 'ru', method: 'cftrace', domain: '4pda.to', iconUrl: 'https://4pda.to/favicon.ico' },
+  { name: 'yaplakal.com',  type: 'ru', method: 'cftrace', domain: 'www.yaplakal.com', iconUrl: 'https://www.yaplakal.com/favicon.ico' },
+  { name: 'rutracker.org', type: 'ru', extra: ['blocked'], method: 'cftrace', domain: 'rutracker.org', iconUrl: 'https://rutracker.org/favicon.ico' },
+  { name: 'meduza.io',     type: 'ru', extra: ['blocked'], method: 'cftrace', domain: 'meduza.io', iconUrl: 'https://meduza.io/favicon.ico' },
+
+  // ---- Зарубежные: соцсети ----
+  { name: 'discord.com', type: 'intl', extra: ['social'], method: 'cftrace', domain: 'gateway.discord.gg', icon: 'discord' },
+  { name: 'x.com',       type: 'intl', extra: ['social'], method: 'cftrace', domain: 'x.com', icon: 'x' },
+  { name: 'medium.com',  type: 'intl', extra: ['social'], method: 'cftrace', domain: 'medium.com', icon: 'medium' },
+  { name: 'signal.org',  type: 'intl', extra: ['social'], method: 'cftrace', domain: 'signal.org', icon: 'signal' },
+  // ---- AI ----
+  { name: 'anthropic.com',  type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'anthropic.com', icon: 'anthropic' },
+  { name: 'claude.ai',      type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'claude.ai', icon: 'claude' },
+  { name: 'chatgpt.com',    type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'chatgpt.com', iconPath: 'chatgpticon.png?v=1' },
+  { name: 'openai.com',     type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'openai.com', icon: 'openai' },
+  { name: 'sora.com',       type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'sora.com', icon: 'sora' },
+  { name: 'grok.com',       type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'grok.com', iconPath: 'grok.png?v=4' },
+  { name: 'pixpix.com',     type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'pixpix.com', iconPath: 'link/pixpix.ico?v=4' },
+  { name: 'perplexity.ai',  type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'www.perplexity.ai', icon: 'perplexity' },
+  { name: 'midjourney.com', type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'midjourney.com', icon: 'midjourney' },
+  { name: 'mistral.ai',     type: 'intl', extra: ['ai'], method: 'cftrace', domain: 'mistral.ai', icon: 'mistral' },
+  // ---- Крипта ----
+  { name: 'coinbase.com', type: 'intl', extra: ['crypto'], method: 'cftrace', domain: 'coinbase.com', icon: 'coinbase' },
+  { name: 'www.okx.com',  type: 'intl', extra: ['crypto'], method: 'cftrace', domain: 'www.okx.com', icon: 'okx' },
+  { name: 'binance.com',  type: 'intl', extra: ['crypto'], method: 'cftrace', domain: 'www.binance.info', iconPath: 'binance.png' },
+  { name: 'crypto.com',   type: 'intl', extra: ['crypto'], method: 'cftrace', domain: 'crypto.com', iconPath: 'crypto.png' },
+  // ---- Работа и сервисы ----
+  { name: 'zoom.us',         type: 'intl', extra: ['tools'], method: 'cftrace', domain: 'zoom.us', icon: 'zoom' },
+  { name: '1password.com',   type: 'intl', extra: ['tools'], method: 'cftrace', domain: '1password.com', icon: '1password' },
+  { name: 'wise.com',        type: 'intl', extra: ['tools'], method: 'cftrace', domain: 'wise.com', icon: 'wise' },
+  { name: 'poe.com',         type: 'intl', extra: ['tools'], method: 'cftrace', domain: 'poe.com', icon: 'poe' },
+  { name: 'notion.so',       type: 'intl', extra: ['tools'], method: 'cftrace', domain: 'notion.so', iconPath: 'notion.png' },
+  { name: 'shopify.com',     type: 'intl', extra: ['tools'], method: 'cftrace', domain: 'shopify.com', iconPath: 'shopify.png' },
+  { name: 'godaddy.com',     type: 'intl', extra: ['tools'], method: 'cftrace', domain: 'godaddy.com', icon: 'godaddy' },
+  { name: 'producthunt.com', type: 'intl', extra: ['tools'], method: 'cftrace', domain: 'producthunt.com', icon: 'producthunt' },
+  // ---- Скорость / сеть ----
+  { name: 'cloudflare.com', type: 'intl', extra: ['speed'], method: 'cftrace', domain: 'www.cloudflare.com', icon: 'cloudflare' },
+  // ---- Разработка / CDN ----
+  { name: 'cloudflare cdnjs', type: 'intl', extra: ['static'], method: 'cftrace', domain: 'cdnjs.cloudflare.com', icon: 'cdnjs' },
+  { name: 'npm registry',     type: 'intl', extra: ['static'], method: 'cftrace', domain: 'registry.npmjs.org', icon: 'npmjs' },
+  { name: 'kali.download',    type: 'intl', extra: ['static'], method: 'cftrace', domain: 'kali.download', iconPath: 'kali.png' },
+  { name: 'unpkg.com',        type: 'intl', extra: ['static'], method: 'cftrace', domain: 'unpkg.com', icon: 'unpkg' },
+  { name: 'nodejs.org',       type: 'intl', extra: ['dev'], method: 'cftrace', domain: 'nodejs.org', icon: 'nodejs' },
+  { name: 'gitlab.com',       type: 'intl', extra: ['dev'], method: 'cftrace', domain: 'gitlab.com', icon: 'gitlab' },
+  // ---- Стриминг ----
+  { name: 'crunchyroll.com', type: 'intl', extra: ['media'], method: 'cftrace', domain: 'crunchyroll.com', icon: 'crunchyroll' },
+];
+
+const state = tests.map(() => ({ status: 'pending', ip: null, geo: null, countryCode: null, error: null }));
+
+function faviconUrl(t) {
+  if (t.iconUrl) return t.iconUrl;
+  if (t.iconPath) return ASSET + t.iconPath;
+  if (t.icon) return ASSET + t.icon + '.webp';
+  return 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+}
+function badgeHTML(type, extras) {
+  let h = type === 'cn' ? '<span class="badge badge-cn">Китай</span>'
+    : type === 'ru' ? '<span class="badge badge-ru">Россия</span>'
+    : '<span class="badge badge-intl">Зарубеж</span>';
+  const labels = { ai: 'AI', crypto: 'Крипта', social: 'Соцсети', tools: 'Сервисы', speed: 'Скорость', dev: 'Dev', media: 'Видео', static: 'CDN', blocked: 'блок в РФ' };
+  for (const e of extras || []) h += `<span class="badge${e === 'blocked' ? ' badge-blocked' : ''}">${labels[e] || e}</span>`;
+  return h;
+}
+
+// ----- Гео: свой кэш по /24, бэкенд → запасные API (как у оригинала) -----
+const geoCache = new Map(), geoInflight = new Map();
+function normalizeIp(ip) { return /^\d+\.\d+\.\d+\.\d+$/.test(ip) ? ip.replace(/\.\d+$/, '.1') : ip; }
+async function fetchGeoFromServer(ip) {
+  const r = await fetch(`${NC}/api/geoip/${ip}`, { signal: AbortSignal.timeout(5000) });
+  if (!r.ok) return null;
+  const d = await r.json();
+  return { geoString: [d.country, d.region, d.city, d.isp].filter(Boolean).join(' · '), countryCode: d.country_code || null };
+}
+async function fetchGeoFallback(ip) {
+  try {
+    const r = await fetch(`https://api.ip.sb/geoip/${ip}`, { signal: AbortSignal.timeout(5000) });
+    if (r.ok) { const d = await r.json(); if (d.country) return { geoString: [d.country, d.region, d.city, d.isp || d.organization].filter(Boolean).join(' · '), countryCode: d.country_code?.toLowerCase() || null }; }
+  } catch {}
+  try {
+    const d = await (await fetch(`https://ipwho.is/${ip}`, { signal: AbortSignal.timeout(5000) })).json();
+    if (d.success) return { geoString: [d.country, d.region, d.city, d.connection?.isp].filter(Boolean).join(' · '), countryCode: d.country_code?.toLowerCase() || null };
+  } catch {}
+  return null;
+}
+async function lookupGeo(ip) {
+  if (!ip) return null;
+  const key = normalizeIp(ip);
+  if (geoCache.has(key)) return geoCache.get(key);
+  if (geoInflight.has(key)) return geoInflight.get(key);
+  const p = (async () => {
+    let res = null;
+    try { res = await fetchGeoFromServer(ip); } catch {}
+    if (!res) { try { res = await fetchGeoFallback(ip); } catch {} }
+    if (res) geoCache.set(key, res);
+    return res;
+  })();
+  geoInflight.set(key, p);
+  try { return await p; } finally { geoInflight.delete(key); }
+}
+
+// ----- Способы узнать IP выхода к сайту -----
+async function detectCftrace(domain) {
+  const e = await trace(`https://${domain}/cdn-cgi/trace`, 5000);
+  return { ip: e.ip || null, loc: e.loc?.toLowerCase() || null };
+}
+async function detectNetease() {
+  const r = await fetch('https://necaptcha.nosdn.127.net/ab7f4275c1744aa28e0a8f3a1c58c532.png', { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(5000) });
+  const ip = r.headers.get('cdn-user-ip');
+  if (ip) return { ip };
+  throw new Error('IP не получен');
+}
+async function detectBytedance(url) {
+  const r = await fetch(url, { method: 'HEAD', cache: 'no-store', signal: AbortSignal.timeout(5000) });
+  const ip = r.headers.get('x-request-ip') || r.headers.get('x-response-cinfo');
+  if (ip) return { ip };
+  throw new Error('IP не получен');
+}
+// Для российских сервисов без Cloudflare: STUN-сервер сам называет адрес, с которого пришёл запрос
+async function detectStun(url) {
+  const ip = await stunIP(url, 4000);
+  if (ip) return { ip };
+  throw new Error('нет ответа по UDP');
+}
+function errText(e) {
+  if (!e) return 'не удалось';
+  if (e.name === 'TimeoutError' || e.name === 'AbortError') return 'тайм-аут';
+  if (e.name === 'TypeError') return 'не отвечает';
+  return e.message || 'не удалось';
+}
+
+async function runTest(i) {
+  const t = tests[i];
+  state[i].status = 'loading';
+  renderRow(i);
+  try {
+    let res;
+    switch (t.method) {
+      case 'cftrace': res = await detectCftrace(t.domain); break;
+      case 'netease': res = await detectNetease(); break;
+      case 'bytedance': res = await detectBytedance(t.url); break;
+      case 'stun': res = await detectStun(t.stun); break;
+    }
+    const ip = res?.ip || null;
+    Object.assign(state[i], { ip, countryCode: res?.loc || null, status: ip ? 'done' : 'error', error: ip ? null : 'IP не получен' });
+    if (ip) {
+      renderRow(i);
+      const g = await lookupGeo(ip);
+      if (g) { state[i].geo = g.geoString; if (!state[i].countryCode) state[i].countryCode = g.countryCode; }
+    }
+    renderRow(i);
+  } catch (e) {
+    state[i].status = 'error';
+    state[i].error = errText(e);
+    renderRow(i);
+  }
+}
+
+function rowCells(i) {
+  const t = tests[i], s = state[i];
+  const site = `<td><div class="site-cell"><img class="favicon" src="${faviconUrl(t)}" alt="" onerror="this.style.display='none'"><span class="site-name">${esc(t.name)}</span>${badgeHTML(t.type, t.extra)}</div></td>`;
+  let f, ip, geo;
+  if (s.status === 'pending') { f = '<td class="flag-td"></td>'; ip = '<td></td>'; geo = '<td class="geo-col"></td>'; }
+  else if (s.status === 'loading') { f = '<td class="flag-td"></td>'; ip = '<td><span class="loading" style="width:110px"></span></td>'; geo = '<td class="geo-col"><span class="loading" style="width:160px"></span></td>'; }
+  else if (s.status === 'error') { f = '<td class="flag-td" style="text-align:center">?</td>'; ip = `<td><span class="err-text">${esc(s.error || 'не удалось')}</span></td>`; geo = '<td class="geo-col"></td>'; }
+  else {
+    f = `<td class="flag-td">${flagImg(s.countryCode)}</td>`;
+    ip = `<td class="ip-cell">${displayIP(s.ip)}</td>`;
+    geo = `<td class="geo-col geo-cell">${s.geo ? esc(s.geo) : '<span class="loading" style="width:140px"></span>'}</td>`;
+  }
+  return site + f + ip + geo;
+}
+function renderTable() { document.getElementById('tableBody').innerHTML = tests.map((_, i) => `<tr>${rowCells(i)}</tr>`).join(''); }
+function renderRow(i) {
+  const tr = document.getElementById('tableBody').children[i];
+  if (!tr) return renderTable();
+  tr.innerHTML = rowCells(i);
+  renderSplitIpSummary();
+}
+
+// ----- Сводка уникальных выходов -----
+function compactIp(ip) {
+  if (!ip || !ip.includes(':') || ip.length <= 22) return ip;
+  const p = ip.split(':');
+  return p[0] + ':' + p[1] + '…' + p[p.length - 1];
+}
+function renderSplitIpSummary() {
+  const seen = new Map();
+  for (const s of state) {
+    if (s.status !== 'done' || !s.ip) continue;
+    if (!seen.has(s.ip)) seen.set(s.ip, s.countryCode || '');
+    else if (!seen.get(s.ip) && s.countryCode) seen.set(s.ip, s.countryCode);
+  }
+  const grid = document.getElementById('splitIpGrid');
+  if (!seen.size) return;
+  grid.innerHTML = [...seen.entries()].map(([ip, cc]) =>
+    `<a class="split-ip-cell" href="${ROOT}ip/?q=${encodeURIComponent(ip)}" target="_blank" rel="noopener" title="Оценить ${esc(ip)}">${flagImg(cc)}<span class="ip-mask-target">${esc(compactIp(ip))}</span></a>`
+  ).join('');
+}
+
+// ----- Пул с ограничением параллельности + 2 повтора упавших -----
+function runWithLimit(items, limit, worker) {
+  return new Promise(resolve => {
+    let cursor = 0, active = 0, done = 0;
+    const total = items.length;
+    if (!total) return resolve();
+    (function next() {
+      while (active < limit && cursor < total) {
+        const i = cursor++; active++;
+        Promise.resolve(worker(i)).catch(() => {}).finally(() => { active--; done++; done === total ? resolve() : next(); });
+      }
+    })();
+  });
+}
+async function runAll() {
+  await runWithLimit(tests, 12, i => runTest(i));
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const failed = state.map((s, i) => s.status === 'error' ? i : -1).filter(i => i >= 0);
+    if (!failed.length) break;
+    await new Promise(r => setTimeout(r, 2000 * attempt));
+    await runWithLimit(failed, 12, k => runTest(failed[k]));
+  }
+}
+
+renderPingGrid();
+runIPQuery();
+runRUQuery();
+runPings();
+renderTable();
+runAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#cc785c">
+<title>Новости ИИ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../common/site.css">
+<script src="../common/site.js"></script>
+<style>
+.nw-bar{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 16px}
+.nw-tag{border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:999px;padding:4px 12px;font:inherit;font-size:.88em;cursor:pointer}
+.nw-tag:hover{color:var(--text)}
+.nw-tag.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.nw-tag .n{opacity:.7;font-size:.85em;margin-left:3px}
+.nw-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.nw-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;min-width:0}
+.nw-card:hover{border-color:var(--accent)}
+.nw-card h2{font-size:1em;margin:0 0 6px;line-height:1.35;word-break:break-word}
+.nw-card p{color:var(--muted);font-size:.86em;margin:0 0 10px;line-height:1.5;flex:1;word-break:break-word;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.nw-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.78em}
+.nw-date{color:var(--muted);margin-right:2px}
+.nw-chip{background:var(--neutral-bg);color:var(--muted);border-radius:5px;padding:1px 7px}
+.nw-kind{border-radius:5px;padding:1px 7px;font-weight:600}
+.k-inc{background:var(--warn-bg);color:var(--warn)}.k-ok{background:var(--safe-bg);color:var(--safe)}.k-rel{background:var(--info-bg);color:var(--info)}
+.nw-orig{color:var(--muted);font-size:.85em;margin:-4px 0 6px;word-break:break-word}
+.nw-empty{color:var(--muted);padding:20px 0}
+.nw-more{display:block;margin:16px auto 0}
+.src-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.src{display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-decoration:none;color:inherit;min-width:0}
+.src:hover{border-color:var(--accent)}
+.src b{display:block;font-size:.92em}
+.src span{color:var(--muted);font-size:.82em}
+.src.cn{border-style:dashed}
+.src-state{color:var(--muted);font-size:.82em;margin-top:14px}
+@media (max-width:860px){.nw-grid,.src-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.nw-grid,.src-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head"><div>
+    <h1>Новости ИИ</h1>
+    <p class="desc">Свежие события по Claude, Anthropic, OpenAI, ChatGPT, Codex, Gemini и MCP: сбои и их разборы, новые версии Claude Code, Codex и Gemini CLI. Всё подтягивается из открытых официальных источников в момент открытия.</p>
+  </div></div>
+
+  <div class="nw-bar" id="nwBar"></div>
+  <div class="nw-grid" id="nwGrid"><div class="nw-empty">Загрузка…</div></div>
+  <button class="btn nw-more" id="moreBtn" style="display:none">Показать ещё</button>
+  <div class="src-state" id="srcState"></div>
+
+  <h2 style="font-size:1.05em;margin:28px 0 0">Официальные блоги и списки изменений</h2>
+  <div class="src-grid">
+    <a class="src" href="https://www.anthropic.com/news" target="_blank" rel="noopener"><b>Anthropic — новости</b><span>anthropic.com/news</span></a>
+    <a class="src" href="https://docs.claude.com/en/release-notes/overview" target="_blank" rel="noopener"><b>Claude — что нового</b><span>release notes: API, приложения</span></a>
+    <a class="src" href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md" target="_blank" rel="noopener"><b>Claude Code — changelog</b><span>github.com/anthropics/claude-code</span></a>
+    <a class="src" href="https://openai.com/news/" target="_blank" rel="noopener"><b>OpenAI — новости</b><span>openai.com/news</span></a>
+    <a class="src" href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener"><b>ChatGPT — release notes</b><span>help.openai.com</span></a>
+    <a class="src" href="https://platform.openai.com/docs/changelog" target="_blank" rel="noopener"><b>OpenAI API — changelog</b><span>platform.openai.com</span></a>
+    <a class="src" href="https://blog.google/technology/google-deepmind/" target="_blank" rel="noopener"><b>Google DeepMind / Gemini</b><span>blog.google</span></a>
+    <a class="src" href="https://modelcontextprotocol.io/specification/changelog" target="_blank" rel="noopener"><b>MCP — изменения спецификации</b><span>modelcontextprotocol.io</span></a>
+    <a class="src cn" id="cnLink" href="https://ip.net.coffee/news/" target="_blank" rel="noopener"><b>Лента оригинала (на китайском)</b><span>ip.net.coffee/news — авторские статьи net.coffee</span></a>
+  </div>
+  <div class="foot">У оригинала здесь авторские статьи редакции net.coffee — это чужой контент, мы его не копируем и не переводим, а даём ссылку на их ленту (с тем же тегом, что выбран). Наша лента собирает то же по смыслу из открытых API с CORS: статус-страницы Claude и OpenAI (incidents.json) и релизы на GitHub (Claude Code, Codex, Gemini CLI, спецификация MCP).</div>
+</div>
+
+<script>
+// Те же рубрики, что у оригинала (ip.net.coffee/news): Все, OpenAI, Claude, ChatGPT, Codex, API, Claude Code, Gemini, MCP
+const TAGS = ['OpenAI', 'Claude', 'ChatGPT', 'Codex', 'API', 'Claude Code', 'Gemini', 'MCP'];
+const CN_TAG = { 'Claude Code': 'Claude-Code' };
+const PAGE = 24;
+let items = [], curTag = 'all', shown = PAGE;
+
+function pad(n) { return String(n).padStart(2, '0'); }
+function fmtDate(iso) { const d = new Date(iso); return isNaN(d) ? '' : `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()}`; }
+// Тот же шаблонный перевод названий инцидентов, что на вкладке «Статусы»
+const NAME_RULES = [
+  [/^(?:elevated|increased|higher) (?:number of |rate of )?((?:[\w./-]+ ){0,3}?)(?:error rates?|errors?)(?: rates?)?(?: (?:on|for|in|with|affecting|when using|across))? ?(.*)$/i, 'Больше ошибок'],
+  [/^(?:elevated|increased|high) latency(?: (?:on|for|in|with|affecting))? ?(.*)$/i, 'Рост задержек'],
+  [/^degraded (?:performance|service|availability)(?: (?:on|for|in|of|with|affecting))? ?(.*)$/i, 'Работает с перебоями'],
+  [/^partial (?:outage|service disruption)(?: (?:on|for|in|of|with|affecting))? ?(.*)$/i, 'Частичный сбой'],
+  [/^(?:major )?(?:outage|service disruption|disruption)(?: (?:on|for|in|of|with|affecting))? ?(.*)$/i, 'Сбой'],
+  [/^scheduled maintenance(?: (?:on|for|of))? ?(.*)$/i, 'Плановые работы'],
+  [/^investigating(?: issues? (?:with|on|in))? ?(.*)$/i, 'Разбираются'],
+  [/^(.+?) errors? (?:in|on|for|with) (.+)$/i, 'Ошибки'],
+  [/^(.+?) (?:is |are )?(?:unavailable|down|not loading)$/i, 'Недоступно'],
+  [/^(.+?) (?:issues?|problems?|errors?|degradation|outage)$/i, 'Проблемы'],
+  [/^(?:delays?|delayed) (?:in|for|on|with)? ?(.*)$/i, 'Задержки'],
+];
+function nameRU(n) { for (const [re, ru] of NAME_RULES) { const m = n.match(re); if (m) { const g = m.slice(1).map(s => (s || '').trim()); const what = g.length > 1 ? g[0] : '', where = g[g.length - 1].replace(/^the /i, ''); return ru + (what ? ` (${what})` : '') + (where ? `: ${where}` : ''); } } return n; }
+const IMPACT_RU = { none: 'событие', minor: 'мелкий сбой', major: 'крупный сбой', critical: 'авария', maintenance: 'техработы' };
+const ST_RU = { investigating: 'разбираются', identified: 'причина найдена', monitoring: 'наблюдают', resolved: 'решено', postmortem: 'разбор' };
+// Markdown-тело релиза → 2–3 первых пункта простым текстом
+function mdPoints(md, n) {
+  return String(md || '').split('\n').map(l => l.trim()).filter(l => /^[-*] /.test(l))
+    .slice(0, n || 3).map(l => l.replace(/^[-*] /, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/`|\*\*/g, '')
+      .replace(/ by @\S+ in https?:\/\/\S+/g, '').replace(/\s*\(#[\d, #]+\)/g, '')).join(' · ');
+}
+// Кэш на 10 минут: у GitHub лимит 60 запросов в час без ключа
+async function cached(key, url, ttl) {
+  try { const c = JSON.parse(sessionStorage.getItem(key) || 'null'); if (c && Date.now() - c.t < ttl) return c.d; } catch {}
+  const r = await fetch(url, { signal: AbortSignal.timeout(12000) });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const d = await r.json();
+  try { sessionStorage.setItem(key, JSON.stringify({ t: Date.now(), d })); } catch {}
+  return d;
+}
+
+// ===== Источники =====
+async function statusIncidents(host, base, tagger, label) {
+  const d = await cached('nw_' + host, `https://${host}/api/v2/incidents.json`, 5 * 60e3);
+  return (d.incidents || []).slice(0, 25).map(i => {
+    const text = [i.name, ...(i.components || []).map(c => c.name)].join(' ');
+    const ru = nameRU(i.name);
+    const upd = i.incident_updates?.[0];
+    return {
+      title: ru, orig: ru !== i.name ? i.name : '', date: i.created_at,
+      desc: (upd?.body || '').replace(/\s+/g, ' ').slice(0, 220),
+      tags: [...new Set([...base, ...tagger(text)])], url: i.shortlink || `https://${host}`,
+      kind: i.status === 'resolved' ? ['k-ok', `${IMPACT_RU[i.impact] || 'сбой'} · решено`] : ['k-inc', `${IMPACT_RU[i.impact] || 'сбой'} · ${ST_RU[i.status] || i.status}`],
+      src: label,
+    };
+  });
+}
+async function ghReleases(repo, tags, title, opts) {
+  const d = await cached('nw_gh_' + repo, `https://api.github.com/repos/${repo}/releases?per_page=30`, 10 * 60e3);
+  return d.filter(r => !r.draft && !r.prerelease).slice(0, (opts && opts.max) || 10).map(r => ({
+    title: title(r), orig: '', date: r.published_at,
+    desc: mdPoints(r.body, 3) || String(r.body || '').replace(/[#*`\r]/g, '').replace(/\s+/g, ' ').slice(0, 200),
+    tags, url: r.html_url, kind: ['k-rel', 'новая версия'], src: 'GitHub ' + repo,
+  }));
+}
+const SOURCES = [
+  ['Статус Claude', () => statusIncidents('status.claude.com', ['Claude'], t => [
+    ...(/claude code/i.test(t) ? ['Claude Code'] : []), ...(/\bAPI\b|console|platform/i.test(t) ? ['API'] : []), ...(/\bMCP\b|connector/i.test(t) ? ['MCP'] : [])], 'status.claude.com')],
+  ['Статус OpenAI', () => statusIncidents('status.openai.com', ['OpenAI'], t => [
+    ...(/chatgpt|conversation|login|voice|gpts|deep research|file upload|search|image generation/i.test(t) ? ['ChatGPT'] : []),
+    ...(/codex/i.test(t) ? ['Codex'] : []), ...(/\bAPI\b|completions|responses|embeddings|fine-tuning|batch|realtime|moderations/i.test(t) ? ['API'] : [])], 'status.openai.com')],
+  ['Claude Code', () => ghReleases('anthropics/claude-code', ['Claude Code', 'Claude'], r => `Claude Code ${r.tag_name}`)],
+  ['Codex', () => ghReleases('openai/codex', ['Codex', 'OpenAI'], r => `Codex CLI ${r.name || r.tag_name}`)],
+  ['Gemini CLI', () => ghReleases('google-gemini/gemini-cli', ['Gemini'], r => `Gemini CLI ${r.tag_name}`)],
+  ['MCP', () => ghReleases('modelcontextprotocol/modelcontextprotocol', ['MCP'], r => `Спецификация MCP ${r.tag_name}`, { max: 5 })],
+];
+
+// ===== Отрисовка =====
+function renderBar() {
+  const cnt = t => t === 'all' ? items.length : items.filter(i => i.tags.includes(t)).length;
+  document.getElementById('nwBar').innerHTML = ['all', ...TAGS].map(t =>
+    `<button class="nw-tag${t === curTag ? ' on' : ''}" data-tag="${esc(t)}">${t === 'all' ? 'Все' : esc(t)}<span class="n">${cnt(t)}</span></button>`).join('');
+  const cn = document.getElementById('cnLink');
+  cn.href = curTag === 'all' ? 'https://ip.net.coffee/news/' : `https://ip.net.coffee/news/tag/${encodeURIComponent(CN_TAG[curTag] || curTag)}/`;
+}
+function renderGrid() {
+  const list = curTag === 'all' ? items : items.filter(i => i.tags.includes(curTag));
+  const el = document.getElementById('nwGrid');
+  el.innerHTML = list.length ? list.slice(0, shown).map(i => `<a class="nw-card" href="${esc(i.url)}" target="_blank" rel="noopener nofollow">
+      <h2>${esc(i.title)}</h2>${i.orig ? `<div class="nw-orig">${esc(i.orig)}</div>` : ''}
+      <p>${esc(i.desc)}</p>
+      <div class="nw-meta"><span class="nw-date">${fmtDate(i.date)}</span><span class="nw-kind ${i.kind[0]}">${esc(i.kind[1])}</span>${i.tags.map(t => `<span class="nw-chip">${esc(t)}</span>`).join('')}</div>
+    </a>`).join('') : '<div class="nw-empty">В этой рубрике пока пусто</div>';
+  document.getElementById('moreBtn').style.display = list.length > shown ? '' : 'none';
+}
+function setTag(t) {
+  curTag = t; shown = PAGE; renderBar(); renderGrid();
+  const u = new URL(location.href); t === 'all' ? u.searchParams.delete('tag') : u.searchParams.set('tag', t); history.replaceState(null, '', u);
+}
+document.getElementById('nwBar').addEventListener('click', e => { const b = e.target.closest('.nw-tag'); if (b) setTag(b.dataset.tag); });
+document.getElementById('moreBtn').addEventListener('click', () => { shown += PAGE; renderGrid(); });
+
+async function main() {
+  const q = new URLSearchParams(location.search).get('tag');
+  if (q && TAGS.includes(q)) curTag = q;
+  renderBar();
+  const res = await Promise.allSettled(SOURCES.map(([, f]) => f()));
+  const failed = [];
+  res.forEach((r, i) => { if (r.status === 'fulfilled') items.push(...r.value); else failed.push(SOURCES[i][0]); });
+  items.sort((a, b) => new Date(b.date) - new Date(a.date));
+  renderBar(); renderGrid();
+  document.getElementById('srcState').textContent = `Загружено ${items.length} записей из ${SOURCES.length - failed.length} источников` +
+    (failed.length ? `. Не ответили: ${failed.join(', ')}` : '') + '. Обновление — при открытии страницы (кэш 5–10 минут).';
+}
+main();
+</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#cc785c">
+<title>Пинг по миру</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../common/site.css">
+<script src="../common/site.js"></script>
+<style>
+.ping-tbl th:not(:first-child),.ping-tbl td:not(:first-child){text-align:center;width:16%}
+.ping-tbl td{vertical-align:middle}
+.node-cell{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.node-city{color:var(--muted);font-size:.82em}
+.cont-row td{background:var(--neutral-bg);color:var(--muted);font-weight:600;font-size:.85em;padding:6px 8px}
+.ping-val{font-variant-numeric:tabular-nums;white-space:nowrap}
+.ping-ok{color:var(--safe);font-weight:600}.ping-med{color:var(--info);font-weight:600}
+.ping-slow{color:var(--warn);font-weight:600}.ping-bad{color:var(--danger);font-weight:600}
+.ping-avg{font-weight:800}
+.ping-err{color:var(--danger);font-size:.88em}
+.ping-wait{color:var(--muted)}
+.note{color:var(--muted);font-size:.85em;margin:10px 0 0}
+.legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.82em;margin-top:8px}
+@media (max-width:520px){.node-city{display:none}.ping-tbl{font-size:.85em}.ping-tbl td,.ping-tbl th{padding:7px 3px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head">
+    <div>
+      <h1>Пинг по миру</h1>
+      <p class="desc">Задержка до IP или домена с 20 узлов по всему миру: Москва, Европа, Азия, Америка</p>
+    </div>
+  </div>
+
+  <div class="search">
+    <input class="input" type="text" id="hostInput" placeholder="IP или домен, например ya.ru" autocomplete="off" spellcheck="false">
+    <button class="btn-primary" id="pingBtn" onclick="startPing()">Пинг</button>
+  </div>
+
+  <div class="card">
+    <div class="tbl-wrap">
+      <table class="tbl ping-tbl">
+        <thead><tr><th>Узел</th><th>Мин</th><th>Сред</th><th>Макс</th></tr></thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </div>
+    <div class="legend"><span class="ping-ok">до 100 мс</span><span class="ping-med">100–200</span><span class="ping-slow">200–350</span><span class="ping-bad">350+</span></div>
+    <p class="note" id="pingNote" style="display:none"></p>
+  </div>
+
+  <div class="foot">Логика повторяет ip.net.coffee/ping: пинг запускает их сервер (сеть узлов check-host), по 4 ICMP-пакета с каждого узла, браузер забирает результаты. Лимит оригинала — 10 проверок одного адреса в сутки. В поле сразу подставляется твой IP выхода к Cloudflare. Российский узел у них один — Москва; других узлов в РФ их сервер не принимает, а сам check-host.net прямые запросы из браузера не пускает.</div>
+</div>
+
+<script>
+// Узлы оригинала (n01–n20) — все на месте. Порядок групп: Россия, Европа, Азия, Америка
+const NODES = [
+  { id: 'n19', name: 'Москва', cc: 'ru', city: 'Moscow', cont: 'Россия' },
+  { id: 'n20', name: 'Стамбул', cc: 'tr', city: 'Istanbul', cont: 'Европа' },
+  { id: 'n16', name: 'Стокгольм', cc: 'se', city: 'Stockholm', cont: 'Европа' },
+  { id: 'n13', name: 'Франкфурт', cc: 'de', city: 'Frankfurt', cont: 'Европа' },
+  { id: 'n14', name: 'Амстердам', cc: 'nl', city: 'Amsterdam', cont: 'Европа' },
+  { id: 'n15', name: 'Париж', cc: 'fr', city: 'Paris', cont: 'Европа' },
+  { id: 'n17', name: 'Цюрих', cc: 'ch', city: 'Zurich', cont: 'Европа' },
+  { id: 'n18', name: 'Мадрид', cc: 'es', city: 'Madrid', cont: 'Европа' },
+  { id: 'n01', name: 'Шанхай, Китай', cc: 'cn', city: 'Shanghai', cont: 'Азия' },
+  { id: 'n02', name: 'Гонконг', cc: 'hk', city: 'Hong Kong', cont: 'Азия' },
+  { id: 'n03', name: 'Токио', cc: 'jp', city: 'Tokyo', cont: 'Азия' },
+  { id: 'n04', name: 'Сингапур', cc: 'sg', city: 'Singapore', cont: 'Азия' },
+  { id: 'n05', name: 'Хошимин', cc: 'vn', city: 'Ho Chi Minh City', cont: 'Азия' },
+  { id: 'n06', name: 'Джакарта', cc: 'id', city: 'Jakarta', cont: 'Азия' },
+  { id: 'n07', name: 'Мумбаи', cc: 'in', city: 'Mumbai', cont: 'Азия' },
+  { id: 'n08', name: 'Тель-Авив', cc: 'il', city: 'Tel Aviv', cont: 'Азия' },
+  { id: 'n09', name: 'Лос-Анджелес', cc: 'us', city: 'Los Angeles', cont: 'Америка' },
+  { id: 'n10', name: 'Атланта', cc: 'us', city: 'Atlanta', cont: 'Америка' },
+  { id: 'n11', name: 'Ванкувер', cc: 'ca', city: 'Vancouver', cont: 'Америка' },
+  { id: 'n12', name: 'Сан-Паулу', cc: 'br', city: 'Sao Paulo', cont: 'Америка' },
+];
+const CONT_ICON = { 'Россия': '🇷🇺', 'Европа': '🌍', 'Азия': '🌏', 'Америка': '🌎' };
+
+// Пороги цвета — как у оригинала (по среднему)
+function pingClass(ms) {
+  if (ms < 100) return 'ping-ok';
+  if (ms < 200) return 'ping-med';
+  if (ms < 350) return 'ping-slow';
+  return 'ping-bad';
+}
+const cell = (k, i) => document.getElementById(`${k}-${i}`);
+
+function renderTable() {
+  let last = '';
+  document.getElementById('resultsBody').innerHTML = NODES.map((n, i) => {
+    let sep = '';
+    if (n.cont !== last) { last = n.cont; sep = `<tr class="cont-row"><td colspan="4">${CONT_ICON[n.cont]} ${n.cont}</td></tr>`; }
+    return `${sep}<tr id="row-${i}">
+      <td><div class="node-cell">${flagImg(n.cc)} ${n.name}<span class="node-city">${n.city}</span></div></td>
+      <td class="ping-val ping-wait" id="min-${i}">--</td>
+      <td class="ping-val ping-wait" id="avg-${i}">--</td>
+      <td class="ping-val ping-wait" id="max-${i}">--</td>
+    </tr>`;
+  }).join('');
+}
+function showLoading() {
+  NODES.forEach((_, i) => ['min', 'avg', 'max'].forEach(k => {
+    cell(k, i).className = 'ping-val ping-wait';
+    cell(k, i).innerHTML = '<span class="loading" style="width:36px"></span>';
+  }));
+}
+function setRowText(i, minHtml) {
+  cell('min', i).innerHTML = minHtml;
+  cell('avg', i).textContent = '--'; cell('avg', i).className = 'ping-val ping-wait';
+  cell('max', i).textContent = '--'; cell('max', i).className = 'ping-val ping-wait';
+}
+// data — формат check-host: [[["OK", сек, ip?], ["TIMEOUT", сек], …]] или null
+function updateRow(i, data) {
+  if (!data || !data[0]) { setRowText(i, '<span class="ping-err">таймаут</span>'); return; }
+  const times = data[0].filter(p => p && p[0] === 'OK').map(p => Math.round(p[1] * 1000));
+  if (!times.length) { setRowText(i, '<span class="ping-err">недоступен</span>'); return; }
+  const min = Math.min(...times), max = Math.max(...times);
+  const avg = Math.round(times.reduce((a, b) => a + b, 0) / times.length);
+  const cls = pingClass(avg);
+  cell('min', i).className = `ping-val ${cls}`; cell('min', i).textContent = min + ' мс';
+  cell('avg', i).className = `ping-val ping-avg ${cls}`; cell('avg', i).textContent = avg + ' мс';
+  cell('max', i).className = `ping-val ${cls}`; cell('max', i).textContent = max + ' мс';
+}
+function hasLoading(i) { return !!cell('min', i).querySelector('.loading'); }
+
+// Сообщения сервера оригинала приходят по-китайски — переводим известные
+function ruError(msg) {
+  const s = String(msg || '');
+  if (/无响应|超时|timeout/i.test(s)) return 'сеть узлов не ответила, попробуй ещё раз через минуту';
+  if (/限|频繁|次数|limit/i.test(s)) return 'лимит: этот адрес уже проверяли 10 раз за сутки';
+  if (/无效|非法|格式|invalid/i.test(s)) return 'некорректный адрес';
+  return 'ошибка сервера проверки';
+}
+
+let polling = false;
+async function startPing(useCache) {
+  const host = document.getElementById('hostInput').value.trim();
+  if (!host || polling) return;
+  const btn = document.getElementById('pingBtn');
+  btn.disabled = true; btn.textContent = 'Проверяем…';
+  polling = true;
+  document.getElementById('pingNote').style.display = 'none';
+  showLoading();
+  try { const u = new URL(location.href); u.searchParams.set('q', host); history.replaceState(null, '', u); } catch (e) {}
+
+  try {
+    const nodeParam = NODES.map(n => `node=${n.id}`).join('&');
+    // IP пользователя для лимита на стороне оригинала — как у них, из 1.1.1.1/cdn-cgi/trace
+    let userIp = 'unknown';
+    try { const t = await trace('https://1.1.1.1/cdn-cgi/trace', 3000); if (t.ip) userIp = t.ip; } catch (e) {}
+    // Кнопка = принудительный перезамер (force=1); при открытии по ссылке ?q= можно взять кэш сервера
+    const url = `${NC}/api/ping/start?host=${encodeURIComponent(host)}&user_ip=${encodeURIComponent(userIp)}&${nodeParam}${useCache ? '' : '&force=1'}`;
+    const resp = await fetch(url, { signal: AbortSignal.timeout(15000) });
+    const data = await resp.json();
+
+    if (data.error) {
+      const msg = ruError(data.error);
+      NODES.forEach((_, i) => setRowText(i, `<span class="ping-err">${esc(msg)}</span>`));
+      return;
+    }
+    if (data.cached) {
+      NODES.forEach((n, i) => { if (data.results && data.results[n.id]) updateRow(i, data.results[n.id]); else setRowText(i, '<span class="ping-err">нет данных</span>'); });
+      return;
+    }
+    const requestId = data.request_id;
+    if (!requestId) throw new Error('нет request_id');
+
+    // Опрос результатов: до 10 раз через 1,5 с, как у оригинала
+    for (let attempt = 1; attempt <= 10; attempt++) {
+      await new Promise(r => setTimeout(r, 1500));
+      let results = {};
+      try {
+        const r = await fetch(`${NC}/api/ping/result/${encodeURIComponent(requestId)}`, { signal: AbortSignal.timeout(10000) });
+        results = await r.json() || {};
+      } catch (e) { continue; }
+      let allDone = true;
+      NODES.forEach((n, i) => { if (results[n.id]) updateRow(i, results[n.id]); else allDone = false; });
+      if (allDone) break;
+    }
+    // Узлы, которые так и не ответили
+    NODES.forEach((_, i) => { if (hasLoading(i)) setRowText(i, '<span class="ping-err">нет ответа</span>'); });
+  } catch (e) {
+    NODES.forEach((_, i) => { if (hasLoading(i)) setRowText(i, '<span class="ping-err">запрос не прошёл</span>'); });
+  } finally {
+    polling = false;
+    btn.disabled = false; btn.textContent = 'Пинг';
+    if (document.querySelector('#resultsBody .ping-ok, #resultsBody .ping-med, #resultsBody .ping-slow, #resultsBody .ping-bad')) {
+      const note = document.getElementById('pingNote');
+      note.textContent = `Результат для ${host} на ${new Date().toLocaleString('ru-RU', { hour12: false })}. Узлы с «таймаутом» могут просто не пускать ICMP — это не всегда значит, что адрес лежит.`;
+      note.style.display = '';
+    }
+  }
+}
+
+async function init() {
+  renderTable();
+  document.getElementById('hostInput').addEventListener('keydown', e => { if (e.key === 'Enter') startPing(); });
+  // ?q=адрес (ссылки с других вкладок) — подставляем и запускаем (кэш сервера разрешён)
+  const q = new URLSearchParams(location.search).get('q') || new URLSearchParams(location.search).get('host');
+  if (q) { document.getElementById('hostInput').value = q.trim(); startPing(true); return; }
+  // Иначе, как у оригинала, подставляем IP выхода к Cloudflare и ничего не запускаем
+  try { const t = await trace('https://1.1.1.1/cdn-cgi/trace', 5000); if (t.ip && !document.getElementById('hostInput').value) document.getElementById('hostInput').value = t.ip; } catch (e) {}
+}
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#10a37f">
+<title>ChatGPT IP — проверка</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310a37f'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../common/site.css">
+<script src="../common/site.js"></script>
+<style>
+.ip-row.four{grid-template-columns:repeat(4,1fr)}
+#deviceContent .tag{white-space:normal}
+@media (max-width:1000px){.ip-row.four{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.ip-row.four{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head">
+    <div>
+      <h1>ChatGPT · Codex: проверка IP</h1>
+      <p class="desc">Каким IP тебя видит ChatGPT / Codex: чистота, риск, тип адреса (домашний / серверный), DNS, UDP, часовой пояс, отпечатки и история</p>
+    </div>
+    <label class="toggle">Скрыть IP <input type="checkbox" id="ipMaskToggle"><span class="slider"></span></label>
+  </div>
+
+  <div class="banner warn" id="ipv6Warn">⚠️ Сейчас IPv6. Для Codex IPv6 лучше не использовать — часть проверок может быть неполной.</div>
+
+  <div class="ip-row four">
+    <div class="card ip-hero" id="ipHeroCN">
+      <div class="label">Китайский выход</div>
+      <div class="ip-addr" id="ipAddrCN"><span class="loading" style="width:170px;height:22px"></span></div>
+      <div class="ip-geo" id="ipGeoCN"><span class="loading" style="width:200px"></span></div>
+    </div>
+    <div class="card ip-hero" id="ipHeroRU">
+      <div class="label">Российский выход</div>
+      <div class="ip-addr" id="ipAddrRU"><span class="loading" style="width:170px;height:22px"></span></div>
+      <div class="ip-geo" id="ipGeoRU"><span class="loading" style="width:200px"></span></div>
+    </div>
+    <div class="card ip-hero" id="ipHero">
+      <div class="label">Выход Cloudflare</div>
+      <div class="ip-addr" id="ipAddr"><span class="loading" style="width:170px;height:22px"></span></div>
+      <div class="ip-geo" id="ipGeo"><span class="loading" style="width:200px"></span></div>
+    </div>
+    <div class="card ip-hero main" id="ipHeroChatGPT">
+      <div class="label">Выход ChatGPT</div>
+      <div class="ip-addr" id="ipAddrChatGPT"><span class="loading" style="width:170px;height:22px"></span></div>
+      <div class="ip-geo" id="ipGeoChatGPT"><span class="loading" style="width:200px"></span></div>
+    </div>
+  </div>
+
+  <div class="banner danger" id="regionWarn"></div>
+  <div class="banner warn" id="sameAsRuWarn"></div>
+
+  <div class="grid3">
+    <div class="card">
+      <h2>Trust Score выхода ChatGPT</h2>
+      <div class="gauge-score" id="gaugeScore"><span class="loading" style="width:90px;height:30px"></span></div>
+      <div class="gauge"><div class="gauge-ptr" id="gaugePointer"></div></div>
+      <div class="gauge-marks"><span>0 опасно</span><span>25</span><span>50</span><span>75</span><span>100 чисто</span></div>
+      <div class="gauge-text" id="gaugeText"></div>
+      <div class="risk-row" id="chatgptRegionSupportRow" style="margin-top:8px"><span class="risk-label">Регион поддерживается ChatGPT</span><span class="risk-value" id="chatgptRegionSupport"><span class="loading" style="width:60px"></span></span></div>
+    </div>
+    <div class="card">
+      <h2>Свойства IP ChatGPT</h2>
+      <div id="propsContent"><span class="loading"></span></div>
+    </div>
+    <div class="card">
+      <h2>Безопасность IP ChatGPT</h2>
+      <div id="securityContent"><span class="loading"></span></div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h2><span>Доступность GPT · Codex <span class="small" title="Серверы OpenAI в основном в США, задержка 100+ мс из Европы и Азии — нормально. api.openai.com — путь Codex и API, отдельный от сайта: смотри обе строки" style="cursor:help">ⓘ</span></span> <button class="btn" onclick="detectChatGPTAvail()">Обновить</button></h2>
+      <div id="chatgptAvailContent"><span class="loading"></span></div>
+    </div>
+    <div class="card">
+      <h2>Утечка DNS <a class="btn" href="../dns/" style="text-decoration:none">Подробнее</a></h2>
+      <div id="dnsLeakContent"><span class="loading"></span></div>
+    </div>
+    <div class="card">
+      <h2>Утечка WebRTC (UDP) <a class="btn" href="../webrtc/" style="text-decoration:none">Подробнее</a></h2>
+      <div id="udpLeakContent"><span class="loading"></span></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Устройство и браузер</h2>
+      <div id="deviceContent"><span class="loading"></span></div>
+    </div>
+    <div class="card">
+      <h2>История выходов ChatGPT <button class="btn" onclick="clearIPHistory()">Очистить</button></h2>
+      <div class="small" style="margin-bottom:6px">Хранится только в этом браузере</div>
+      <div id="ipHistoryContent">Загрузка…</div>
+    </div>
+  </div>
+
+  <div class="foot">Логика проверок повторяет ip.net.coffee/gpt. Оценка IP (Trust Score, VPN/прокси/Tor, тип адреса) — их открытый API; DNS — bash.ws; статус — status.openai.com. Китайский выход — ip.cn / ip138, как у оригинала. Российский выход — STUN Яндекса (российский адрес идёт мимо VPN при раздельной маршрутизации).</div>
+</div>
+
+<script>
+const state = { ip: null, ippure: null, ipapis: null, chatgptRisk: null, chatgptGeo: null, ruIp: null };
+
+function setGeoText(id, text) { const el = document.getElementById(id); el.textContent = text || ''; el.title = text || ''; }
+function showIPv6Warning() { document.getElementById('ipv6Warn').style.display = 'block'; }
+
+// Страны вне списка поддерживаемых OpenAI (developers.openai.com/api/docs/supported-countries) — тот же список, что у оригинала
+const OPENAI_RESTRICTED_CC = {
+  'CN': 'в Китае', 'HK': 'в Гонконге', 'MO': 'в Макао', 'RU': 'в России', 'KP': 'в КНДР',
+  'IR': 'в Иране', 'SY': 'в Сирии', 'CU': 'на Кубе', 'BY': 'в Беларуси', 'VE': 'в Венесуэле'
+};
+function getRestrictedName() {
+  const cc = (state.chatgptRisk && state.chatgptRisk.countryCode || '').toUpperCase();
+  return cc ? (OPENAI_RESTRICTED_CC[cc] || null) : null;
+}
+function scoreLabel(s) {
+  if (s >= 95) return { text: 'идеально чистый', cls: 'tag-safe' };
+  if (s >= 80) return { text: 'чистый', cls: 'tag-safe' };
+  if (s >= 50) return { text: 'хороший', cls: 'tag-info' };
+  if (s >= 25) return { text: 'средний', cls: 'tag-warn' };
+  return { text: 'подозрительный', cls: 'tag-danger' };
+}
+
+// ===== Получение трёх IP =====
+async function fetchCfIP() {
+  try { const e = await trace('https://1.1.1.1/cdn-cgi/trace', 5000); state.ip = e.ip || null; } catch {}
+}
+async function fetchChatGPTIP() {
+  try { const e = await trace('https://chatgpt.com/cdn-cgi/trace', 8000); return { ip: e.ip || null, loc: e.loc?.toLowerCase() || null }; }
+  catch { return null; }
+}
+// Китайский выход — те же источники, что у оригинала. ip.cn отдаёт CORS, ip138 для
+// не-китайских IP редиректит на 127.0.0.1, поэтому сначала ip.cn, потом ip138.
+async function fetchCNIP() {
+  for (const [url, source] of [['https://my.ip.cn/', 'IP.cn'], ['https://2026.ip138.com/', 'iP138.com']]) {
+    try {
+      const html = await (await fetch(url, { signal: AbortSignal.timeout(5000) })).text();
+      const m = html.match(/(\d+\.\d+\.\d+\.\d+)/);
+      if (m) return { ip: m[1], source };
+    } catch {}
+  }
+  return null;
+}
+async function renderIPCard(elId, geoElId, ip, locHint) {
+  if (!ip) { document.getElementById(elId).textContent = 'не получен'; setGeoText(geoElId, ''); return null; }
+  if (isIPv6(ip)) showIPv6Warning();
+  document.getElementById(elId).innerHTML = `${flagImg(locHint)} ${linkIP(ip)}`;
+  try {
+    const g = await geoip(ip);
+    document.getElementById(elId).innerHTML = `${flagImg(g.country_code || locHint)} ${linkIP(ip)}`;
+    setGeoText(geoElId, [g.country, g.region, g.city, g.isp].filter(Boolean).join(' · '));
+    return g;
+  } catch { return null; }
+}
+
+// ===== Основной рендер =====
+function render() {
+  const p = state.ippure, cr = state.chatgptRisk, cg = state.chatgptGeo, a = state.ipapis;
+  const asn = cr?.asn || p?.asn || '';
+  const asnOrg = cr?.asOrganization || a?.company?.name || '';
+  const restrictedName = getRestrictedName();
+
+  // Trust Score: с бэкенда; нет IP / нет оценки → «—»; запрещённый регион → принудительно 0
+  const hasGptIp = !!(cr && cr.ip);
+  let trustScore, restrictedText = null;
+  if (!hasGptIp) trustScore = null;
+  else if (restrictedName) { trustScore = 0; restrictedText = 'Регион недоступен — ChatGPT будет жёстко проверять'; }
+  else trustScore = (typeof cr.trust_score === 'number') ? cr.trust_score : null;
+
+  const ptr = document.getElementById('gaugePointer');
+  if (trustScore === null) {
+    document.getElementById('gaugeScore').innerHTML = `<span style="color:#9ca3af">—</span> <span class="tag tag-neutral" style="font-size:.4em;vertical-align:middle">нет данных</span>`;
+    ptr.style.left = '0%'; ptr.style.opacity = '.3';
+    document.getElementById('gaugeText').textContent = hasGptIp ? 'Для этого IP пока нет оценки' : 'Не удалось получить IP выхода ChatGPT';
+  } else {
+    const sl = restrictedName ? { text: 'недоступен', cls: 'tag-danger' } : scoreLabel(trustScore);
+    const col = trustScore >= 95 ? '#22c55e' : trustScore >= 80 ? '#16a34a' : trustScore >= 50 ? '#84cc16' : trustScore >= 25 ? '#eab308' : '#ef4444';
+    document.getElementById('gaugeScore').innerHTML = `<span style="color:${col}">${trustScore}</span> <span class="tag ${sl.cls}" style="font-size:.4em;vertical-align:middle">${sl.text}</span>`;
+    ptr.style.left = Math.min(trustScore, 100) + '%'; ptr.style.opacity = '1';
+    document.getElementById('gaugeText').textContent = restrictedText
+      || (trustScore >= 95 ? 'Репутация IP отличная' : trustScore >= 80 ? 'Репутация IP очень хорошая' : trustScore >= 50 ? 'Есть небольшой риск' : trustScore >= 25 ? 'Риск заметный' : 'Риск очень высокий');
+  }
+
+  const rw = document.getElementById('regionWarn');
+  if (restrictedName) {
+    rw.innerHTML = `⚠️ Выход ChatGPT сейчас <strong>${restrictedName}</strong>. Не заходи в ChatGPT — легко поймать бан аккаунта.`;
+    rw.style.display = 'block';
+  } else rw.style.display = 'none';
+
+  // Проверка, специфичная для РФ: ChatGPT видит тот же IP, что и российские сайты
+  const sw = document.getElementById('sameAsRuWarn');
+  if (state.ruIp && cr?.ip && state.ruIp === cr.ip) {
+    const ruCC = (cr.countryCode || '').toUpperCase() === 'RU';
+    sw.className = 'banner ' + (ruCC ? 'danger' : 'warn');
+    sw.innerHTML = ruCC
+      ? '⚠️ ChatGPT видит тот же российский IP, что и сайты РФ — трафик к ChatGPT идёт мимо VPN.'
+      : 'ℹ️ Российские сайты видят тот же зарубежный IP, что и ChatGPT — весь трафик идёт через VPN, раздельной маршрутизации нет.';
+    sw.style.display = 'block';
+  } else sw.style.display = 'none';
+
+  const rr = document.getElementById('chatgptRegionSupportRow'), rv = document.getElementById('chatgptRegionSupport');
+  if (restrictedName) rr.style.display = 'none';
+  else {
+    rv.innerHTML = (!cr?.ip || !cr?.countryCode) ? '<span class="tag tag-neutral">неизвестно</span>' : '<span class="tag tag-safe">да</span>';
+    rr.style.display = '';
+  }
+
+  const isResidential = cr?.isResidential ?? (a ? !a.is_datacenter : null);
+  const companyType = a?.company?.type || '';
+  const regionStr = cg?.country || cr?.country || '';
+  const cityStr = cg?.city || cr?.city || regionStr;
+  let propTag = isResidential === true ? '<span class="tag tag-safe">домашний IP</span>'
+    : isResidential === false ? '<span class="tag tag-warn">серверный IP</span>' : '<span class="tag tag-neutral">неизвестно</span>';
+  if (companyType) {
+    const typeMap = { hosting: 'хостинг', isp: 'провайдер', business: 'компания', education: 'образование' };
+    propTag += ` <span class="small">(${typeMap[companyType] || companyType})</span>`;
+  }
+  document.getElementById('propsContent').innerHTML =
+    row('Страна', regionStr || 'неизвестно') +
+    row('Город', cityStr || 'неизвестно') +
+    row('Тип IP', propTag) +
+    row('ASN', asn ? 'AS' + asn : 'неизвестно') +
+    row('Оператор', asnOrg || 'неизвестно', 'font-size:.85em');
+
+  const s = a || {};
+  document.getElementById('securityContent').innerHTML =
+    row('VPN', boolTag(s.is_vpn, 'VPN', 'не найден')) +
+    row('Прокси', boolTag(s.is_proxy, 'прокси', 'не найден')) +
+    row('Tor', boolTag(s.is_tor, 'Tor', 'не найден')) +
+    row('Бот (Crawler)', boolTag(s.is_crawler, 'да', 'нет')) +
+    row('Жалобы на абьюз', boolTag(s.is_abuser, 'есть', 'нет'));
+}
+
+// ===== Утечка DNS =====
+// Принцип как у оригинала: браузер резолвит уникальные поддомены,
+// авторитетный DNS запоминает, какие резолверы пришли, потом читаем список.
+// Утечка: российский DNS при выходе ChatGPT не в РФ.
+async function detectDNSLeak() {
+  const el = document.getElementById('dnsLeakContent');
+  let dnsServers = [];
+  try {
+    const id = [...crypto.getRandomValues(new Uint8Array(8))].map(b => b.toString(16).padStart(2, '0')).join('');
+    for (let i = 1; i <= 2; i++) {
+      await new Promise(res => {
+        const img = new Image(); const t = setTimeout(res, 2000);
+        img.onload = img.onerror = () => { clearTimeout(t); res(); };
+        img.src = `https://${i}.${id}.bash.ws/?_=${Date.now()}`;
+      });
+    }
+    await new Promise(r => setTimeout(r, 1500));
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const r = await fetch(`https://bash.ws/dnsleak/test/${id}?json`, { signal: AbortSignal.timeout(4000) });
+        const data = await r.json();
+        dnsServers = data.filter(x => x.type === 'dns').map(x => x.ip);
+        if (dnsServers.length) break;
+      } catch {}
+      if (attempt === 0) await new Promise(r => setTimeout(r, 1500));
+    }
+  } catch {}
+
+  if (!dnsServers.length) {
+    el.innerHTML = row('Статус', '<span class="tag tag-safe">DNS зашифрован или выход не виден</span>');
+    return;
+  }
+  // Как у оригинала «中国DNS», плюс российский: резолвер в стране X при выходе ChatGPT не из X
+  const gptCC = (state.chatgptRisk?.countryCode || '').toUpperCase();
+  const LEAK_CC = { cn: 'DNS из Китая', ru: 'DNS из РФ' };
+  let showIP = null, isLeaked = false;
+  for (const ip of dnsServers) {
+    let g = null; try { g = await geoip(ip, 3000); } catch {}
+    const cc = (g?.country_code || '').toLowerCase(), isp = g?.isp || '';
+    if (LEAK_CC[cc] && gptCC !== cc.toUpperCase()) { showIP = { ip, cc, isp, leaked: LEAK_CC[cc] }; isLeaked = true; break; }
+    if (!showIP) showIP = { ip, cc, isp, leaked: false };
+  }
+  let rows = row('Статус', isLeaked ? '<span class="tag tag-warn">возможна утечка</span>' : '<span class="tag tag-safe">утечки нет</span>');
+  rows += row('DNS-выход', `${flagImg(showIP.cc)} <span class="ip-mask-target">${showIP.ip}</span> ${showIP.leaked ? `<span class="tag tag-warn">${showIP.leaked}</span>` : ''}`, 'font-size:.88em');
+  if (showIP.isp) rows += row('Сервис', `<span class="small">${showIP.isp}</span>`);
+  el.innerHTML = rows;
+}
+
+// ===== Утечка WebRTC =====
+async function detectWebRTCLeak() {
+  const el = document.getElementById('udpLeakContent');
+  const udpIPs = new Set();
+  try {
+    const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:stun.cloudflare.com:3478' }] });
+    pc.createDataChannel('');
+    await pc.setLocalDescription(await pc.createOffer());
+    await new Promise(res => {
+      const t = setTimeout(() => { pc.close(); res(); }, 5000);
+      pc.onicecandidate = e => {
+        if (!e.candidate) { clearTimeout(t); pc.close(); res(); return; }
+        const m = e.candidate.candidate.match(/([0-9]{1,3}\.){3}[0-9]{1,3}/);
+        if (m && !m[0].startsWith('0.') && !m[0].startsWith('127.')) udpIPs.add(m[0]);
+        const m6 = e.candidate.candidate.match(/([a-f0-9]{1,4}:){2,7}[a-f0-9]{1,4}/i);
+        if (m6) udpIPs.add(m6[0]);
+      };
+    });
+  } catch {}
+  const gptIp = state.chatgptRisk?.ip || '';
+  const all = [...udpIPs];
+  const pub = all.filter(ip => !isIPv6(ip) && !/^(192\.168\.|10\.|172\.|198\.1[89]\.|100\.64\.|127\.|0\.)/.test(ip));
+  if (!pub.length) {
+    el.innerHTML = row('Статус', `<span class="tag tag-safe">${all.length ? 'утечки нет' : 'WebRTC выключен или утечки нет'}</span>`);
+    return;
+  }
+  // Утечка: любой публичный UDP-IP, отличный от выхода ChatGPT
+  const leakIP = gptIp ? pub.find(ip => ip !== gptIp) : undefined;
+  const showIP = leakIP || pub.find(ip => ip === gptIp) || pub[0];
+  let rows = row('Статус', leakIP ? '<span class="tag tag-warn">возможна утечка</span>' : '<span class="tag tag-safe">утечки нет</span>');
+  let cc = '', country = '';
+  try { const g = await geoip(showIP); cc = g.country_code || ''; country = g.country || ''; } catch {}
+  rows += row('UDP-выход', `${flagImg(cc)} ${displayIP(showIP)} ${leakIP ? '<span class="tag tag-warn">не совпадает</span>' : ''}`, 'font-size:.88em');
+  if (country) rows += row('Где', `<span class="small">${country}</span>`);
+  el.innerHTML = rows;
+}
+
+// ===== Доступность ChatGPT / Codex =====
+async function detectChatGPTAvail() {
+  const el = document.getElementById('chatgptAvailContent');
+  const targets = [
+    { name: 'chatgpt.com', url: 'https://chatgpt.com/cdn-cgi/trace' },
+    // api.openai.com — путь Codex и API, отдельная инфраструктура: может не открываться, даже если сайт работает
+    { name: 'api.openai.com', url: 'https://api.openai.com/', tip: 'Через него ходят Codex и API. Инфраструктура отдельная от сайта: одно может работать, другое нет' },
+  ];
+  const results = await Promise.all(targets.map(async t => {
+    const st = performance.now();
+    try { await fetch(t.url, { mode: 'no-cors', cache: 'no-store', signal: AbortSignal.timeout(6000) }); return { name: t.name, tip: t.tip, ms: Math.round(performance.now() - st), ok: true }; }
+    catch { return { name: t.name, tip: t.tip, ok: false }; }
+  }));
+  const restricted = getRestrictedName();
+  let rows = '';
+  results.forEach(d => {
+    const name = d.tip ? `${d.name} <span class="small" title="${d.tip}" style="cursor:help">ⓘ</span>` : d.name;
+    if (restricted || !d.ok) rows += row(name, '<span class="tag tag-danger">недоступен</span>');
+    else {
+      const cls = d.ms < 250 ? 'tag-safe-dark' : d.ms < 500 ? 'tag-safe' : 'tag-warn';
+      const lbl = d.ms < 250 ? 'норма' : d.ms < 500 ? 'хорошо' : 'медленно';
+      rows += row(name, `<span class="tag ${cls}">${lbl}</span> <span class="small">${d.ms} мс</span>`);
+    }
+  });
+  try {
+    const st = await (await fetch('https://status.openai.com/api/v2/status.json', { signal: AbortSignal.timeout(4000) })).json();
+    const ind = st.status?.indicator || 'none';
+    const txt = { none: 'всё работает', minor: 'мелкий сбой', major: 'крупный сбой', critical: 'авария', maintenance: 'обслуживание' };
+    const cls = { none: 'tag-safe-dark', minor: 'tag-warn', major: 'tag-danger', critical: 'tag-danger', maintenance: 'tag-warn' };
+    rows += row('Статус ChatGPT', `<a href="https://status.openai.com" target="_blank" rel="noopener" style="text-decoration:none"><span class="tag ${cls[ind] || 'tag-warn'}">${txt[ind] || 'сбой'}</span></a>`);
+  } catch {}
+  el.innerHTML = rows;
+}
+
+// ===== Устройство =====
+function renderDeviceInfo() {
+  const localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'неизвестно';
+  const localOffMin = -new Date().getTimezoneOffset();
+  const fmt = mins => { if (mins == null) return ''; const s = mins >= 0 ? '+' : '-', a = Math.abs(mins); return 'UTC' + s + Math.floor(a / 60) + (a % 60 ? ':' + String(a % 60).padStart(2, '0') : ''); };
+  const localUtc = fmt(localOffMin);
+  function offsetOf(tz) {
+    if (!tz) return null;
+    try {
+      const p = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'longOffset' }).formatToParts(new Date()).find(x => x.type === 'timeZoneName');
+      if (!p) return null; if (p.value === 'GMT' || p.value === 'UTC') return 0;
+      const m = p.value.match(/GMT([+-])(\d{1,2}):?(\d{0,2})/); if (!m) return null;
+      return (m[1] === '+' ? 1 : -1) * (parseInt(m[2], 10) * 60 + parseInt(m[3] || '0', 10));
+    } catch { return null; }
+  }
+  const CC_TO_TZ = {
+    CN:'Asia/Shanghai',TW:'Asia/Taipei',HK:'Asia/Hong_Kong',JP:'Asia/Tokyo',KR:'Asia/Seoul',SG:'Asia/Singapore',
+    IN:'Asia/Kolkata',AE:'Asia/Dubai',TR:'Europe/Istanbul',RU:'Europe/Moscow',UA:'Europe/Kyiv',KZ:'Asia/Almaty',GE:'Asia/Tbilisi',AM:'Asia/Yerevan',
+    GB:'Europe/London',IE:'Europe/Dublin',FR:'Europe/Paris',DE:'Europe/Berlin',IT:'Europe/Rome',ES:'Europe/Madrid',PT:'Europe/Lisbon',
+    NL:'Europe/Amsterdam',BE:'Europe/Brussels',CH:'Europe/Zurich',AT:'Europe/Vienna',SE:'Europe/Stockholm',NO:'Europe/Oslo',
+    DK:'Europe/Copenhagen',FI:'Europe/Helsinki',PL:'Europe/Warsaw',CZ:'Europe/Prague',LV:'Europe/Riga',LT:'Europe/Vilnius',EE:'Europe/Tallinn',
+    US:'America/Los_Angeles',CA:'America/Toronto',MX:'America/Mexico_City',BR:'America/Sao_Paulo',AU:'Australia/Sydney'
+  };
+  const cr = state.chatgptRisk;
+  const ccU = (cr?.countryCode || '').toUpperCase();
+  const gptTz = cr?.timezone || CC_TO_TZ[ccU] || '';
+  const exact = !!cr?.timezone;
+  const cOff = offsetOf(gptTz);
+  const tzMatch = (gptTz && cOff != null) ? Math.abs(cOff - localOffMin) <= 60 : null;
+  const localIsRU = /^(Europe\/(Moscow|Kaliningrad|Samara|Volgograd|Kirov|Astrakhan|Saratov|Ulyanovsk)|Asia\/(Yekaterinburg|Omsk|Novosibirsk|Barnaul|Tomsk|Novokuznetsk|Krasnoyarsk|Irkutsk|Chita|Yakutsk|Khandyga|Vladivostok|Ust-Nera|Magadan|Sakhalin|Srednekolymsk|Kamchatka|Anadyr))$/.test(localTz);
+  const gptLine = () => {
+    if (!gptTz || cOff == null) return 'Выход ChatGPT: неизвестно';
+    const d = cOff - localOffMin, h = Math.round(d / 60);
+    const lbl = d === 0 ? 'смещение совпадает' : h === 0 ? 'небольшая разница' : h > 0 ? `у ChatGPT на ${h} ч больше` : `у ChatGPT на ${-h} ч меньше`;
+    return `Выход ChatGPT: ${exact ? gptTz : gptTz + ' (по стране)'} (${fmt(cOff)}) — ${lbl}`;
+  };
+  let tzHtml;
+  if (localIsRU && ccU !== 'RU') tzHtml = `<span class="tag tag-warn">российский часовой пояс — не рекомендуется</span><br><span class="small">Локально: ${localTz} (${localUtc})<br>${gptLine()}</span>`;
+  else if (tzMatch === true) tzHtml = `<span class="tag tag-safe">совпадает</span> ${localTz} (${localUtc})`;
+  else if (tzMatch === false) tzHtml = `<span class="tag tag-warn">не совпадает</span><br><span class="small">Локально: ${localTz} (${localUtc})<br>${gptLine()}</span>`;
+  else tzHtml = `${localTz} (${localUtc})`;
+
+  const langs = navigator.languages || [navigator.language];
+  const langsStr = langs.join(', ') || 'неизвестно';
+  const primary = (langs[0] || '').split('-')[0].toLowerCase();
+  const langMap = {
+    CN:['zh'],TW:['zh'],HK:['zh','en'],JP:['ja'],KR:['ko'],SG:['en','zh','ms','ta'],IN:['en','hi'],
+    US:['en'],GB:['en'],IE:['en','ga'],AU:['en'],NZ:['en','mi'],CA:['en','fr'],DE:['de'],AT:['de'],CH:['de','fr','it','rm'],
+    BE:['nl','fr','de'],FR:['fr'],IT:['it'],ES:['es','ca','gl','eu'],PT:['pt'],NL:['nl','fy'],LU:['lb','fr','de'],
+    SE:['sv'],NO:['no','nb','nn'],DK:['da'],FI:['fi','sv'],PL:['pl'],CZ:['cs'],SK:['sk'],HU:['hu'],RO:['ro'],BG:['bg'],GR:['el'],
+    RU:['ru'],UA:['uk','ru'],BY:['be','ru'],KZ:['kk','ru'],GE:['ka'],AM:['hy'],LV:['lv'],LT:['lt'],EE:['et'],
+    TR:['tr'],IL:['he','ar','en'],AE:['ar','en'],BR:['pt'],AR:['es'],MX:['es']
+  };
+  const rl = langMap[ccU] || [];
+  const lm = (primary && rl.length) ? rl.includes(primary) : null;
+  const langHtml = lm === true ? `<span class="tag tag-safe">совпадает</span> ${langsStr}`
+    : lm === false ? `<span class="tag tag-warn">не совпадает</span><br><span class="small">Локально: ${langsStr}<br>В стране выхода ChatGPT обычно: ${rl.join(' / ')}</span>`
+    : langsStr;
+
+  const ua = navigator.userAgent;
+  let os = 'неизвестно', br = 'неизвестно';
+  if (ua.includes('Windows')) os = 'Windows'; else if (ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS';
+  else if (ua.includes('Mac OS')) os = 'macOS'; else if (ua.includes('Android')) os = 'Android'; else if (ua.includes('Linux')) os = 'Linux';
+  if (ua.includes('Edg/')) br = 'Edge ' + (ua.match(/Edg\/([\d.]+)/) || [])[1];
+  else if (ua.includes('YaBrowser/')) br = 'Яндекс Браузер ' + (ua.match(/YaBrowser\/([\d.]+)/) || [])[1];
+  else if (ua.includes('Chrome/')) br = 'Chrome ' + (ua.match(/Chrome\/([\d.]+)/) || [])[1];
+  else if (ua.includes('Firefox/')) br = 'Firefox ' + (ua.match(/Firefox\/([\d.]+)/) || [])[1];
+  else if (ua.includes('Safari/')) br = 'Safari ' + (ua.match(/Version\/([\d.]+)/) || [])[1];
+
+  const hash = s => { let h = 0; for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0; return (h >>> 0).toString(16).toUpperCase(); };
+  let glR = 'не поддерживается', glH = 'не поддерживается', cvH = 'не поддерживается';
+  try {
+    const gl = document.createElement('canvas').getContext('webgl');
+    if (gl) {
+      const ext = gl.getExtension('WEBGL_debug_renderer_info');
+      const v = ext ? gl.getParameter(ext.UNMASKED_VENDOR_WEBGL) : '', r = ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : '';
+      if (r) glR = r;
+      glH = hash(v + '~' + r + '~' + gl.getParameter(gl.VERSION) + '~' + gl.getParameter(gl.SHADING_LANGUAGE_VERSION));
+    }
+  } catch {}
+  try {
+    const c = document.createElement('canvas'); c.width = 200; c.height = 50;
+    const x = c.getContext('2d'); x.textBaseline = 'top'; x.font = '14px Arial';
+    x.fillStyle = '#f60'; x.fillRect(50, 0, 100, 50); x.fillStyle = '#069'; x.fillText('net.coffee', 2, 15);
+    x.fillStyle = 'rgba(102,204,0,0.7)'; x.fillText('canvas fp', 4, 30);
+    cvH = hash(c.toDataURL());
+  } catch {}
+
+  document.getElementById('deviceContent').innerHTML =
+    row('Часовой пояс', tzHtml) +
+    row('Язык', langHtml, 'font-size:.88em') +
+    row('ОС / браузер', `${os} / ${br}`) +
+    row('Cookie', navigator.cookieEnabled ? '<span class="tag tag-safe">включены</span>' : '<span class="tag tag-warn">выключены</span>') +
+    row('WebGL-рендерер', `<span class="small">${glR}</span>`) +
+    row('Canvas-отпечаток', cvH, 'letter-spacing:1px') +
+    row('WebGL-отпечаток', glH, 'letter-spacing:1px');
+}
+
+// ===== История (localStorage) =====
+const HKEY = 'chatgpt_ip_history', HMAX = 6;
+function getIPHistory() { try { return JSON.parse(localStorage.getItem(HKEY)) || []; } catch { return []; } }
+function saveAndRenderIPHistory() {
+  const ip = state.chatgptRisk?.ip || '';
+  if (ip) {
+    const h = getIPHistory(), now = new Date();
+    // То же правило: тот же IP в пределах 24 ч не пишем; новый IP — пишем всегда
+    if (!(h.length && h[0].ip === ip && (now - new Date(h[0].time)) / 36e5 < 24)) {
+      h.unshift({ ip, cc: (state.chatgptRisk?.countryCode || '').toLowerCase(), geo: state.chatgptRisk?.city || '', time: now.toISOString() });
+      if (h.length > HMAX) h.length = HMAX;
+      try { localStorage.setItem(HKEY, JSON.stringify(h)); } catch {}
+    }
+  }
+  renderIPHistory();
+}
+function renderIPHistory() {
+  const el = document.getElementById('ipHistoryContent'), h = getIPHistory();
+  if (!h.length) { el.textContent = 'Пока пусто'; return; }
+  el.innerHTML = h.map((x, i) => {
+    const d = new Date(x.time);
+    const t = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+    return row(`${t}${i === 0 ? ' <span style="color:#22c55e;font-size:.82em">(сейчас)</span>' : ''}`, `${flagImg(x.cc)} ${linkIP(x.ip)} <span class="small">${x.geo}</span>`, 'font-size:.9em');
+  }).join('');
+}
+function clearIPHistory() { try { localStorage.removeItem(HKEY); } catch {} renderIPHistory(); }
+
+// ===== Main =====
+async function main() {
+  const [, cnR, ruR, gpR] = await Promise.allSettled([fetchCfIP(), fetchCNIP(), fetchRUIP(), fetchChatGPTIP()]);
+  const cn = cnR.value || null;
+  const ru = ruR.value || null, gpt = gpR.value || null;
+  state.ruIp = ru?.ip || null;
+
+  const tasks = [];
+  tasks.push(renderIPCard('ipAddrCN', 'ipGeoCN', cn?.ip, 'cn'));
+  tasks.push(renderIPCard('ipAddrRU', 'ipGeoRU', ru?.ip, 'ru'));
+  tasks.push((async () => {
+    const g = await renderIPCard('ipAddr', 'ipGeo', state.ip, '');
+    if (g) state.ippure = { ip: state.ip, country: g.country, countryCode: (g.country_code || '').toUpperCase() };
+  })());
+  tasks.push((async () => {
+    const ip = gpt?.ip;
+    if (!ip) { document.getElementById('ipAddrChatGPT').textContent = 'не получен'; setGeoText('ipGeoChatGPT', ''); return; }
+    if (isIPv6(ip)) showIPv6Warning();
+    document.getElementById('ipAddrChatGPT').innerHTML = `${flagImg(gpt.loc)} ${linkIP(ip)}`;
+    const [riskR, geoR] = await Promise.allSettled([
+      fetch(`${NC}/api/iprisk/${ip}`, { signal: AbortSignal.timeout(10000) }).then(r => r.ok ? r.json() : null),
+      geoip(ip),
+    ]);
+    const g = geoR.value;
+    if (g?.country) {
+      state.chatgptGeo = g;
+      document.getElementById('ipAddrChatGPT').innerHTML = `${flagImg(g.country_code || gpt.loc)} ${linkIP(ip)}`;
+      setGeoText('ipGeoChatGPT', [g.country, g.region, g.city, g.isp].filter(Boolean).join(' · '));
+    } else if (gpt.loc) setGeoText('ipGeoChatGPT', gpt.loc.toUpperCase());
+    const d = riskR.value;
+    if (d) {
+      state.ipapis = { is_datacenter: d.is_datacenter, is_vpn: d.is_vpn, is_proxy: d.is_proxy, is_tor: d.is_tor,
+        is_crawler: d.is_crawler, is_abuser: d.is_abuser, company: { type: d.company_type, name: d.company_name } };
+      state.chatgptRisk = { ip, asn: d.asn, asOrganization: d.asOrganization, country: d.country, countryCode: d.countryCode,
+        city: d.city, isResidential: d.isResidential, trust_score: d.trust_score, timezone: d.timezone };
+    } else {
+      // Оценки нет — IP и страну всё равно знаем из trace, чтобы сработал запрет региона
+      state.chatgptRisk = { ip, countryCode: (g?.country_code || gpt.loc || '').toUpperCase(), country: g?.country, city: g?.city };
+    }
+  })());
+  await Promise.allSettled(tasks);
+  render();
+  Promise.allSettled([detectDNSLeak(), detectWebRTCLeak(), detectChatGPTAvail()]);
+  renderDeviceInfo();
+  saveAndRenderIPHistory();
+}
+
+main();
+</script>
+</body>
+</html>

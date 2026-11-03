@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#cc785c">
+<title>Доступность сайтов</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../common/site.css">
+<script src="../common/site.js"></script>
+<style>
+.link-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.retest-btn{display:inline-flex;align-items:center;gap:6px}
+.retest-btn svg,.group-refresh svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+.spinning svg{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.legend{display:flex;gap:12px;color:var(--muted);font-size:.85em}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.country-block{margin-bottom:12px}
+.country-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.country-head h2{margin:0;font-size:1.05em}
+.country-flag{width:22px;height:auto;border-radius:2px}
+.country-globe{width:20px;height:20px;border-radius:50%}
+.country-sum{color:var(--muted);font-size:.85em;flex:1}
+.group-refresh{display:inline-flex;align-items:center;gap:4px}
+.group-refresh:disabled{opacity:.5;cursor:default}
+.ping-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ping-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;min-width:0}
+.ping-icon{width:18px;height:18px;border-radius:4px;flex:0 0 auto;object-fit:contain}
+.ping-name{font-size:.85em;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ping-dots{display:flex;gap:2px;margin-top:4px}
+.ping-dot{width:7px;height:7px;border-radius:2px}
+.dot-pending{background:var(--border)}.dot-good{background:#1b8a2d}.dot-warn{background:#6fcf7c}.dot-bad{background:#f0c040}.dot-fail{background:#e17055}
+.ping-ms{font-size:.85em;font-weight:700;flex:0 0 auto;min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:860px){.ping-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:600px){.ping-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:380px){.ping-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head">
+    <div>
+      <h1>Доступность сайтов</h1>
+      <p class="desc">Открываются ли популярные сайты Китая, России, Японии, США и остального мира и с какой задержкой. Помогает понять, работают ли правила маршрутизации и не тормозит ли VPN.</p>
+    </div>
+  </div>
+
+  <div class="link-controls">
+    <button class="btn-primary retest-btn" id="retestBtn">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      <span id="retestLabel">Проверить заново</span>
+    </button>
+    <div class="legend">
+      <span><i class="dot-good"></i>быстро</span>
+      <span><i class="dot-warn"></i>нормально</span>
+      <span><i class="dot-bad"></i>медленно</span>
+      <span><i class="dot-fail"></i>не отвечает</span>
+    </div>
+  </div>
+
+  <div id="linkRoot"></div>
+
+  <div class="card article">
+    <h3 style="margin-top:0">Как это работает</h3>
+    Браузер сам отправляет короткие запросы к каждому сайту (иконка или служебный адрес) и засекает время ответа. Каждый сайт проверяется 8 раз, в цифре — медиана. Значит, результат показывает твою текущую сеть, а не чужой сервер.<br>
+    «Не отвечает» обычно значит, что сайт заблокирован в твоей сети или до него нет маршрута. Если российские сайты быстрые, а зарубежные идут через VPN и тоже открываются — раздельная маршрутизация работает. Госуслуги, банки и часть магазинов не пускают зарубежные IP: если они не отвечают при включённом VPN, отправь их напрямую.
+  </div>
+</div>
+
+<script>
+const ASSET = NC + '/favicons/';
+const LBASE = ASSET + 'link/';
+const GROUPS = [
+  { cc: 'cn', name: 'Китай' },
+  { cc: 'ru', name: 'Россия' },
+  { cc: 'jp', name: 'Япония' },
+  { cc: 'us', name: 'США' },
+  { cc: 'gl', name: 'Весь мир', flag: LBASE + 'googleearth.ico', plain: true },
+];
+
+const LINK_ICONS = {
+  baidu:"baidu.ico", tmall:"tmall.png", jd:"jd.ico", weibo:"weibo.ico", bilibili:"bilibili.ico",
+  zhihu:"zhihu.ico", douyin:"douyin.ico", meituan:"meituan.ico", pinduoduo:"pinduoduo.png",
+  mi:"mi.ico", alipay:"alipay.ico", csdn:"csdn.ico",
+  yahoojp:"yahoojp.ico", rakuten:"rakuten.ico", amazonjp:"amazonjp.ico", line:"line.png",
+  niconico:"niconico.ico", pixiv:"pixiv.ico", mercari:"mercari.ico", dmm:"dmm.ico",
+  hatena:"hatena.ico", kakaku:"kakaku.ico", tabelog:"tabelog.ico", nhk:"nhk.ico",
+  softbank:"softbank.ico", nikkei:"nikkei.ico", sony:"sony.ico", nintendo:"nintendo.ico",
+  google:"google.ico", facebook:"facebook.ico", instagram:"instagram.png", amazon:"amazon.ico",
+  microsoft:"microsoft.ico", apple:"apple.ico", netflix:"netflix.ico", reddit:"reddit.png",
+  wikipedia:"wikipedia.ico", twitch:"twitch.ico", linkedin:"linkedin.ico", steam:"steam.ico",
+  deepseek:"deepseek.ico", xiaohongshu:"xiaohongshu.ico", gemini:"gemini.png", oracle:"oracle.ico", bing:"bing.ico",
+  tiktok:"tiktok.png", spotify:"spotify.ico", npm:"npm.png", yandex:"yandex.ico", mistral:"mistral.ico", jumia:"jumia.ico", takealot:"takealot.png", bbc:"bbc.ico", naver:"naver.ico", noon:"noon.png", mercadolibre:"mercadolibre.ico", pixpix:"pixpix.ico"
+};
+
+const TARGETS = [
+  // ---- Китай (как у оригинала) ----
+  { cc:'cn', name:'DeepSeek', slug:'deepseek', host:'www.deepseek.com' },
+  { cc:'cn', name:'Douyin',   slug:'douyin', host:'www.douyin.com', url:'https://lf3-static.bytednsdoc.com/obj/eden-cn/favicon.ico' },
+  { cc:'cn', name:'Bilibili', slug:'bilibili', host:'www.bilibili.com' },
+  { cc:'cn', name:'JD',       slug:'jd', host:'www.jd.com' },
+  { cc:'cn', name:'Tencent QQ', icon: ASSET+'tencent.webp', host:'www.qq.com' },
+  { cc:'cn', name:'WeChat',   icon: ASSET+'weixin.webp', url:'https://res.wx.qq.com/a/wx_fed/assets/res/NTI4MWU5.ico' },
+  { cc:'cn', name:'Xiaohongshu', slug:'xiaohongshu', url:'https://fe-static.xhscdn.com/favicon.ico' },
+  { cc:'cn', name:'Weibo',    slug:'weibo', host:'weibo.com', url:'https://tva1.sinaimg.cn/favicon.ico' },
+  { cc:'cn', name:'Baidu',    slug:'baidu', host:'www.baidu.com' },
+  { cc:'cn', name:'NetEase',  icon: ASSET+'netease.png', host:'www.163.com' },
+  { cc:'cn', name:'Taobao',   icon: ASSET+'taobao.webp', host:'www.taobao.com' },
+  { cc:'cn', name:'Xiaomi',   slug:'mi', host:'www.mi.com' },
+  // ---- Россия (добавлено) ----
+  { cc:'ru', name:'Яндекс',      host:'ya.ru' },
+  { cc:'ru', name:'VK',          host:'vk.com' },
+  { cc:'ru', name:'Mail.ru',     host:'mail.ru', url:'https://e.mail.ru/favicon.ico' },
+  { cc:'ru', name:'Госуслуги',   host:'www.gosuslugi.ru' },
+  { cc:'ru', name:'Сбер',        host:'www.sberbank.ru' },
+  { cc:'ru', name:'Т-Банк',      host:'www.tbank.ru' },
+  { cc:'ru', name:'Ozon',        host:'www.ozon.ru', url:'https://cdn1.ozone.ru/favicon.ico' },
+  { cc:'ru', name:'Wildberries', host:'www.wildberries.ru' },
+  { cc:'ru', name:'Авито',       host:'www.avito.ru' },
+  { cc:'ru', name:'Rutube',      icon:'https://static.rtbcdn.ru/static/img/favicon-icons/v3/icon.svg', url:'https://static.rtbcdn.ru/static/img/favicon-icons/v3/icon.svg' },
+  { cc:'ru', name:'Дзен',        host:'dzen.ru' },
+  { cc:'ru', name:'Кинопоиск',   host:'www.kinopoisk.ru' },
+  // ---- Япония ----
+  { cc:'jp', name:'Sony',      slug:'sony', host:'www.sony.jp' },
+  { cc:'jp', name:'Nintendo',  slug:'nintendo', host:'www.nintendo.co.jp' },
+  { cc:'jp', name:'Yahoo! JP', slug:'yahoojp', host:'www.yahoo.co.jp' },
+  { cc:'jp', name:'LINE',      slug:'line', host:'line.me' },
+  // ---- США ----
+  { cc:'us', name:'Apple',      slug:'apple', host:'www.apple.com' },
+  { cc:'us', name:'Google',     slug:'google', url:'https://www.google.com/generate_204' },
+  { cc:'us', name:'YouTube',    icon: ASSET+'youtube.webp', url:'https://www.youtube.com/generate_204' },
+  { cc:'us', name:'GitHub',     icon: ASSET+'github.webp', url:'https://github.com/generate_204' },
+  { cc:'us', name:'Cloudflare', icon: ASSET+'cloudflare.webp', url:'https://1.1.1.1/cdn-cgi/trace' },
+  { cc:'us', name:'Claude',     icon: ASSET+'claude.webp', url:'https://api.anthropic.com/favicon.ico' },
+  { cc:'us', name:'ChatGPT',    icon: ASSET+'chatgpt.webp', url:'https://chatgpt.com/cdn-cgi/trace' },
+  { cc:'us', name:'AI Studio',  slug:'gemini', url:'https://generativelanguage.googleapis.com/favicon.ico' },
+  { cc:'us', name:'Amazon',     slug:'amazon', host:'www.amazon.com' },
+  { cc:'us', name:'Bing',       slug:'bing', url:'https://www.bing.com/favicon.ico' },
+  { cc:'us', name:'Steam',      slug:'steam', host:'store.steampowered.com' },
+  { cc:'us', name:'Oracle',     slug:'oracle', host:'www.oracle.com' },
+  { cc:'us', name:'Zoom',       icon: ASSET+'zoom.webp', url:'https://st1.zoom.us/favicon.ico' },
+  { cc:'us', name:'Facebook',   slug:'facebook', host:'www.facebook.com', url:'https://static.xx.fbcdn.net/rsrc.php/yb/r/hLRJ1GG_y0J.ico' },
+  { cc:'us', name:'Instagram',  slug:'instagram', host:'www.instagram.com', url:'https://static.cdninstagram.com/rsrc.php/yb/r/hLRJ1GG_y0J.ico' },
+  { cc:'us', name:'X',          icon: ASSET+'x.webp', url:'https://abs.twimg.com/favicons/twitter.3.ico' },
+  { cc:'us', name:'Reddit',     slug:'reddit', host:'www.reddit.com' },
+  { cc:'us', name:'LinkedIn',   slug:'linkedin', host:'www.linkedin.com', url:'https://static.licdn.com/favicon.ico' },
+  { cc:'us', name:'Twitch',     slug:'twitch', host:'www.twitch.tv', url:'https://static.twitchcdn.net/assets/favicon-32-e29e246c157142c94346.png' },
+  { cc:'us', name:'Netflix',    slug:'netflix', host:'www.netflix.com', url:'https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico' },
+  // ---- Весь мир ----
+  { cc:'gl', name:'TikTok',     slug:'tiktok', url:'https://www.tiktok.com/favicon.ico' },
+  { cc:'gl', name:'Spotify',    slug:'spotify', url:'https://open.spotify.com/favicon.ico' },
+  { cc:'gl', name:'npm',        slug:'npm', url:'https://registry.npmjs.org/' },
+  { cc:'gl', name:'Takealot',   slug:'takealot', url:'https://static.takealot.com/favicon.ico' },
+  { cc:'gl', name:'PixPix',     slug:'pixpix', url:'https://www.pixpix.com/favicon.ico' },
+  { cc:'gl', name:'Naver',      slug:'naver', url:'https://www.naver.com/favicon.ico' },
+  { cc:'gl', name:'Noon',       slug:'noon', url:'https://www.noon.com/favicon.ico' },
+  { cc:'gl', name:'Wikipedia',  slug:'wikipedia', url:'https://www.wikipedia.org/static/favicon/wikipedia.ico' },
+  { cc:'gl', name:'BBC',        slug:'bbc', url:'https://www.bbc.com/favicon.ico' },
+  { cc:'gl', name:'Mistral AI', slug:'mistral', url:'https://mistral.ai/favicon.ico' },
+  { cc:'gl', name:'Yandex',     slug:'yandex', url:'https://yastatic.net/favicon.ico' },
+  { cc:'gl', name:'MercadoLibre', slug:'mercadolibre', url:'https://http2.mlstatic.com/favicon.ico' },
+];
+TARGETS.forEach(t => {
+  if (!t.icon && t.slug && LINK_ICONS[t.slug]) t.icon = LBASE + LINK_ICONS[t.slug] + '?v=4';
+  if (!t.url)  t.url  = 'https://' + t.host + '/favicon.ico';
+  if (!t.icon) t.icon = t.host ? ('https://' + t.host + '/favicon.ico') : '';
+});
+
+const ROUNDS = 8;             // замеров на сайт
+const POOL = 9;               // не больше 9 сайтов одновременно
+const MIN_INTERVAL_MS = 90;   // минимальная пауза между замерами
+const JITTER_MS = 140;        // случайная добавка к паузе
+const pingHistory = TARGETS.map(() => []);
+let running = false;
+
+const REFRESH_SVG = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>';
+
+function render() {
+  document.getElementById('linkRoot').innerHTML = GROUPS.map(g => {
+    const items = TARGETS.map((t, i) => ({ t, i })).filter(x => x.t.cc === g.cc);
+    const flagHtml = g.flag
+      ? `<img class="country-flag${g.plain ? ' country-globe' : ''}" src="${g.flag}" alt="" onerror="this.style.display='none'">`
+      : `<img class="country-flag" src="https://flagcdn.com/w40/${g.cc}.png" alt="" onerror="this.style.display='none'">`;
+    return `
+    <section class="card country-block">
+      <div class="country-head">
+        ${flagHtml}
+        <h2>${esc(g.name)}</h2>
+        <span class="country-sum" id="sum-${g.cc}">готовлюсь…</span>
+        <button class="btn group-refresh" data-cc="${g.cc}" title="Проверить «${esc(g.name)}» заново">${REFRESH_SVG}заново</button>
+      </div>
+      <div class="ping-grid">
+        ${items.map(({ t, i }) => `
+          <div class="ping-item" id="ping-${i}">
+            <img class="ping-icon" src="${t.icon}" alt="" onerror="this.style.visibility='hidden'">
+            <div style="flex:1;min-width:0">
+              <div class="ping-name" title="${esc(t.name)}">${esc(t.name)}</div>
+              <div class="ping-dots" id="ping-dots-${i}">${'<div class="ping-dot dot-pending"></div>'.repeat(ROUNDS)}</div>
+            </div>
+            <div class="ping-ms" id="ping-ms-${i}" style="color:var(--muted)">--</div>
+          </div>`).join('')}
+      </div>
+    </section>`;
+  }).join('');
+}
+
+async function singlePing(url) {
+  const start = performance.now();
+  try {
+    await fetch(url, { mode: 'no-cors', cache: 'no-store', signal: AbortSignal.timeout(2500) });
+    return Math.round(performance.now() - start);
+  } catch { return -1; }
+}
+function dotClass(ms) { return ms < 0 ? 'dot-fail' : ms < 100 ? 'dot-good' : ms < 400 ? 'dot-warn' : 'dot-bad'; }
+function medianOf(arr) {
+  if (!arr.length) return null;
+  const s = arr.slice().sort((a, b) => a - b);
+  return s[Math.floor(s.length / 2)];
+}
+
+function updateSummary(cc) {
+  const el = document.getElementById('sum-' + cc);
+  if (!el) return;
+  const items = TARGETS.map((t, i) => ({ t, i })).filter(x => x.t.cc === cc);
+  const meds = [];
+  items.forEach(({ i }) => { const m = medianOf(pingHistory[i]); if (m !== null) meds.push(m); });
+  if (meds.length) {
+    const avg = Math.round(meds.reduce((a, b) => a + b, 0) / meds.length);
+    el.innerHTML = `отвечают <b>${meds.length}/${items.length}</b> · в среднем <b>${Math.min(avg, 999)} мс</b>`;
+  } else el.innerHTML = `отвечают <b>0/${items.length}</b>`;
+}
+
+// 1 прогрев + 8 замеров, на экране медиана
+async function probeTarget(t, i) {
+  await singlePing(t.url);
+  for (let round = 0; round < ROUNDS; round++) {
+    const roundStart = performance.now();
+    const ms = await singlePing(t.url);
+    const dotsEl = document.getElementById(`ping-dots-${i}`);
+    const msEl = document.getElementById(`ping-ms-${i}`);
+    if (dotsEl && dotsEl.children[round]) dotsEl.children[round].className = 'ping-dot ' + dotClass(ms);
+    if (ms >= 0) pingHistory[i].push(ms);
+    const med = medianOf(pingHistory[i]);
+    if (msEl) {
+      if (med !== null) {
+        msEl.textContent = Math.min(med, 999) + ' мс';
+        msEl.style.color = med < 100 ? '#1b8a2d' : med < 400 ? '#6fcf7c' : '#f0c040';
+      } else if (ms < 0) {
+        msEl.textContent = 'нет';
+        msEl.title = 'не отвечает';
+        msEl.style.color = '#e17055';
+      }
+    }
+    updateSummary(t.cc);
+    if (round < ROUNDS - 1) {
+      const elapsed = performance.now() - roundStart;
+      await new Promise(r => setTimeout(r, Math.max(0, MIN_INTERVAL_MS - elapsed) + Math.random() * JITTER_MS));
+    }
+  }
+}
+
+async function runPool(items, worker, size) {
+  let idx = 0;
+  async function lane() { while (idx < items.length) { const c = idx++; await worker(items[c], c); } }
+  await Promise.all(Array.from({ length: Math.min(size, items.length) }, lane));
+}
+
+async function runPings() {
+  running = true;
+  const btn = document.getElementById('retestBtn'), lbl = document.getElementById('retestLabel');
+  btn.disabled = true; btn.classList.add('spinning'); lbl.textContent = 'Проверяю…';
+  await runPool(TARGETS, probeTarget, POOL);
+  running = false;
+  btn.disabled = false; btn.classList.remove('spinning'); lbl.textContent = 'Проверить заново';
+}
+
+const busyGroups = new Set();
+async function retestGroup(cc, btn) {
+  if (running || busyGroups.has(cc)) return;
+  busyGroups.add(cc);
+  if (btn) { btn.disabled = true; btn.classList.add('spinning'); }
+  const items = TARGETS.map((t, i) => ({ t, i })).filter(x => x.t.cc === cc);
+  items.forEach(({ i }) => {
+    pingHistory[i] = [];
+    const dotsEl = document.getElementById(`ping-dots-${i}`);
+    if (dotsEl) [...dotsEl.children].forEach(d => d.className = 'ping-dot dot-pending');
+    const msEl = document.getElementById(`ping-ms-${i}`);
+    if (msEl) { msEl.textContent = '--'; msEl.title = ''; msEl.style.color = 'var(--muted)'; }
+  });
+  updateSummary(cc);
+  await runPool(items, ({ t, i }) => probeTarget(t, i), POOL);
+  busyGroups.delete(cc);
+  if (btn) { btn.disabled = false; btn.classList.remove('spinning'); }
+}
+
+function resetAndRun() {
+  if (running || busyGroups.size) return;
+  for (let i = 0; i < pingHistory.length; i++) pingHistory[i] = [];
+  render();
+  runPings();
+}
+
+document.getElementById('retestBtn').addEventListener('click', resetAndRun);
+document.getElementById('linkRoot').addEventListener('click', e => {
+  const b = e.target.closest('.group-refresh');
+  if (b) retestGroup(b.dataset.cc, b);
+});
+render();
+runPings();
+</script>
+</body>
+</html>

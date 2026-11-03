@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#cc785c">
+<title>Whois</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../common/site.css">
+<script src="../common/site.js"></script>
+<style>
+.w-ex{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-4px 0 16px;font-size:.88em;color:var(--muted)}
+.w-chip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--border);border-radius:999px;padding:2px 10px;cursor:pointer;color:var(--text);background:var(--card);font-size:.88em;white-space:nowrap}
+.w-chip:hover{border-color:var(--accent)}
+.w-meta{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.85em;margin-bottom:10px;flex-wrap:wrap}
+.w-hero{background:var(--card);border:1px solid var(--accent);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.w-hero-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.w-ic{width:44px;height:44px;border-radius:10px;background:var(--neutral-bg);display:grid;place-items:center;flex-shrink:0}
+.w-ic svg{width:24px;height:24px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.w-name{font-size:1.45em;font-weight:800;word-break:break-all;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.w-name svg{width:16px;height:16px;opacity:.6}
+.w-sub{color:var(--muted);font-size:.88em;margin-top:2px;word-break:break-word}
+.w-pill{border-radius:999px;padding:3px 12px;font-size:.82em;font-weight:600;white-space:nowrap}
+.w-pill.ok{background:var(--safe-bg);color:var(--safe)}.w-pill.bad{background:var(--danger-bg);color:var(--danger)}.w-pill.mut{background:var(--neutral-bg);color:var(--neutral)}
+.w-tl{margin-top:16px}
+.w-tl-lab{display:flex;justify-content:space-between;font-size:.8em;color:var(--muted);gap:8px}
+.w-tl-bar{height:8px;border-radius:4px;background:var(--neutral-bg);margin:6px 0;overflow:hidden}
+.w-tl-fill{height:100%;border-radius:4px}
+.w-tl-cap{font-size:.85em;color:var(--muted)}
+.w-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.w-card h3{font-size:.95em;margin:0 0 8px}
+.w-row{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--border)}
+.w-row:last-child{border-bottom:0}
+.w-row .k{color:var(--muted);flex:0 0 auto;font-size:.92em}
+.w-row .v{text-align:right;font-weight:600;min-width:0;word-break:break-word}
+.w-badge{display:inline-block;border-radius:6px;padding:1px 8px;font-size:.82em;font-weight:600;background:var(--neutral-bg);color:var(--neutral);cursor:help;margin:2px 2px 2px 0}
+.w-badge.good{background:var(--safe-bg);color:var(--safe)}.w-badge.warn{background:var(--warn-bg);color:var(--warn)}
+.w-ns{font-family:ui-monospace,Menlo,monospace;font-size:.9em;line-height:1.9}
+.w-copy{cursor:pointer;opacity:.55;margin-left:6px;font-size:.85em}.w-copy:hover{opacity:1}
+.w-raw{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px}
+.w-raw summary{cursor:pointer;padding:10px 14px;font-weight:600;display:flex;align-items:center;gap:8px;list-style:none}
+.w-raw summary::-webkit-details-marker{display:none}
+.w-rawact{margin-left:auto;display:flex;gap:6px}
+.w-raw pre{margin:0;padding:12px 14px;border-top:1px solid var(--border);max-height:460px;overflow:auto;font-size:.8em;white-space:pre-wrap;word-break:break-word}
+.w-error{background:var(--danger-bg);color:var(--danger);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.w-warn{background:var(--warn-bg);color:var(--warn);border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:.9em}
+.w-free{background:var(--safe-bg);color:var(--safe);border-radius:14px;padding:22px;text-align:center;margin-bottom:12px}
+.w-skel{border-radius:6px;background:linear-gradient(90deg,var(--neutral-bg),var(--border),var(--neutral-bg));background-size:200% 100%;animation:sh 1.2s infinite}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.stat .l{font-size:.82em;color:var(--muted)}.stat .n{font-size:1.5em;font-weight:700;color:var(--safe);margin:2px 0}.stat .s{font-size:.78em;color:var(--muted)}
+.cats{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.cat{cursor:pointer}.cat.on{background:var(--safe-bg);color:var(--safe)}
+.tld-search{margin-left:auto;width:170px;flex:0 1 170px;padding:6px 12px;border-radius:999px;font-size:.85em}
+.tlds{display:flex;gap:6px;flex-wrap:wrap}
+.tlds .w-chip{cursor:default}
+.tlds .w-chip.norap{color:var(--muted);border-style:dashed}
+.legend{font-size:.8em;color:var(--muted);margin-top:10px}
+@media (max-width:860px){.w-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.stats{grid-template-columns:1fr}.tld-search{margin-left:0;flex:1 1 100%;width:auto}.w-row{flex-wrap:wrap}.w-row .v{text-align:left}}
+</style>
+</head>
+<body>
+<div class="container">
+  <nav class="nav" id="nav"></nav>
+  <div class="head">
+    <div>
+      <h1>Whois</h1>
+      <p class="desc">Whois домена, IP или AS-номера: регистратор, даты, DNS-серверы, статусы и владелец. Сначала RDAP — современный протокол реестров, если его нет — классический whois</p>
+    </div>
+  </div>
+
+  <div class="search">
+    <input class="input" type="text" id="wInput" placeholder="google.com, ya.ru, 8.8.8.8, 2606:4700::1111 или AS15169" autocomplete="off" spellcheck="false">
+    <button class="btn-primary" id="wBtn">Найти</button>
+  </div>
+  <div class="w-ex"><span>Примеры:</span>
+    <span class="w-chip" data-q="qq.com">qq.com</span>
+    <span class="w-chip" data-q="x.ai">x.ai</span>
+    <span class="w-chip" data-q="1.1.1.1">1.1.1.1</span>
+    <span class="w-chip" data-q="AS15169">AS15169</span>
+    <span class="w-chip" data-q="ya.ru">ya.ru</span>
+    <span class="w-chip" data-q="кремль.рф">кремль.рф</span>
+    <span class="w-chip" data-q="77.88.8.8">77.88.8.8</span>
+    <span class="w-chip" data-q="AS13238">AS13238</span>
+  </div>
+
+  <div id="wResult"></div>
+
+  <div id="wTldSec" style="margin-top:28px">
+    <h2 style="font-size:1.15em;margin-bottom:12px">Какие зоны можно проверить</h2>
+    <div class="stats" id="wTldStats"></div>
+    <div class="card">
+      <div class="cats"><span id="wTldCats" style="display:contents"></span><input id="wTldSearch" class="input tld-search" type="text" placeholder="Найти зону, например ru" autocomplete="off" spellcheck="false"></div>
+      <div class="tlds" id="wTldChips"></div>
+      <div class="legend">Пунктир — у зоны нет RDAP: пробуем текстовый whois, но для части таких зон ответа не будет.</div>
+      <div style="text-align:center;margin-top:12px"><span class="w-chip" id="wTldMore" style="display:none"></span></div>
+    </div>
+  </div>
+
+  <div class="card article" style="margin-top:16px">
+    <h3 style="margin-top:0">Чем RDAP отличается от whois</h3>
+    <p>Whois — текстовый протокол из 80-х, у каждого реестра свой формат. RDAP — его замена от ICANN: структурированный JSON, одинаковые поля. Здесь сначала идём в RDAP реестра (через rdap.org и справочник IANA), а если у зоны его нет — берём классический whois (порт 43) через публичный шлюз whois.vu.</p>
+    <h3>Почему .ru, .рф и .su — через whois</h3>
+    <p>Координационный центр доменов .RU/.РФ не держит RDAP: rdap.org и справочник IANA для этих зон ничего не знают. Поэтому для них показываем ответ whois-сервера TCI (whois.tcinet.ru) — дату регистрации, оплату до, дату освобождения, регистратора, NS и статус.</p>
+    <h3>Почему не видно владельца</h3>
+    <p>Из-за GDPR и 152-ФЗ реестры и регистраторы скрывают данные частных лиц. Остаются регистратор, даты, DNS и статусы — это нормально.</p>
+    <h3>Что значат статусы</h3>
+    <p>clientTransferProhibited — замок от перевода к другому регистратору, обычная защита. serverDeleteProhibited — запрет удаления на уровне реестра. clientHold — домен снят с делегирования, сайт и почта не работают. pendingDelete — домен вот-вот освободится. У .ru: DELEGATED — домен работает, NOT DELEGATED — DNS не прописаны. Тревожные статусы подсвечены жёлтым.</p>
+    <h3>Откуда данные</h3>
+    <p>Домены — напрямую из RDAP реестров (Verisign, DENIC и др.) или whois TCI для .ru/.рф/.su. IP и AS — из RDAP региональных регистраторов ARIN / RIPE NCC / APNIC / LACNIC / AFRINIC; российские сети живут в RIPE NCC.</p>
+  </div>
+  <div class="foot">Логика повторяет ip.net.coffee/whois: RDAP первым, классический whois запасным путём. Их серверный /api/whois браузеру с другого сайта недоступен (нет CORS), поэтому RDAP идёт напрямую через rdap.org, whois — через whois.vu, список зон — из IANA.</div>
+</div>
+
+<script>
+(function () {
+'use strict';
+const input = document.getElementById('wInput'), btn = document.getElementById('wBtn'), box = document.getElementById('wResult');
+let busy = false, lastQ = '', rdapDns = null;
+
+// Статусы EPP + статусы реестра .RU/.РФ/.SU
+const STATUS = {
+  active: ['Работает', 'good', 'Обычное состояние: ограничений нет, домен работает.'],
+  ok: ['Работает', 'good', 'Обычное состояние: ограничений нет, домен работает.'],
+  clienttransferprohibited: ['Замок перевода (регистратор)', '', 'Регистратор запретил перевод домена к другому регистратору — защита от угона. Включён почти у всех.'],
+  servertransferprohibited: ['Замок перевода (реестр)', '', 'Перевод запрещён на уровне реестра. Защита сильнее, чем у регистратора, бывает у ценных доменов.'],
+  clientupdateprohibited: ['Замок изменений (регистратор)', '', 'Нельзя менять данные домена — контакты, DNS-серверы. Защита от подмены.'],
+  serverupdateprohibited: ['Замок изменений (реестр)', '', 'Изменения запрещены на уровне реестра.'],
+  clientdeleteprohibited: ['Замок удаления (регистратор)', '', 'Домен нельзя удалить — защита от ошибки или злого умысла.'],
+  serverdeleteprohibited: ['Замок удаления (реестр)', '', 'Удаление запрещено на уровне реестра.'],
+  clienthold: ['Снят с делегирования', 'warn', 'Регистратор отключил DNS: сайт и почта не работают. Обычно из-за неоплаты, непройденной проверки или спора — надо писать регистратору.'],
+  serverhold: ['Снят реестром', 'warn', 'Реестр отключил DNS: часто из-за непройденной проверки или нарушений. Домен не работает.'],
+  pendingdelete: ['Ждёт удаления', 'warn', 'Домен вот-вот удалят и откроют для регистрации, обычно ~5 дней. Вернуть уже нельзя.'],
+  redemptionperiod: ['Период выкупа', 'warn', 'Срок истёк и домен удалён; около 30 дней прежний владелец может выкупить его за повышенную цену.'],
+  pendingtransfer: ['Идёт перевод', 'warn', 'Домен переезжает к другому регистратору, обычно 5–7 дней.'],
+  autorenewperiod: ['Льготный период автопродления', '', 'После автопродления реестром регистратор ещё ~45 дней может его отменить.'],
+  addperiod: ['Льготный период регистрации', '', 'Первые 5 дней после регистрации регистратор может удалить домен с возвратом денег.'],
+  inactive: ['DNS не заданы', 'warn', 'У домена нет DNS-серверов, он не резолвится.'],
+  connect: ['Работает', 'good', 'Домен зарегистрирован и подключён (так статус пишет DENIC).'],
+  registered: ['Зарегистрирован', 'good', 'Домен зарегистрирован (статус реестра .RU/.РФ/.SU).'],
+  delegated: ['Делегирован', 'good', 'DNS-серверы прописаны, домен работает.'],
+  notdelegated: ['Не делегирован', 'warn', 'DNS-серверы не прописаны: домен зарегистрирован, но не работает.'],
+  verified: ['Администратор проверен', 'good', 'Регистратор проверил данные администратора домена.'],
+  unverified: ['Администратор не проверен', 'warn', 'Данные администратора не проверены; реестр может снять домен с делегирования.']
+};
+const ICONS = {
+  domain: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>',
+  ip: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg>',
+  asn: '<svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/><path d="M12 7.2 6 17M12 7.2 18 17M7.2 19h9.6"/></svg>'
+};
+const TYPE_RU = { domain: 'Домен', ipv4: 'IPv4-адрес', ipv6: 'IPv6-адрес', asn: 'Автономная система' };
+
+function fmtDate(iso) { if (!iso) return ''; const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '.' + m[2] + '.' + m[1] : esc(String(iso).slice(0, 19)); }
+function daysBetween(iso, future) { const t = Date.parse(iso); if (isNaN(t)) return null; return Math.floor((future ? t - Date.now() : Date.now() - t) / 86400000); }
+function row(k, v) { return v ? '<div class="w-row"><span class="k">' + k + '</span><span class="v">' + v + '</span></div>' : ''; }
+function card(t, inner) { return inner ? '<div class="card w-card"><h3>' + t + '</h3>' + inner + '</div>' : ''; }
+function copyIco(v) { return '<span class="w-copy" data-v="' + esc(v) + '" title="Скопировать">📋</span>'; }
+function plural(n, a, b, c) { n = Math.abs(n) % 100; const n1 = n % 10; if (n > 10 && n < 20) return c; if (n1 > 1 && n1 < 5) return b; if (n1 === 1) return a; return c; }
+
+function statusMeta(list) {
+  let locks = 0, bad = false, badges = ''; const seen = {};
+  (list || []).forEach(s => {
+    const k = String(s).toLowerCase().replace(/https?:\/\/\S+/g, '').replace(/[\s_-]/g, '');
+    if (!k || seen[k]) return; seen[k] = 1;
+    const info = STATUS[k];
+    if (/prohibited$/.test(k)) locks++;
+    if (info && info[1] === 'warn') bad = true;
+    badges += '<span class="w-badge ' + (info ? info[1] : '') + '" title="' + esc(s) + (info ? '\n' + info[2] : '') + '">' + (info ? info[0] : esc(s)) + '</span>';
+  });
+  return { locks, bad, badges };
+}
+
+// ===== Рендер (как у оригинала) =====
+function render(d) {
+  if (!d.ok && !d.unregistered) { box.innerHTML = '<div class="w-error">' + esc(d.error || 'Не получилось, попробуй позже') + '</div>'; return; }
+  const name0 = d.unicode_name && d.unicode_name !== d.query ? d.unicode_name : (d.type === 'asn' ? 'AS' + d.query : d.query);
+  document.title = name0 + ' — whois';
+  const meta = '<div class="w-meta">Источник: ' + esc(d.source) + (d.via ? ' · ' + esc(d.via) : '') + ' · запрошено только что <span class="w-chip" data-act="refresh" title="Запросить ещё раз">↻ обновить</span></div>';
+  const typeName = TYPE_RU[d.type] || d.type;
+  if (d.unregistered) {
+    box.innerHTML = meta + '<div class="w-free"><div style="font-size:1.6em">🎉</div><div style="font-weight:700;font-size:1.1em;margin:6px 0;word-break:break-all">' + esc(name0) + ' свободен</div><div style="font-size:.88em">По данным реестра домен сейчас можно зарегистрировать</div></div>' + raws(d);
+    return;
+  }
+  const isDomain = d.type === 'domain', sm = statusMeta(d.status);
+  let pill = isDomain ? (sm.bad ? '<span class="w-pill bad">Зарегистрирован · есть проблемы</span>' : '<span class="w-pill ok">Зарегистрирован · всё в порядке</span>')
+    : '<span class="w-pill mut">' + esc(d.net_type || (d.type === 'asn' ? 'Автономная система' : 'Выделен')) + '</span>';
+  const sub = [];
+  if (d.registrar && d.registrar.name) sub.push(esc(d.registrar.name) + (d.registrar.iana_id ? ' · IANA #' + esc(d.registrar.iana_id) : ''));
+  else if (d.name) sub.push(esc(d.name));
+  if (!isDomain && d.rir_whois) sub.push(esc(d.rir_whois));
+  if (d.unicode_name && d.unicode_name !== d.query) sub.push(esc(d.query));
+  const age = d.created ? daysBetween(d.created, false) : null;
+  const ageChip = (age != null && age >= 0) ? '<span class="w-pill mut">' + (isDomain ? 'Возраст ' : 'Выделен ') + (age >= 365 ? (age / 365).toFixed(1).replace('.', ',') + ' г.' : age + ' ' + plural(age, 'день', 'дня', 'дней')) + (isDomain ? '' : ' назад') + '</span>' : '';
+  const isIp = d.type === 'ipv4' || d.type === 'ipv6';
+  let hero = '<div class="w-hero"><div class="w-hero-top"><div class="w-ic">' + ICONS[isDomain ? 'domain' : d.type === 'asn' ? 'asn' : 'ip'] + '</div><div style="flex:1;min-width:160px">'
+    + (isIp ? '<a class="w-name" href="' + ROOT + 'ip/?q=' + encodeURIComponent(d.query) + '" target="_blank" rel="noopener" title="Оценка IP ' + esc(d.query) + '">' + esc(name0) + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg></a>' : '<div class="w-name">' + esc(name0) + '</div>')
+    + '<div class="w-sub">' + (sub.join(' · ') || typeName) + '</div></div>' + pill + ageChip + '</div>';
+  if (isDomain && d.created && d.expires) {
+    const t0 = Date.parse(d.created), t1 = Date.parse(d.expires), now = Date.now();
+    if (!isNaN(t0) && !isNaN(t1) && t1 > t0) {
+      let pct = Math.min(100, Math.max(0, Math.round((now - t0) / (t1 - t0) * 100)));
+      const left = daysBetween(d.expires, true); let color = 'var(--safe)', cap = '';
+      const dd = n => n + ' ' + plural(n, 'день', 'дня', 'дней');
+      if (left == null) cap = '';
+      else if (left < 0) { color = 'var(--danger)'; pct = 100; cap = 'Истёк <b style="color:var(--danger)">' + dd(-left) + '</b> назад'; }
+      else if (left <= 45) { color = 'var(--danger)'; cap = 'До окончания всего <b style="color:var(--danger)">' + dd(left) + '</b> · пройдено ' + pct + '% срока'; }
+      else if (left <= 90) { color = 'var(--warn)'; cap = 'До окончания <b style="color:var(--warn)">' + dd(left) + '</b> · пройдено ' + pct + '% срока'; }
+      else cap = 'До окончания <b style="color:var(--safe)">' + dd(left) + '</b> · пройдено ' + pct + '% срока';
+      hero += '<div class="w-tl"><div class="w-tl-lab"><span>Регистрация ' + fmtDate(d.created) + '</span><span>сегодня</span><span>Оплачен до ' + fmtDate(d.expires) + '</span></div><div class="w-tl-bar"><div class="w-tl-fill" style="width:' + pct + '%;background:' + color + '"></div></div>' + (cap ? '<div class="w-tl-cap">' + cap + '</div>' : '') + '</div>';
+    }
+  }
+  hero += '</div>';
+  const stCard = sm.badges ? '<div style="line-height:2">' + sm.badges + '</div>' + (sm.locks ? '<div style="font-size:.78em;color:var(--muted);margin-top:6px">Защит от реестра и регистратора: ' + sm.locks + '</div>' : '') : '';
+  let dt = '';
+  if (d.created) dt += row('Регистрация', fmtDate(d.created));
+  if (d.expires) dt += row(isDomain ? 'Оплачен до' : 'Действует до', fmtDate(d.expires));
+  if (d.free_date) dt += row('Освободится', fmtDate(d.free_date));
+  if (d.updated) dt += row('Обновлён', fmtDate(d.updated));
+  const ns = (d.nameservers && d.nameservers.length) ? '<div class="w-ns">' + d.nameservers.map(n => '• ' + esc(n) + copyIco(n)).join('<br>') + '</div>' : '';
+  let sec = '';
+  if (d.dnssec === true) sec += row('DNSSEC', '<span class="w-badge good">подписан</span>');
+  else if (d.dnssec === false) sec += row('DNSSEC', 'не включён');
+  if (d.abuse_email) sec += row('Жалобы (abuse)', '<a href="mailto:' + esc(d.abuse_email) + '">' + esc(d.abuse_email) + '</a>');
+  if (d.handle) sec += row('Хэндл в реестре', esc(d.handle));
+  let own = '';
+  if (d.registrant && (d.registrant.org || d.registrant.name)) own += row(isDomain ? 'Владелец' : 'Организация', esc(d.registrant.org || d.registrant.name));
+  if (d.registrant && d.registrant.country) own += row('Страна', esc(d.registrant.country));
+  else if (d.country) own += row('Страна', flagImg(d.country.length === 2 ? d.country : '') + ' ' + esc(d.country));
+  if (d.cidr) own += row('CIDR', esc(d.cidr) + copyIco(d.cidr));
+  if (d.start && d.end) own += row('Диапазон', esc(d.start) + '<br>— ' + esc(d.end));
+  if (d.admin_contact) own += row('Контакт администратора', /^https?:/.test(d.admin_contact) ? '<a href="' + esc(d.admin_contact) + '" target="_blank" rel="nofollow noopener">' + esc(d.admin_contact) + '</a>' : esc(d.admin_contact));
+  box.innerHTML = meta + (d.notice ? '<div class="w-warn">' + d.notice + '</div>' : '') + hero + '<div class="w-grid">'
+    + card('🔖 Статусы и защита', stCard) + card('📅 Даты', dt) + card('🌐 DNS-серверы', ns) + card('🛡️ Безопасность', sec) + card(isDomain ? '🏢 Кому принадлежит' : '🏢 Чья сеть', own) + '</div>' + raws(d);
+}
+function raws(d) {
+  let s = '';
+  const act = '<span class="w-rawact"><span class="w-chip w-rawbtn" data-act="copy">копировать</span><span class="w-chip w-rawbtn" data-act="toggle">развернуть</span></span>';
+  if (d.raw_whois) s += '<details class="w-raw"><summary>📄 Сырой ответ WHOIS' + act + '</summary><pre>' + esc(d.raw_whois) + '</pre></details>';
+  if (d.raw_rdap) s += '<details class="w-raw"><summary>🧾 Сырой ответ RDAP (JSON)' + act + '</summary><pre>' + esc(JSON.stringify(d.raw_rdap, null, 2)) + '</pre></details>';
+  return s;
+}
+
+// ===== Разбор RDAP (как у оригинала) =====
+function vget(vc, want) {
+  try { for (const it of vc[1]) if (it[0] === want) { if (want === 'adr') { const p = it[3]; if (Array.isArray(p) && p.length) return String(p[p.length - 1] || '').trim(); if (it[1] && it[1].label) return String(it[1].label).split('\n').pop().trim(); } else return String(it[3]).trim(); } } catch (e) {}
+  return '';
+}
+function entWalk(ents, out, depth) {
+  if (!ents || depth > 3) return out;
+  for (const ent of ents) {
+    const roles = (ent.roles || []).map(r => String(r).toLowerCase()), vc = ent.vcardArray;
+    const fn = vc ? vget(vc, 'fn') : '', org = vc ? vget(vc, 'org') : '', email = vc ? vget(vc, 'email') : '', country = vc ? vget(vc, 'adr') : '';
+    if (roles.includes('registrar') && !out.registrar) {
+      let iid = ''; (ent.publicIds || []).forEach(p => { if (String(p.type || '').toLowerCase().includes('iana')) iid = String(p.identifier || ''); });
+      out.registrar = { name: fn || org || ent.handle || '', iana_id: iid };
+    }
+    if (roles.includes('registrant') && !out.registrant) out.registrant = { name: fn, org, country };
+    if (roles.includes('abuse') && email && !out.abuse_email) out.abuse_email = email;
+    entWalk(ent.entities, out, depth + 1);
+  }
+  return out;
+}
+function rdapParse(j, type, q, via) {
+  const d = { ok: true, query: q, type, source: 'RDAP', via, raw_rdap: j };
+  d.handle = j.handle || ''; d.unicode_name = j.unicodeName || ''; d.status = j.status || [];
+  (j.events || []).forEach(ev => { if (ev.eventAction === 'registration') d.created = ev.eventDate; else if (ev.eventAction === 'expiration') d.expires = ev.eventDate; else if (ev.eventAction === 'last changed') d.updated = ev.eventDate; });
+  const nsSet = {}; (j.nameservers || []).forEach(n => { const v = (n.ldhName || '').toLowerCase(); if (v) nsSet[v] = 1; });
+  d.nameservers = Object.keys(nsSet).sort();
+  if (type === 'domain') d.dnssec = !!(j.secureDNS && j.secureDNS.delegationSigned);
+  entWalk(j.entities, d, 0);
+  if (type !== 'domain') {
+    d.name = j.name || ''; d.net_type = j.type || ''; d.country = j.country || '';
+    if (j.port43) d.rir_whois = j.port43;
+    if (type !== 'asn') { d.start = j.startAddress || ''; d.end = j.endAddress || ''; d.cidr = (j.cidr0_cidrs || []).map(c => (c.v4prefix || c.v6prefix) + '/' + c.length).join(', '); }
+  }
+  return d;
+}
+
+// ===== Разбор текстового whois (запасной путь, порт 43) =====
+function whoisParse(j, q) {
+  const raw = String(j.whois || '');
+  if (j.available === 'yes' || /no entries found|no match for|not found|is free|no data found/i.test(raw) && !/registrar:/i.test(raw)) return { unregistered: true, query: q, type: 'domain', source: 'WHOIS', via: 'whois.vu', raw_whois: raw };
+  const get = re => { const m = raw.match(re); return m ? m[1].trim() : ''; };
+  const all = re => { const out = []; let m; const r = new RegExp(re.source, 'gim'); while ((m = r.exec(raw))) if (m[1].trim()) out.push(m[1].trim()); return out; };
+  const iso = ts => ts ? new Date(ts * 1000).toISOString() : '';
+  const d = { ok: true, query: q, type: 'domain', source: 'WHOIS', via: 'whois.vu', raw_whois: raw };
+  const reg = get(/^\s*(?:registrar|Registrar):[ \t]*(.+)$/m) || j.registrar || '';
+  d.registrar = reg ? { name: reg, iana_id: get(/^\s*Registrar IANA ID:\s*(.+)$/mi) } : null;
+  d.created = get(/^\s*(?:created|Creation Date|Registered on|Registration Time):\s*(.+)$/mi) || iso(j.created);
+  d.expires = get(/^\s*(?:paid-till|Registry Expiry Date|Registrar Registration Expiration Date|Expir\w* Date|Expiration Time):\s*(.+)$/mi) || iso(j.expires);
+  d.updated = get(/^\s*(?:Updated Date|last-modified|Last Modified):\s*(.+)$/mi) || iso(j.updated);
+  d.free_date = get(/^\s*free-date:\s*(.+)$/mi);
+  d.nameservers = [...new Set(all(/^\s*(?:nserver|Name Server):\s*(\S+)/).map(s => s.toLowerCase().replace(/\.$/, '')))].sort();
+  const state = get(/^\s*state:\s*(.+)$/mi);
+  d.status = state ? state.split(',').map(s => s.trim()).filter(Boolean) : [...new Set(all(/^\s*Domain Status:\s*(\S+)/))];
+  if (!d.status.length && Array.isArray(j.statuses)) d.status = j.statuses;
+  const dnssec = get(/^\s*DNSSEC:\s*(.+)$/mi);
+  if (dnssec) d.dnssec = /^signed/i.test(dnssec) || /yes/i.test(dnssec);
+  d.abuse_email = get(/^\s*Registrar Abuse Contact Email:\s*(.+)$/mi);
+  const org = get(/^\s*(?:org|Registrant Organization|Registrant):[ \t]*(.+)$/mi), person = get(/^\s*person:[ \t]*(.+)$/mi);
+  if (org || person) d.registrant = { org, name: person, country: get(/^\s*Registrant Country:\s*(.+)$/mi) };
+  d.admin_contact = get(/^\s*admin-contact:\s*(.+)$/mi);
+  return d;
+}
+
+// ===== Определение типа запроса =====
+function classify(q) {
+  q = q.trim().replace(/^https?:\/\//i, '').replace(/\/.*$/, '');
+  if (/^as\d+$/i.test(q) || /^\d{1,10}$/.test(q)) return { type: 'asn', norm: q.replace(/^as/i, '') };
+  if (/^(\d{1,3}\.){3}\d{1,3}$/.test(q)) return { type: 'ipv4', norm: q };
+  if (q.includes(':') && /^[0-9a-f:.]+$/i.test(q)) return { type: 'ipv6', norm: q.toLowerCase() };
+  let host = '';
+  try { host = new URL('http://' + q).hostname; } catch (e) {}
+  if (!host || !host.includes('.')) return null;
+  return { type: 'domain', norm: host.replace(/\.$/, ''), display: q.toLowerCase() };
+}
+function loadRdapDns() {
+  if (!rdapDns) rdapDns = fetch('https://data.iana.org/rdap/dns.json', { signal: AbortSignal.timeout(10000) }).then(r => r.json()).then(j => { const m = {}; j.services.forEach(s => s[0].forEach(t => { m[t.toLowerCase()] = s[1][0]; })); return m; }).catch(() => null);
+  return rdapDns;
+}
+
+// ===== Запрос: RDAP → (нет RDAP / ошибка) → whois =====
+function lookup(q) {
+  q = (q || '').trim(); if (!q || busy) return;
+  const c = classify(q);
+  if (!c) { box.innerHTML = '<div class="w-error">Не понял запрос. Нужен домен (example.com), IP или AS-номер (AS15169).</div>'; return; }
+  lastQ = q; busy = true; btn.disabled = true;
+  const skC = '<div class="card"><div class="w-skel" style="height:14px;width:34%"></div><div class="w-skel" style="height:12px;margin-top:12px"></div><div class="w-skel" style="height:12px;margin-top:8px;width:78%"></div></div>';
+  box.innerHTML = '<div class="w-hero"><div class="w-hero-top"><div class="w-skel" style="width:44px;height:44px;border-radius:10px"></div><div style="flex:1"><div class="w-skel" style="height:20px;width:42%"></div><div class="w-skel" style="height:12px;width:64%;margin-top:8px"></div></div></div><div class="w-skel" style="height:8px;margin-top:18px"></div></div><div class="w-grid">' + skC + skC + skC + skC + '</div>';
+  try { history.replaceState(null, '', location.pathname + '?q=' + encodeURIComponent(q)); } catch (e) {}
+  const unlock = () => { busy = false; btn.disabled = false; };
+  const fail = msg => { box.innerHTML = '<div class="w-error">' + msg + '</div>'; };
+
+  function viaWhois(why) {
+    if (c.type !== 'domain') { fail('RDAP регистратора не ответил' + (why ? ' (' + esc(why) + ')' : '') + '. Попробуй чуть позже.'); unlock(); return; }
+    fetch('https://api.whois.vu/?q=' + encodeURIComponent(c.norm), { signal: AbortSignal.timeout(20000) })
+      .then(r => { if (r.status === 429) throw { _rl: true }; return r.json(); })
+      .then(j => {
+        if (!j || (!j.whois && !j.available)) throw { _empty: true };
+        const d = whoisParse(j, c.norm);
+        if (c.display && c.display !== c.norm) d.unicode_name = c.display;
+        render(d);
+      })
+      .catch(e => fail(e && e._rl ? 'Слишком часто, подожди пару секунд' : e && e._empty ? 'У этой зоны нет RDAP, а текстовый whois ничего не вернул. Из браузера дальше не достать.' : e && e.name === 'TimeoutError' ? 'Whois-сервер реестра отвечает слишком долго, попробуй позже' : 'Сеть подвела, попробуй ещё раз'))
+      .finally(unlock);
+  }
+  function viaRdap(base) {
+    const path = c.type === 'asn' ? 'autnum/' : c.type === 'domain' ? 'domain/' : 'ip/';
+    const url = (base || 'https://rdap.org/') + path + encodeURIComponent(c.norm);
+    fetch(url, { signal: AbortSignal.timeout(12000), headers: { Accept: 'application/rdap+json' } })
+      .then(r => { if (r.status !== 200) throw { status: r.status }; return r.json().then(j => ({ j, url: r.url })); })
+      .then(({ j, url }) => { const d = rdapParse(j, c.type, c.norm, new URL(url).host); if (c.display && c.display !== c.norm && !d.unicode_name) d.unicode_name = c.display; render(d); unlock(); })
+      .catch(e => viaWhois(e && e.status ? 'HTTP ' + e.status : ''));
+  }
+  if (c.type !== 'domain') { viaRdap(); return; }
+  // Для домена: есть ли у зоны RDAP по справочнику IANA
+  const tld = c.norm.split('.').pop().toLowerCase();
+  loadRdapDns().then(m => {
+    if (m && !m[tld]) viaWhois();
+    else viaRdap(m && m[tld] ? m[tld] : null);
+  });
+}
+
+btn.addEventListener('click', () => lookup(input.value));
+input.addEventListener('keydown', e => { if (e.key === 'Enter') lookup(input.value); });
+document.querySelectorAll('.w-ex .w-chip').forEach(ch => ch.addEventListener('click', () => { input.value = ch.dataset.q; lookup(ch.dataset.q); }));
+function writeClip(v, ok) { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(ok).catch(() => {}); }
+box.addEventListener('click', e => {
+  const c = e.target.closest('.w-copy');
+  if (c) { writeClip(c.dataset.v || '', () => { c.textContent = '✓'; setTimeout(() => { c.textContent = '📋'; }, 900); }); return; }
+  if (e.target.closest('[data-act="refresh"]')) { if (lastQ) lookup(lastQ); return; }
+  const t = e.target.closest('.w-rawbtn');
+  if (t) {
+    e.preventDefault(); const det = t.closest('details');
+    if (t.dataset.act === 'toggle') det.open = !det.open;
+    else { const pre = det.querySelector('pre'); writeClip(pre ? pre.textContent : '', () => { const o = t.textContent; t.textContent = 'скопировано'; setTimeout(() => { t.textContent = o; }, 900); }); }
+  }
+});
+box.addEventListener('toggle', e => { const det = e.target; if (det.classList && det.classList.contains('w-raw')) { const b = det.querySelector('[data-act="toggle"]'); if (b) b.textContent = det.open ? 'свернуть' : 'развернуть'; } }, true);
+const q0 = new URLSearchParams(location.search).get('q');
+if (q0) { input.value = q0; lookup(q0); } else input.focus();
+
+// ===== Список зон: IANA (все TLD) + справочник RDAP =====
+function puny(label) {
+  if (!/^xn--/i.test(label)) return label;
+  const s = label.slice(4).toLowerCase(), base = 36, tmin = 1, tmax = 26, skew = 38, damp = 700;
+  let n = 128, i = 0, bias = 72, out = []; const b = s.lastIndexOf('-');
+  if (b > 0) out = s.slice(0, b).split('').map(ch => ch.charCodeAt(0));
+  const digit = c => c - 48 < 10 ? c - 22 : c - 65 < 26 ? c - 65 : c - 97 < 26 ? c - 97 : base;
+  const adapt = (delta, num, first) => { let k = 0; delta = first ? Math.floor(delta / damp) : delta >> 1; delta += Math.floor(delta / num); for (; delta > ((base - tmin) * tmax) >> 1; k += base) delta = Math.floor(delta / (base - tmin)); return Math.floor(k + (base - tmin + 1) * delta / (delta + skew)); };
+  for (let idx = b > 0 ? b + 1 : 0; idx < s.length;) {
+    const oldi = i;
+    for (let w = 1, k = base; ; k += base) { const dg = digit(s.charCodeAt(idx++)); i += dg * w; const t = k <= bias ? tmin : k >= bias + tmax ? tmax : k - bias; if (dg < t) break; w *= base - t; }
+    bias = adapt(i - oldi, out.length + 1, oldi === 0); n += Math.floor(i / (out.length + 1)); i %= out.length + 1; out.splice(i++, 0, n);
+  }
+  try { return String.fromCodePoint(...out); } catch (e) { return label; }
+}
+const GENERIC = ['com', 'net', 'org', 'info', 'biz', 'name', 'pro'];
+const SPONSORED = ['aero', 'asia', 'cat', 'coop', 'edu', 'gov', 'int', 'jobs', 'mil', 'mobi', 'museum', 'post', 'tel', 'travel', 'xxx'];
+const CATN = { cc: 'Страны и регионы', new: 'Новые общие', generic: 'Классические', idn: 'Национальные (IDN)', sponsored: 'Спонсируемые' };
+Promise.all([
+  fetch('https://data.iana.org/TLD/tlds-alpha-by-domain.txt', { signal: AbortSignal.timeout(15000) }).then(r => r.text()),
+  loadRdapDns()
+]).then(([txt, rdap]) => {
+  const all = txt.split('\n').map(s => s.trim().toLowerCase()).filter(s => s && s[0] !== '#');
+  const tlds = all.map(t => ({ t, u: puny(t), c: /^xn--/.test(t) ? 'idn' : t.length === 2 ? 'cc' : GENERIC.includes(t) ? 'generic' : SPONSORED.includes(t) ? 'sponsored' : 'new', r: !!(rdap && rdap[t]) }));
+  const cats = {}; tlds.forEach(x => { cats[x.c] = (cats[x.c] || 0) + 1; });
+  const nR = tlds.filter(x => x.r).length;
+  const stat = (l, n, s) => '<div class="card stat"><div class="l">' + l + '</div><div class="n">' + n + '</div><div class="s">' + s + '</div></div>';
+  document.getElementById('wTldStats').innerHTML = stat('Зон в корне IANA', tlds.length.toLocaleString('ru'), 'все страновые и новые общие')
+    + stat('С RDAP', nR.toLocaleString('ru'), 'структурированный ответ прямо от реестра')
+    + stat('Без RDAP', (tlds.length - nR).toLocaleString('ru'), 'пробуем классический whois, среди них .ru, .рф, .su')
+    + stat('Что показываем', '10+', 'регистратор, даты, статусы, DNS, DNSSEC, владелец…');
+  const catsEl = document.getElementById('wTldCats'), chips = document.getElementById('wTldChips'), more = document.getElementById('wTldMore'), search = document.getElementById('wTldSearch');
+  const order = ['cc', 'new', 'generic', 'idn', 'sponsored'], st = { cat: 'all', q: '', exp: false };
+  const filtered = () => tlds.filter(i => (st.cat === 'all' || i.c === st.cat) && (!st.q || i.t.indexOf(st.q) === 0 || i.u.indexOf(st.q) === 0));
+  function paintCats() {
+    catsEl.innerHTML = order.map(c => '<span class="w-badge cat' + (st.cat === c ? ' on' : '') + '" data-cat="' + c + '">' + CATN[c] + ': <b>' + (cats[c] || 0) + '</b></span>').join('') + '<span class="w-badge cat' + (st.cat === 'all' ? ' on' : '') + '" data-cat="all">Все: <b>' + tlds.length + '</b></span>';
+  }
+  function paint() {
+    const list = filtered(), n = st.exp ? list.length : 60;
+    chips.innerHTML = list.slice(0, n).map(i => '<span class="w-chip' + (i.r ? '' : ' norap') + '" title="' + (i.u !== i.t ? '.' + i.t + ' · ' : '') + (i.r ? 'RDAP есть' : 'RDAP нет') + '">.' + esc(i.u) + '</span>').join('') || '<span class="muted" style="font-size:.85em">Ничего не нашлось</span>';
+    if (list.length > 60) { more.style.display = 'inline-flex'; more.textContent = st.exp ? 'Свернуть' : 'Показать все ' + list.length; } else more.style.display = 'none';
+  }
+  catsEl.addEventListener('click', e => { const c = e.target.closest('.cat'); if (!c) return; st.cat = c.dataset.cat; st.exp = false; paintCats(); paint(); });
+  search.addEventListener('input', () => { st.q = search.value.trim().toLowerCase().replace(/^\./, ''); st.exp = false; paint(); });
+  more.addEventListener('click', () => { st.exp = !st.exp; paint(); });
+  paintCats(); paint();
+}).catch(() => { document.getElementById('wTldSec').style.display = 'none'; });
+})();
+</script>
+</body>
+</html>
