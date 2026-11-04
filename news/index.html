@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#cc785c">
 <title>Новости ИИ</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../common/site.css">
 <script src="../common/site.js"></script>
 <style>
@@ -24,7 +24,7 @@
 .nw-date{color:var(--muted);margin-right:2px}
 .nw-chip{background:var(--neutral-bg);color:var(--muted);border-radius:5px;padding:1px 7px}
 .nw-kind{border-radius:5px;padding:1px 7px;font-weight:600}
-.k-inc{background:var(--warn-bg);color:var(--warn)}.k-ok{background:var(--safe-bg);color:var(--safe)}.k-rel{background:var(--info-bg);color:var(--info)}
+.k-art{background:var(--neutral-bg);color:var(--text)}.k-inc{background:var(--warn-bg);color:var(--warn)}.k-ok{background:var(--safe-bg);color:var(--safe)}.k-rel{background:var(--info-bg);color:var(--info)}
 .nw-orig{color:var(--muted);font-size:.85em;margin:-4px 0 6px;word-break:break-word}
 .nw-empty{color:var(--muted);padding:20px 0}
 .nw-more{display:block;margin:16px auto 0}
@@ -44,7 +44,7 @@
   <nav class="nav" id="nav"></nav>
   <div class="head"><div>
     <h1>Новости ИИ</h1>
-    <p class="desc">Свежие события по Claude, Anthropic, OpenAI, ChatGPT, Codex, Gemini и MCP: сбои и их разборы, новые версии Claude Code, Codex и Gemini CLI. Всё подтягивается из открытых официальных источников в момент открытия.</p>
+    <p class="desc">Свежие события по Claude, Anthropic, OpenAI, ChatGPT, Codex, Gemini и MCP: сбои и их разборы, новые версии Claude Code, Codex и Gemini CLI. Плюс статьи net.coffee. Всё автоматически переводится на русский и обновляется раз в час.</p>
   </div></div>
 
   <div class="nw-bar" id="nwBar"></div>
@@ -64,7 +64,7 @@
     <a class="src" href="https://modelcontextprotocol.io/specification/changelog" target="_blank" rel="noopener"><b>MCP — изменения спецификации</b><span>modelcontextprotocol.io</span></a>
     <a class="src cn" id="cnLink" href="https://ip.net.coffee/news/" target="_blank" rel="noopener"><b>Лента оригинала (на китайском)</b><span>ip.net.coffee/news — авторские статьи net.coffee</span></a>
   </div>
-  <div class="foot">У оригинала здесь авторские статьи редакции net.coffee — это чужой контент, мы его не копируем и не переводим, а даём ссылку на их ленту (с тем же тегом, что выбран). Наша лента собирает то же по смыслу из открытых API с CORS: статус-страницы Claude и OpenAI (incidents.json) и релизы на GitHub (Claude Code, Codex, Gemini CLI, спецификация MCP).</div>
+  <div class="foot">Статьи net.coffee — авторские: здесь только переведённый заголовок и вводка, полный текст по ссылке у авторов. Остальное — статус-страницы Claude и OpenAI и релизы на GitHub (Claude Code, Codex, Gemini CLI, MCP). Перевод машинный (Google Translate).</div>
 </div>
 
 <script>
@@ -170,10 +170,27 @@ function setTag(t) {
 document.getElementById('nwBar').addEventListener('click', e => { const b = e.target.closest('.nw-tag'); if (b) setTag(b.dataset.tag); });
 document.getElementById('moreBtn').addEventListener('click', () => { shown += PAGE; renderGrid(); });
 
+// Готовая лента с переводом (собирается раз в час: scripts/build_news.py)
+async function fromBuilt() {
+  const r = await fetch('news.json', { cache: 'no-cache', signal: AbortSignal.timeout(8000) });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return r.json();
+}
+
 async function main() {
   const q = new URLSearchParams(location.search).get('tag');
   if (q && TAGS.includes(q)) curTag = q;
   renderBar();
+  try {
+    const d = await fromBuilt();
+    items = d.items;
+    renderBar(); renderGrid();
+    const upd = new Date(d.updated);
+    document.getElementById('srcState').textContent = `${items.length} записей, переведено на русский. Обновлено ${fmtDate(d.updated)} в ${pad(upd.getHours())}:${pad(upd.getMinutes())}` +
+      (d.sources_failed?.length ? `. В прошлый раз не ответили: ${d.sources_failed.join(', ')}` : '') + '.';
+    return;
+  } catch {}
+  // Запасной путь — живые источники без перевода
   const res = await Promise.allSettled(SOURCES.map(([, f]) => f()));
   const failed = [];
   res.forEach((r, i) => { if (r.status === 'fulfilled') items.push(...r.value); else failed.push(SOURCES[i][0]); });

@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#cc785c">
 <title>IP-карточка</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../common/site.css">
 <script src="../common/site.js"></script>
 <style>
@@ -28,13 +28,15 @@
 .actions .btn{font-size:.88em;padding:7px 12px;text-decoration:none;display:inline-flex;align-items:center}
 .status{color:var(--muted);font-size:.85em}
 .stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;margin-bottom:22px}
+.stage>*{min-width:0}
+.embed,.embed-row{min-width:0;max-width:100%}
 .stage-label{font-weight:600;font-size:.92em;margin-bottom:8px}
 .stage-sub{color:var(--muted);font-weight:400;font-size:.88em;margin-left:4px}
 .preview-wrap{position:relative;background:repeating-conic-gradient(var(--neutral-bg) 0 25%,transparent 0 50%) 0 0/16px 16px;border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;justify-content:center;min-height:200px}
 .preview-wrap img{width:100%;max-width:480px;height:auto;display:block}
 .preview-wrap.loading img{opacity:.35}
 .preview-wrap.loading:after{content:"Загрузка…";position:absolute;color:var(--muted);font-size:.9em}
-.code{display:block;background:var(--neutral-bg);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;cursor:pointer;color:var(--text)}
+.code{display:block;max-width:100%;overflow-x:auto;white-space:pre;-webkit-overflow-scrolling:touch;background:var(--neutral-bg);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font:12.5px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;cursor:pointer;color:var(--text)}
 .code:hover{border-color:var(--accent)}
 .code.copied{border-color:var(--safe);background:var(--safe-bg)}
 .side-link{display:flex;align-items:center;gap:8px;margin-top:10px;border:1px solid var(--border);background:var(--card);border-radius:10px;padding:10px 12px;text-decoration:none;color:inherit;font-size:.9em}
@@ -61,8 +63,33 @@
 .faq p{color:var(--muted);margin:0;font-size:.92em}
 #copyToast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:.88em;opacity:0;pointer-events:none;transition:.2s}
 #copyToast.show{opacity:1;transform:translateX(-50%)}
-@media (max-width:860px){.stage{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:560px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.st-chip{width:30px;height:30px}.st-chip.rect{width:50px}}
+@media (max-width:860px){.stage{grid-template-columns:minmax(0,1fr)}.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Скрыть IP: на картинках IP нарисован сервером, поэтому размываем превью и галерею */
+body.ip-masked .preview-wrap img,body.ip-masked .g-item img{filter:blur(7px)}
+.about{margin-top:26px}
+.about h2{font-size:1.05em;margin:22px 0 8px}
+.about p{color:var(--muted);margin:6px 0;font-size:.92em}
+.feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.feat div{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:.88em;color:var(--muted);min-width:0}
+.feat b{display:block;color:var(--text);margin-bottom:2px}
+.about ul{margin:6px 0;padding-left:18px;color:var(--muted);font-size:.92em}
+.about li{margin:3px 0}
+.rel{display:flex;flex-wrap:wrap;gap:8px}
+.rel a{border:1px solid var(--border);background:var(--card);border-radius:8px;padding:8px 12px;text-decoration:none;font-size:.9em}
+.rel a:hover{border-color:var(--accent)}
+@media (max-width:560px){
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  /* стили и стикеры — лентой с прокруткой внутри, чтобы превью не уезжало на второй экран */
+  .chips,.stickers{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:16px;-webkit-overflow-scrolling:touch}
+  .chips::-webkit-scrollbar,.stickers::-webkit-scrollbar{display:none}
+  .chips>*,.stickers>*{flex:0 0 auto;white-space:nowrap}
+  .chip{min-height:36px;padding:6px 12px}
+  .st-chip{width:40px;height:40px}.st-chip.rect{width:62px}.st-chip.word{min-height:40px}
+  .ew-btn{min-height:36px;padding:6px 12px}
+  .actions .btn,.actions .btn-primary{min-height:42px}
+  .actions .status{flex-basis:100%}
+  .preview-wrap{padding:8px;min-height:0}
+}
 </style>
 </head>
 <body>
@@ -89,7 +116,7 @@
       <div class="preview-wrap loading" id="previewWrap"><img id="preview" alt="Превью IP-карточки" decoding="async"></div>
     </div>
     <div>
-      <div class="stage-label">Markdown <span class="stage-sub">GitHub, Hexo, Notion, Obsidian</span></div>
+      <div class="stage-label">Markdown <span class="stage-sub">GitHub, Hexo, Notion, NodeSeek, Obsidian</span></div>
       <code class="code" data-format="md"></code>
       <a class="side-link" href="#embedBox"><span>📝</span><span>Код для HTML и BBCode, выбор ширины</span><span class="arr">→</span></a>
       <a class="side-link" id="ipScoreLink" href="../ip/" target="_blank" rel="noopener"><span>🎯</span>
@@ -111,11 +138,41 @@
       <button class="ew-btn" data-w="0">оригинал 720</button>
       <span class="small">высота считается сама, 720:340</span></div>
     <div class="embed-row"><span class="embed-label">HTML — блог, свой сайт</span><code class="code" data-format="html"></code></div>
-    <div class="embed-row"><span class="embed-label">Markdown — GitHub, Hexo, Notion</span><code class="code" data-format="md"></code></div>
-    <div class="embed-row"><span class="embed-label">BBCode — phpBB, Discuz, старые форумы</span><code class="code" data-format="bb"></code></div>
+    <div class="embed-row"><span class="embed-label">Markdown — GitHub, GitFlic, Hexo, Notion, NodeSeek</span><code class="code" data-format="md"></code></div>
+    <div class="embed-row"><span class="embed-label">BBCode — phpBB, IPB, Discuz, старые форумы</span><code class="code" data-format="bb"></code></div>
   </div>
 
+  <section class="about">
+    <h2>Что это за карточка</h2>
+    <p>SVG-картинка, которую вставляют на любую страницу. В момент открытия сервер смотрит IP того, кто её запросил, и рисует адрес, страну и город, сеть (ASN), тип сети и Trust. Это не скриншот: один и тот же код показывает каждому посетителю его собственный IP.</p>
+    <h2>Что умеет</h2>
+    <div class="feat">
+      <div><b>🎨 22 стиля</b>минимализм, терминал, киберпанк, северное сияние, сакура, пиксели, неон… Можно случайный.</div>
+      <div><b>🎯 60+ стикеров</b>эмодзи, печати VIP / BOSS / 好评+1 / 来了老弟 / 绝密, печати операторов CN2 / 9929 / CMIN2 / 三网优化 / DMIT / GEN2.</div>
+      <div><b>⚡ Лёгкая</b>статичный SVG на 3–6 КБ, чёткий в любом размере.</div>
+      <div><b>📐 Любая ширина</b>240 / 360 / 480 / 560 / 720, высота считается сама (720:340). В ссылке это <code>&amp;w=480</code>.</div>
+      <div><b>🔒 Без регистрации</b>ни аккаунта, ни ключа, ни оплаты.</div>
+      <div><b>🌐 IPv4 и IPv6</b>оба адреса рисуются одинаково.</div>
+    </div>
+    <h2>Куда можно вставить</h2>
+    <ul>
+      <li><b>Git-хостинги</b> — README и вики на GitHub, GitLab, Gitea, Codeberg; у нас — GitFlic и GitVerse (Markdown).</li>
+      <li><b>Блоги</b> — Hexo, Hugo, Jekyll, Astro, WordPress, Ghost, Typecho (Markdown или HTML).</li>
+      <li><b>Заметки</b> — Notion, Obsidian, Logseq, 语雀, 飞书 (Markdown).</li>
+      <li><b>Подписи на форумах</b> — NodeSeek, V2EX, hostloc, Discuz, phpBB, XenForo, IPB (HTML или BBCode [img]).</li>
+      <li>Любая площадка, где разрешены внешние картинки.</li>
+    </ul>
+    <h2>Где пригодится</h2>
+    <ul>
+      <li>Виджет в сайдбаре блога — посетитель видит свой IP и город.</li>
+      <li>Шапка профиля на GitHub — стиль «Терминал» или «Киберпанк».</li>
+      <li>Подпись на форуме — с печатью DMIT / CN2 / 9929 про свою сеть, как любят на NodeSeek и hostloc.</li>
+      <li>Статья про VPN, CDN или прокси — читатель сразу видит свой выходной IP.</li>
+    </ul>
+  </section>
+
   <div class="faq">
+    <h2 style="font-size:1.05em;margin:22px 0 4px">Вопросы</h2>
     <h3>Чей IP увидят на моём сайте — мой или посетителя?</h3>
     <p>Посетителя. Код вставки ссылается на <code>card.net.coffee/v1/card.svg</code> без IP: их сервер смотрит, с какого адреса пришёл запрос картинки, и рисует карточку для него (проверено: отвечает редиректом на <code>?ip=&lt;адрес запросившего&gt;</code>). Превью здесь собирается с твоим IP — так же, как у оригинала.</p>
     <h3>Чей это сервер?</h3>
@@ -123,8 +180,25 @@
     <h3>Какой IP попадёт на карточку, если у меня VPN с раздельной маршрутизацией?</h3>
     <p>Тот, через который браузер ходит на card.net.coffee (это зарубежный сайт на Cloudflare, обычно — выход VPN). Российский IP туда не попадёт.</p>
     <h3>Регистрация, ключи, оплата?</h3>
-    <p>Не нужны. Китайские стикеры (来了老弟 — «Заходи, братан», 绝密 — «Совершенно секретно», 好评+1 — «Лайк», 三网优化 — «Оптимизация для трёх операторов КНР», CN2 / 9929 / CMIN2 — магистрали китайских операторов) оставлены как в оригинале.</p>
+    <p>Не нужны.</p>
+    <h3>Какой размер выбрать?</h3>
+    <p>Подпись на форуме — 480, сайдбар блога — 360, широкая колонка — 560, README на GitHub — оригинал 720.</p>
+    <h3>Не замедлит ли сайт?</h3>
+    <p>Нет: картинка весит 3–6 КБ и отдаётся через CDN Cloudflare.</p>
+    <h3>Углы не перекроет фон?</h3>
+    <p>Нет: углы скруглены внутри SVG и прозрачны, карточка нормально смотрится и на светлом, и на тёмном фоне.</p>
+    <h3>Можно сохранить как картинку?</h3>
+    <p>Да: правой кнопкой по превью → «Сохранить изображение» (SVG), или скриншотом в PNG.</p>
+    <h3>Что значат китайские стикеры?</h3>
+    <p>Китайские стикеры (来了老弟 — «Заходи, братан», 绝密 — «Совершенно секретно», 好评+1 — «Лайк», 三网优化 — «Оптимизация для трёх операторов КНР», CN2 / 9929 / CMIN2 — магистрали китайских операторов) оставлены как в оригинале.</p>
   </div>
+  <section class="about">
+    <h2>Другие проверки</h2>
+    <div class="rel">
+      <a href="../">🔍 Мой IP</a><a href="../ip/">🎯 Оценка IP</a><a href="../claude/">🤖 Claude</a><a href="../ping/">📡 Пинг</a>
+      <a href="../dns/">🧪 Утечка DNS</a><a href="../webrtc/">🔌 WebRTC</a><a href="../status/">📊 Статусы</a>
+    </div>
+  </section>
   <div class="foot">Конструктор повторяет card.net.coffee/ip. Картинки: card.net.coffee/v1/card.svg (Net.Coffee). IP для превью — /cdn-cgi/trace того же сервера.</div>
 </div>
 <div id="copyToast">✓ Скопировано</div>
@@ -363,6 +437,12 @@ function renderCard() {
   document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.style === state.styleId));
   document.querySelectorAll('.g-item').forEach(c => c.classList.toggle('active', c.dataset.style === state.activeStyleId));
   document.querySelectorAll('.st-chip').forEach(c => c.classList.toggle('active', c.dataset.stickerId === state.stickerId));
+  // На мобилке ленты прокручиваются внутри — подтягиваем выбранный чип в видимую часть (без прокрутки страницы)
+  ['chips', 'stickers'].forEach(id => {
+    const box = $(id), a = box.querySelector('.active'); if (!a || box.scrollWidth <= box.clientWidth) return;
+    const br = box.getBoundingClientRect(), ar = a.getBoundingClientRect();
+    if (ar.left < br.left || ar.right > br.right) box.scrollLeft += ar.left - br.left - (br.width - ar.width) / 2;
+  });
   const nm = styleObj.name.replace(/[^\p{L}\p{N} -]/gu, '').trim();
   const sn = stk.kind === 'none' ? 'без стикера' : 'стикер ' + (stk.ch || stk.label.split(' — ')[0]);
   $('status').textContent = `Сейчас: ${nm}${state.styleId === 'random' ? ' (случайно)' : ''}, ${sn}${state.stickerId === 'random' ? ' (случайно)' : ''}`;
@@ -385,7 +465,14 @@ function updatePreview() {
   if (img.dataset.lastUrl === url) return;
   img.dataset.lastUrl = url;
   wrap.classList.add('loading');
-  img.onload = img.onerror = () => wrap.classList.remove('loading');
+  let tries = 0;
+  img.onload = () => wrap.classList.remove('loading');
+  // При частых переключениях их сервер иногда не отдаёт картинку — пробуем ещё пару раз
+  img.onerror = () => {
+    if (img.dataset.lastUrl !== url) return;
+    if (++tries <= 2) setTimeout(() => { if (img.dataset.lastUrl === url) img.removeAttribute('src'); img.src = url; }, 1200 * tries);
+    else wrap.classList.remove('loading');
+  };
   img.src = url;
 }
 function absUrl(p) { return new URL(p, location.href).href; }
@@ -496,6 +583,8 @@ async function init() {
   } catch { $('ipInfoText').textContent = 'Данных по IP нет'; }
 }
 init();
+// Скрыть IP: текст маскирует common/site.js, картинки (IP в них нарисован сервером) — размываем
+$('ipMaskToggle').addEventListener('change', e => document.body.classList.toggle('ip-masked', e.target.checked));
 </script>
 </body>
 </html>

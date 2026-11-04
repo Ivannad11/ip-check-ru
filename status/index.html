@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#cc785c">
 <title>Статусы сервисов</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../common/site.css">
 <script src="../common/site.js"></script>
 <style>
@@ -55,11 +55,16 @@
 .detail-link{margin-top:8px;font-size:.85em}
 .detail-link a{color:var(--accent);text-decoration:none}
 .source-note{color:var(--muted);font-size:.82em;margin-top:18px}
+.sec-split{justify-content:space-between;flex-wrap:wrap;gap:4px 12px}
+.inc-name a{display:inline-block;padding:6px 8px;margin:-6px -4px}
+.detail-link a,.back-row a{display:inline-block;padding:6px 0}
+.help-link{display:inline-block;padding:6px 0;font-size:.8em;font-weight:400;color:var(--accent);text-decoration:none}
 /* Детальная страница */
 .back-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;font-size:.9em}
 .back-row a{color:var(--accent);text-decoration:none}
 .comp-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .comp-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;min-width:0}
+.comp-grp{color:var(--muted);font-size:.72em;text-transform:uppercase;letter-spacing:.03em}
 .comp-name{font-weight:600;font-size:.9em;word-break:break-word}
 .comp-status{display:flex;align-items:center;gap:6px;font-size:.82em;color:var(--muted);margin-top:4px}
 .comp-status .dot{margin-top:0;width:8px;height:8px;flex-basis:8px}
@@ -97,8 +102,10 @@ const SERVICES = [
   { key: 'groq', name: 'Groq', group: 'ИИ', ...sp('groqstatus.com') },
   { key: 'openai', name: 'OpenAI / ChatGPT', group: 'ИИ', ...sp('status.openai.com'), detail: '?s=openai' },
   { key: 'perplexity', name: 'Perplexity', group: 'ИИ', ...sp('status.perplexity.com') },
-  // status.replicate.com больше не отдаёт API (редирект на страницу Cloudflare) — у оригинала тоже «неизвестно»
-  { key: 'replicate', name: 'Replicate', group: 'ИИ', none: 'статус-API больше не отвечает', page: 'https://replicate.com' },
+  // status.replicate.com теперь редиректит на cloudflarestatus.com (Replicate куплен Cloudflare), у оригинала
+  // поэтому «неизвестно». Статус Replicate там — отдельный компонент, его и берём (CORS открыт).
+  { key: 'replicate', name: 'Replicate', group: 'ИИ', component: 'Replicate', summary: 'https://www.cloudflarestatus.com/api/v2/summary.json',
+    incidents: 'https://www.cloudflarestatus.com/api/v2/incidents.json', page: 'https://www.cloudflarestatus.com/services?search=replicate' },
   { key: 'cloudflare', name: 'Cloudflare', group: 'Облака', ...sp('www.cloudflarestatus.com') },
   { key: 'digitalocean', name: 'DigitalOcean', group: 'Облака', ...sp('status.digitalocean.com') },
   { key: 'flyio', name: 'Fly.io', group: 'Облака', ...sp('status.flyio.net') },
@@ -133,6 +140,7 @@ const IMPACT_RU = { none: 'без влияния', minor: 'мелкий', major:
 const INC_ST_RU = { investigating: 'разбираются', identified: 'причина найдена', monitoring: 'наблюдают', resolved: 'решено',
   postmortem: 'разбор', scheduled: 'запланировано', in_progress: 'идёт', completed: 'завершено', verifying: 'проверяют' };
 const COMP_RU = { operational: 'работает', degraded_performance: 'медленно', partial_outage: 'частичный сбой', major_outage: 'сбой', under_maintenance: 'техработы' };
+const COMP_IND = { operational: 'none', degraded_performance: 'minor', partial_outage: 'minor', major_outage: 'major', under_maintenance: 'maintenance' };
 const COMP_CLS = { operational: 'ok', degraded_performance: 'warn', partial_outage: 'warn', major_outage: 'bad', under_maintenance: 'maint' };
 const DESC_RU = {
   'All Systems Operational': 'Все системы работают', 'Minor Service Outage': 'Мелкий сбой сервиса',
@@ -141,6 +149,9 @@ const DESC_RU = {
 };
 // Оригинал переводит названия инцидентов на китайский шаблонами («错误增多：X»). Делаем то же по-русски.
 const NAME_RULES = [
+  [/^(?:elevated|increased|higher|high) latency and errors?(?: rates?)?(?: (?:on|for|in|with|affecting))? ?(.*)$/i, 'Рост задержек и ошибок'],
+  [/^(?:elevated|increased|higher|high) errors? (?:rates? )?and latency(?: (?:on|for|in|with|affecting))? ?(.*)$/i, 'Рост ошибок и задержек'],
+  [/^(.+?) latency issues? (?:in|on|for|with) (.+)$/i, 'Задержки'],
   [/^(?:elevated|increased|higher) (?:number of |rate of )?((?:[\w./-]+ ){0,3}?)(?:error rates?|errors?)(?: rates?)?(?: (?:on|for|in|with|affecting|when using|across))? ?(.*)$/i, 'Больше ошибок'],
   [/^(?:elevated|increased|high) latency(?: (?:on|for|in|with|affecting))? ?(.*)$/i, 'Рост задержек'],
   [/^degraded (?:performance|service|availability)(?: (?:on|for|in|of|with|affecting))? ?(.*)$/i, 'Работает с перебоями'],
@@ -163,6 +174,8 @@ function fmtTime(iso) {
   if (!iso) return ''; const d = new Date(iso); if (isNaN(d)) return iso;
   return `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
+// Как у оригинала на детальной странице: время с поясом, «(UTC+3)»
+function tzLabel() { const o = -new Date().getTimezoneOffset() / 60; return `(UTC${o >= 0 ? '+' : ''}${o})`; }
 function relTime(iso) {
   if (!iso) return ''; const diff = Date.now() - new Date(iso).getTime(); if (isNaN(diff) || diff < 0) return fmtTime(iso);
   const s = Math.floor(diff / 1000);
@@ -194,6 +207,14 @@ async function loadSummary(svc) {
   }
   try {
     const d = await getJSON(svc.summary);
+    if (svc.component) { // один компонент чужой статус-страницы (Replicate на Cloudflare)
+      const c = (d.components || []).find(x => x.name === svc.component);
+      if (!c) throw new Error('компонент не найден');
+      const ind = COMP_IND[c.status] || 'unknown';
+      const active = (d.incidents || []).filter(i => (i.components || []).some(x => x.name === svc.component));
+      Object.assign(st, { indicator: ind, description: COMP_RU[c.status] || c.status, ok: true, error: '', scheduled: [], components: [c], active });
+      return;
+    }
     const ind = d.status?.indicator || 'unknown';
     // Плановые работы: идущие и предстоящие (как scheduled у оригинала)
     const sched = (d.scheduled_maintenances || []).filter(m => m.status !== 'completed')
@@ -211,7 +232,7 @@ async function loadIncidents(svc) {
   const st = store[svc.key] = store[svc.key] || { incidents: [], scheduled: [] };
   try {
     const d = await getJSON(svc.incidents);
-    st.incidents = (d.incidents || []).map(i => ({ name: i.name, status: i.status, impact: i.impact, created_at: i.created_at,
+    st.incidents = (d.incidents || []).filter(i => !svc.component || (i.components || []).some(c => c.name === svc.component)).map(i => ({ name: i.name, status: i.status, impact: i.impact, created_at: i.created_at,
       updated_at: i.updated_at, resolved_at: i.resolved_at, shortlink: i.shortlink,
       body: i.incident_updates?.[0]?.body || '', components: (i.components || []).map(c => c.name) }));
     // «Последний сбой» — у оригинала это время, когда монитор последний раз видел сбой.
@@ -337,9 +358,11 @@ function mountList() {
 
 // ===== Детальная страница: ?s=claude / ?s=openai (у оригинала /claude/status.html и /gpt/status.html) =====
 const DETAIL = {
-  claude: { svc: 'claude', title: 'Статус Claude', back: ['../claude/', '← К проверке IP для Claude'], source: 'Anthropic' },
+  claude: { svc: 'claude', title: 'Статус Claude', back: ['../claude/', '← К проверке IP для Claude'], source: 'Anthropic',
+    help: ['https://ip.net.coffee/claude/claudecode.html', 'Claude Code всё равно не работает? Разбор у оригинала (на китайском) ↗'] },
   // Оригинал для ChatGPT выводит только «вход» и «диалоги»; мы показываем все компоненты из summary.json
-  openai: { svc: 'openai', title: 'Статус ChatGPT и OpenAI', back: ['../gpt/', '← К проверке IP для ChatGPT'], source: 'OpenAI' },
+  openai: { svc: 'openai', title: 'Статус ChatGPT и OpenAI', back: ['../gpt/', '← К проверке IP для ChatGPT'], source: 'OpenAI',
+    help: ['https://ip.net.coffee/gpt/codex.html', 'Codex всё равно не работает? Разбор у оригинала (на китайском) ↗'] },
 };
 function mountDetail(cfg) {
   const svc = SERVICES.find(s => s.key === cfg.svc);
@@ -351,7 +374,7 @@ function mountDetail(cfg) {
     <div id="overall" class="overall"><div class="dot dot-loading"></div><div><div class="overall-text">Загрузка…</div></div></div>
     <h2 class="section-title">Компоненты</h2>
     <div class="comp-grid" id="components"><div class="comp-card"><div class="comp-name">Загрузка…</div></div></div>
-    <h2 class="section-title">Последние события</h2>
+    <h2 class="section-title sec-split"><span>Последние события</span>${cfg.help ? `<a class="help-link" href="${cfg.help[0]}" target="_blank" rel="noopener">${cfg.help[1]}</a>` : ''}</h2>
     <div id="incidents"><div class="inc-empty">Загрузка…</div></div>
     <p class="source-note">Источник: ${cfg.source}, <a href="${svc.page}" target="_blank" rel="noopener">${svc.page.replace('https://', '')}</a> (summary.json + incidents.json). Обновляется каждую минуту.</p>`;
   const run = async () => {
@@ -369,11 +392,13 @@ function mountDetail(cfg) {
         && Date.now() - new Date(i.updated_at || i.created_at).getTime() < 2 * 3600e3);
       ov.className = 'overall ' + color;
       ov.innerHTML = `<div class="dot dot-${color}"></div><div style="min-width:0"><div class="overall-text">${esc(DESC_RU[st.description] || st.description || IND_RU[st.indicator])}</div>
-        <div class="overall-time">Обновлено ${fmtTime(new Date().toISOString())}</div>
+        <div class="overall-time">Обновлено ${fmtTime(new Date().toISOString())} ${tzLabel()}</div>
         ${active ? `<div class="overall-active">${esc(nameRU(active.name))}<br><span class="small">${esc(IMPACT_RU[active.impact] || active.impact)} · ${esc(INC_ST_RU[active.status] || active.status)}</span></div>` : ''}</div>`;
     }
     const comps = (st.components || []).filter(c => !c.group);
-    document.getElementById('components').innerHTML = comps.length ? comps.map(c => `<div class="comp-card"><div class="comp-name">${esc(c.name)}</div>
+    // У OpenAI компоненты разложены по группам (API / ChatGPT / …), имена повторяются («Login») — подписываем группу
+    const grp = Object.fromEntries((st.components || []).filter(c => c.group).map(c => [c.id, c.name]));
+    document.getElementById('components').innerHTML = comps.length ? comps.map(c => `<div class="comp-card">${grp[c.group_id] ? `<div class="comp-grp">${esc(grp[c.group_id])}</div>` : ''}<div class="comp-name">${esc(c.name)}</div>
       <div class="comp-status"><div class="dot dot-${COMP_CLS[c.status] || 'warn'}"></div>${esc(COMP_RU[c.status] || c.status)}</div></div>`).join('')
       : '<div class="comp-card"><div class="comp-name">Нет данных</div></div>';
     const incs = (st.incidents || []).slice(0, 10);
@@ -383,7 +408,7 @@ function mountDetail(cfg) {
       const stt = i.status === 'resolved' ? '<span class="itag itag-resolved">решено</span>' : `<span class="small">${esc(INC_ST_RU[i.status] || i.status)}</span>`;
       return `<div class="inc-card"><div class="inc-title">${esc(ru)} ${i.shortlink ? `<a href="${esc(i.shortlink)}" target="_blank" rel="noopener nofollow" style="text-decoration:none;color:var(--muted)">↗</a>` : ''}</div>
         ${ru !== i.name ? `<div class="inc-orig small">${esc(i.name)}</div>` : ''}
-        <div class="inc-meta" style="margin-top:6px">${tag}${stt} · ${esc(fmtTime(i.updated_at || i.created_at))}</div></div>`;
+        <div class="inc-meta" style="margin-top:6px">${tag}${stt} · ${esc(fmtTime(i.updated_at || i.created_at))} ${tzLabel()}</div></div>`;
     }).join('') : '<div class="inc-empty">Недавних событий нет, всё работает</div>';
   };
   run();

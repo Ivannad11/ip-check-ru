@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#cc785c">
 <title>Оценка IP</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EIP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23cc785c'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="../common/site.css">
 <script src="../common/site.js"></script>
 <style>
@@ -44,8 +44,8 @@
 .grid2,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}
 .full{margin-bottom:12px}
 .tip-wrap{position:relative;display:inline-block;margin-left:4px;color:var(--muted);cursor:help;font-weight:400;font-size:.9em}
-.tip-text{display:none;position:absolute;z-index:20;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);width:260px;max-width:70vw;background:var(--text);color:var(--bg);font-size:12px;line-height:1.45;padding:8px 10px;border-radius:8px;text-align:left;font-weight:400;white-space:normal}
-.tip-wrap:hover .tip-text,.tip-wrap:focus .tip-text{display:block}
+.tip-text{display:none;position:fixed;z-index:50;left:8px;top:8px;width:max-content;max-width:min(280px,calc(100vw - 16px));background:var(--text);color:var(--bg);font-size:12px;line-height:1.45;padding:8px 10px;border-radius:8px;text-align:left;font-weight:400;white-space:normal;overflow-wrap:anywhere;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.tip-wrap.on .tip-text{display:block}
 .copy-btn{background:none;border:0;cursor:pointer;padding:0 2px;font-size:.85em;opacity:.6}
 .copy-btn:hover{opacity:1}
 .geo-name{display:inline-flex;align-items:center;gap:4px;font-weight:600}
@@ -199,7 +199,20 @@
   .ip-head{grid-template-columns:1fr auto}.ih-gauge{grid-column:1/-1;grid-row:2}
 }
 @media (max-width:700px){.bgp-wrap{display:none}.bgp-list{display:block}.ht-top{grid-template-columns:1fr 1fr}.ht-idx{grid-column:1/-1}.gp-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:480px){.engs{grid-template-columns:1fr}.kv{flex-wrap:wrap}.kv .v{text-align:left;justify-content:flex-start}.kv-scene .v,.kv-hb .v{align-items:flex-start}}
+@media (max-width:480px){.engs{grid-template-columns:1fr}.kv{flex-wrap:wrap}.kv .v{text-align:left;justify-content:flex-start}.kv-scene .v,.kv-hb .v{align-items:flex-start}
+  .trunc,.rd-domain,.rd-via,.co-name,.eng b,.eng .mono,.ih-geo span,.bl-row span{white-space:normal;overflow-wrap:anywhere}
+  .ht-tile>span{white-space:normal}
+  .ip-head{gap:12px}.ih-ip{font-size:1.45em}.ih-ip.v6{font-size:1.05em}
+  .btn,.tab,.th,.tgl,.rd-toggle,.ext-tools a,.ext-toggle,.dn-toggle,.btn-primary{min-height:34px;display:inline-flex;align-items:center}
+  .copy-btn{min-width:30px;min-height:30px}
+  .tip-wrap{padding:4px 2px;margin:-4px 0 -4px 2px}
+  .gp-grid{gap:6px}
+  .geo-rows .kv{flex-wrap:nowrap;align-items:flex-start}.geo-rows .kv .v{text-align:right;justify-content:flex-end}
+  .map .srcs{display:none}.map .coord{font-size:.8em;left:8px;top:8px}
+}
+/* длинные строки не распирают страницу */
+.kv .v,.rd-item,.dn-cell,.geo-sum,.w-sub,.ih-geo,.map-links,.ext-tools,.actions-row,.bl-row{overflow-wrap:anywhere}
+.v-scene .rg{flex:0 0 auto}
 </style>
 </head>
 <body>
@@ -560,7 +573,7 @@ function render(ip, d) {
     kv('VPN', deepChip(d.is_vpn, 'warn'))
     + kv('Прокси' + tip('Открытый HTTP / SOCKS-прокси: через него может гонять трафик кто угодно.'), deepChip(d.is_proxy, 'bad'))
     + kv('Tor' + tip('Выходной узел сети Tor: трафик приходит из луковой маршрутизации.'), deepChip(d.is_tor, 'bad'))
-    + kv('Краулер / бот', deepChip(d.is_crawler, 'info')));
+    + kv('Краулер / бот', deepChip(typeof d.is_crawler === 'string' ? !!d.is_crawler : d.is_crawler, 'info') + (typeof d.is_crawler === 'string' && d.is_crawler ? ' <span class="muted" style="font-weight:400">' + esc(d.is_crawler) + '</span>' : '')));
 
   let vpnCard = '';
   if (d.vpn_trace) {
@@ -753,7 +766,7 @@ function triggerPingCheck() {
     if (!body || !body.ok) { if (slot) slot.innerHTML = chip('tag-warn', 'Не вышло'); if (b) { b.disabled = false; b.textContent = 'Пинг-проверка'; } return; }
     if (b) b.remove(); if (!slot) return;
     if (body.verdict === 'reachable') slot.innerHTML = chip('tag-safe', 'пингуется') + ' <span class="muted" style="font-weight:400;font-size:.8em">' + body.ok_nodes + '/' + body.total_nodes + ' узлов</span>';
-    else if (body.verdict === 'unreachable') slot.innerHTML = chip('tag-danger', 'не пингуется');
+    else if (body.verdict === 'unreachable') slot.innerHTML = chip('tag-danger', 'не пингуется') + (body.marked_dead ? ' <span class="muted" style="font-weight:400;font-size:.8em">убран из списка соседей</span>' : '');
     else slot.innerHTML = chip('tag-warn', 'неясно');
   }).catch(() => { if (slot) slot.innerHTML = chip('tag-warn', 'Не вышло (сеть)'); if (b) { b.disabled = false; b.textContent = 'Пинг-проверка'; } });
 }
@@ -840,6 +853,20 @@ function fitMap() {
   const vw = parseFloat((svg.getAttribute('viewBox') || '').split(' ')[2]) || 94.4; const k = vw / (a.clientWidth || 520);
   const mob = innerWidth <= 700, fs = (mob ? 14 : 13.5) * k, pr = (mob ? 6.5 : 5.5) * k, gap = (mob ? 10 : 9) * k;
   const t = svg.querySelector('.map-label'); if (t) { t.style.fontSize = fs.toFixed(3) + 'px'; t.style.strokeWidth = (2.5 * k).toFixed(3) + 'px'; t.setAttribute('y', (fs * 0.36).toFixed(3)); t.setAttribute('x', (t.getAttribute('text-anchor') === 'end' ? -gap : gap).toFixed(3)); }
+  // подпись не должна уходить за край карты: при необходимости переворачиваем на другую сторону точки
+  if (t) try {
+    const vb = svg.viewBox.baseVal, m = /translate\(([-\d.]+)/.exec(t.parentNode.getAttribute('transform') || ''), gx = m ? +m[1] : 0;
+    if (!t.dataset.full) t.dataset.full = t.textContent;
+    const fits = () => { const bb = t.getBBox(); return gx + bb.x >= vb.x && gx + bb.x + bb.width <= vb.x + vb.width; };
+    const place = a => { t.setAttribute('text-anchor', a); t.setAttribute('x', (a === 'end' ? -gap : a === 'start' ? gap : 0).toFixed(3)); t.setAttribute('y', a === 'middle' ? (pr * 2.6 + fs).toFixed(3) : (fs * 0.36).toFixed(3)); };
+    const pref = (gx - vb.x) / vb.width > 0.58 ? ['end', 'start'] : ['start', 'end'];
+    let ok = false;
+    for (const txt of [t.dataset.full, t.dataset.full.split(' · ')[0]]) {
+      t.textContent = txt;
+      for (const a of pref.concat('middle')) { place(a); if (fits()) { ok = true; break; } }
+      if (ok) break;
+    }
+  } catch (e) {}
   const pin = svg.querySelector('.pin'); if (pin) { pin.setAttribute('r', pr.toFixed(3)); pin.setAttribute('stroke-width', (1.6 * k).toFixed(3)); }
   const pu = svg.querySelector('.pulse'); if (pu) pu.setAttribute('r', (pr * 2.4).toFixed(3));
 }
@@ -938,6 +965,26 @@ document.addEventListener('click', e => {
   if (t.closest('.ext-toggle')) { t.closest('.ext-tools').classList.toggle('open'); return; }
   const cb = t.closest('.copy-btn'); if (cb && navigator.clipboard) { navigator.clipboard.writeText(cb.dataset.copy || '').then(() => { cb.textContent = '✓'; setTimeout(() => { cb.textContent = '📋'; }, 1200); }).catch(() => {}); }
 });
+
+// ===== Подсказки ⓘ: позиция fixed, прижимаем к краям экрана (не ломают ширину на мобиле) =====
+let tipOn = null;
+function tipHide() { if (tipOn) { tipOn.classList.remove('on'); tipOn = null; } }
+function tipShow(w) {
+  if (tipOn === w) return; tipHide();
+  const t = w.querySelector('.tip-text'); if (!t) return;
+  w.classList.add('on'); tipOn = w;
+  const r = w.getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = innerHeight;
+  const tw = t.offsetWidth, th = t.offsetHeight;
+  let x = r.left + r.width / 2 - tw / 2; x = Math.max(8, Math.min(vw - tw - 8, x));
+  let y = r.top - th - 6; if (y < 8) y = Math.min(vh - th - 8, r.bottom + 6);
+  t.style.left = x + 'px'; t.style.top = Math.max(8, y) + 'px';
+}
+document.addEventListener('mouseover', e => { const w = e.target.closest && e.target.closest('.tip-wrap'); if (w) tipShow(w); else if (tipOn && !(e.target.closest && e.target.closest('.tip-wrap'))) tipHide(); });
+document.addEventListener('focusin', e => { const w = e.target.closest && e.target.closest('.tip-wrap'); if (w) tipShow(w); });
+document.addEventListener('focusout', e => { if (e.target === tipOn) tipHide(); });
+document.addEventListener('click', e => { const w = e.target.closest && e.target.closest('.tip-wrap'); if (w) { e.preventDefault(); e.stopPropagation(); tipShow(w); } else tipHide(); }, true);
+addEventListener('scroll', tipHide, true);
+addEventListener('resize', tipHide);
 
 // ===== Скрыть IP: маскируем все IP в тексте результата (включая rDNS вида 1-2-3-4) =====
 let maskOn = false; const originals = new WeakMap(), written = new WeakMap();
