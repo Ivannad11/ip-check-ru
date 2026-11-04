@@ -36,22 +36,25 @@ function icon(p) { return `<svg class="ico" viewBox="0 0 24 24" fill="none" stro
 // ===== Тема (auto / light / dark) =====
 (function () {
   let t = null; try { t = localStorage.getItem('theme'); } catch {}
-  if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
 })();
 function cycleTheme() {
   let t = null; try { t = localStorage.getItem('theme'); } catch {}
-  const next = t === 'light' ? 'dark' : t === 'dark' ? 'auto' : 'light';
-  try { next === 'auto' ? localStorage.removeItem('theme') : localStorage.setItem('theme', next); } catch {}
-  if (next === 'auto') document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme', next);
+  const next = t === 'light' ? 'dark' : 'light';
+  try { localStorage.setItem('theme', next); } catch {}
+  document.documentElement.setAttribute('data-theme', next);
   paintThemeBtn();
 }
 function paintThemeBtn() {
   let t = null; try { t = localStorage.getItem('theme'); } catch {}
-  const label = t === 'light' ? '☀' : t === 'dark' ? '☾' : '◐';
-  const title = t === 'light' ? 'Тема: светлая' : t === 'dark' ? 'Тема: тёмная' : 'Тема: как в системе';
+  const label = t === 'light' ? '☀' : '☾';
+  const title = t === 'light' ? 'Тема: светлая' : 'Тема: тёмная';
   document.querySelectorAll('.theme-btn').forEach(b => { b.textContent = label; b.title = title; b.setAttribute('aria-label', title); });
 }
+
+// Связка с основным сайтом
+const NAEZA = 'https://naezasoft.ru';
+const NAEZA_LINKS = [['/index.html#services', 'Услуги'], ['/cases.html', 'Кейсы'], ['/baza.html', 'Инструменты'], ['/knowledge/', 'Статьи'], ['/index.html#contact', 'Связаться']];
 
 // ===== Шапка: <nav class="nav" id="nav"></nav> =====
 // Компьютер: логотип · главные вкладки · «Ещё» · тема.
@@ -68,7 +71,8 @@ function renderNav() {
   const more = pages.filter(x => !x.main);
   const moreActive = more.some(x => x.active);
   el.innerHTML = `
-    <a class="brand" href="${ROOT}"><span class="brand-mark">N</span><span class="brand-name">naeza</span></a>
+    <a class="brand" href="${NAEZA}/" title="naezasoft.ru">Naeza<span class="brand-dot"></span></a>
+    <a class="brand-sub" href="${ROOT}">Проверка IP</a>
     <div class="nav-main">${pages.filter(x => x.main).map(link).join('')}
       <div class="nav-more"><button class="nav-more-btn${moreActive ? ' active' : ''}" aria-expanded="false" aria-haspopup="true">${moreActive ? cur.name : 'Ещё'} <span class="caret">▾</span></button>
         <div class="nav-more-menu">${more.map(link).join('')}</div></div>
@@ -76,7 +80,8 @@ function renderNav() {
     <span class="nav-cur">${cur ? icon(cur.p) + cur.name : ''}</span>
     <button class="theme-btn" onclick="cycleTheme()"></button>
     <button class="nav-burger" aria-expanded="false" aria-label="Все вкладки"><span></span><span></span><span></span></button>
-    <div class="nav-sheet">${pages.map(link).join('')}</div>`;
+    <div class="nav-sheet">${pages.map(link).join('')}
+      <div class="nav-site">${NAEZA_LINKS.map(([h, t]) => `<a href="${NAEZA}${h}">${t}</a>`).join('')}</div></div>`;
   const moreBtn = el.querySelector('.nav-more-btn'), moreBox = el.querySelector('.nav-more');
   const burger = el.querySelector('.nav-burger');
   const close = () => { moreBox.classList.remove('open'); el.classList.remove('sheet-open'); moreBtn.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-expanded', 'false'); };

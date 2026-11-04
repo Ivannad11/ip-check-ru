@@ -82,14 +82,14 @@ def tagger(text, base):
 
 # ===== Источники =====
 def net_coffee():
-    page = get('https://ip.net.coffee/news/')
+    page = get('https://ip.net.coffee/news/', timeout=60)
     m = re.search(r'<script type="application/ld\+json">(\{"@context":"https://schema.org","@type":"CollectionPage".*?)</script>', page, re.S)
     lst = json.loads(m.group(1))['mainEntity']['itemListElement'][:NC_ARTICLES]
     items = []
     for el in lst:
         url = el['url']
         try:
-            art = get(url)
+            art = get(url, timeout=40)
         except Exception:
             continue
         date = re.search(r'/news/(\d{4})(\d{2})(\d{2})', url)

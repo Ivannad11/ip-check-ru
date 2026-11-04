@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@500;600&display=swap');
 :root{
   --bg:#f6f5f2;--card:#fff;--text:#1f1e1d;--muted:#73716b;--border:#e6e3dc;--accent:#cc785c;
   --safe-bg:#e8f7ee;--safe:#15803d;--safe-dark-bg:#15803d;--safe-dark:#fff;
@@ -68,8 +69,12 @@ a{color:inherit}
 /* ===== Шапка ===== */
 .nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:6px;margin:-24px -16px 18px;padding:10px 16px;
   background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.brand{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--text);font-weight:800;margin-right:10px;flex:0 0 auto}
-.brand-mark{background:var(--accent);color:#fff;border-radius:7px;padding:2px 6px;font-size:.85em;letter-spacing:.5px}
+.brand{display:flex;align-items:center;gap:5px;text-decoration:none;color:var(--text);font-family:"Geist","Inter",sans-serif;font-size:21px;font-weight:600;letter-spacing:-.02em;flex:0 0 auto}
+.brand-dot{width:6px;height:6px;border-radius:50%;background:currentColor;margin-top:3px}
+.brand-sub{color:var(--muted);text-decoration:none;font-size:.85em;margin:0 12px 0 4px;padding-left:12px;border-left:1px solid var(--border);white-space:nowrap;flex:0 0 auto}
+.brand-sub:hover{color:var(--text)}
+.nav-site{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 14px;padding:12px 2px 0;margin-top:4px;border-top:1px solid var(--border)}
+.nav-sheet .nav-site a{background:none;border:0;min-height:auto;padding:4px 0;color:var(--muted);font-size:.86em;display:inline}
 .nav-main{display:flex;align-items:center;gap:2px;flex:1;min-width:0}
 .nav-main>a,.nav-more-btn{color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:9px;font:inherit;font-size:.92em;white-space:nowrap;background:none;border:0;cursor:pointer}
 .nav-main>a:hover,.nav-more-btn:hover{color:var(--text);background:var(--neutral-bg)}
@@ -86,6 +91,7 @@ a{color:inherit}
 .nav-cur,.nav-burger,.nav-sheet{display:none}
 @media (max-width:760px){
   .nav-main{display:none}
+  .brand-sub{display:none}
   .nav-cur{display:block;flex:1;min-width:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .nav-burger{display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:36px;padding:0 10px;background:none;border:1px solid var(--border);border-radius:9px;cursor:pointer}
   .nav-burger span{display:block;height:2px;border-radius:1px;background:var(--text);transition:.2s}
@@ -104,7 +110,7 @@ a{color:inherit}
 .nav-main>a .ico{opacity:.85}
 .nav-cur{display:none;align-items:center;gap:7px}
 .nav-cur .ico{color:var(--accent)}
-@media (max-width:760px){.nav-cur{display:flex}.nav-sheet a{flex-direction:column;gap:4px}.nav-sheet .ico{width:21px;height:21px;color:var(--accent)}.nav-sheet a.active .ico{color:inherit}}
+@media (max-width:760px){.nav-cur{display:flex;margin-left:8px}.nav-sheet a{flex-direction:column;gap:4px}.nav-sheet .ico{width:21px;height:21px;color:var(--accent)}.nav-sheet a.active .ico{color:inherit}}
 @media (min-width:761px) and (max-width:1000px){.nav-main>a span{display:none}.nav-main>a.active span{display:inline}}
 /* ===== Мобильная страховка: ничего не раздвигает страницу ===== */
 html,body{max-width:100%;overflow-x:clip}
