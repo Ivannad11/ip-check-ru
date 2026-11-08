@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-08T13:39:55Z",
+"updated": "2026-11-08T18:53:18Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,22 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Elevated errors with image generation",
+"orig": "Elevated errors with image generation",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
+"date": "2026-11-08T15:11:15Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-ok",
+"мелкий сбой · решено"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
 {
 "title": "Degraded performance for Claude Fable 5.1",
 "orig": "Degraded performance for Claude Fable 5.1",
@@ -1284,22 +1300,6 @@
 ],
 "src": "GitHub google-gemini/gemini-cli",
 "group": "Gemini CLI"
-},
-{
-"title": "Ошибки загрузки файлов",
-"orig": "File Download errors",
-"desc": "Все затронутые службы теперь полностью восстановлены.",
-"date": "2026-10-19T13:31:52Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
 },
 {
 "title": "Gemini CLI v0.64.0",
