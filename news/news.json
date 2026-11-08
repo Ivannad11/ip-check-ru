@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-08T06:15:04Z",
+"updated": "2026-11-08T13:39:55Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,24 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Degraded performance for Claude Fable 5.1",
+"orig": "Degraded performance for Claude Fable 5.1",
+"desc": "The issue affecting claude.ai, the Claude API, Claude Code, and Claude Cowork has been resolved. Impact occurred from 00:18 PT / 08:18 UTC on Nov 8 to 00:32 PT / 08:32 UTC on Nov 8.",
+"date": "2026-11-08T08:28:32.818Z",
+"tags": [
+"Claude",
+"Claude Code",
+"API"
+],
+"url": "https://stspg.io/3m3q1nwb142k",
+"kind": [
+"k-ok",
+"мелкий сбой · решено"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
 {
 "title": "Повышенное количество ошибок при использовании некоторых бизнес-карт Mastercard в США.",
 "orig": "Elevated error rates with some U.S. business Mastercards",
@@ -1434,22 +1452,6 @@
 "kind": [
 "k-ok",
 "крупный сбой · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
-"title": "Проблемы с подписками Google Play",
-"orig": "Issues with Google Play subscriptions",
-"desc": "Эта проблема решена.",
-"date": "2026-09-16T16:18:10.735Z",
-"tags": [
-"Claude"
-],
-"url": "https://stspg.io/wzwyxh4x9t39",
-"kind": [
-"k-ok",
-"событие · решено"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
