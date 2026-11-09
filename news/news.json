@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-09T11:46:15Z",
+"updated": "2026-11-09T22:31:45Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,89 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Fable 5.2 降价两成、提速三成，Mythos 5.2 仍只对审核机构开放",
+"orig": "Fable 5.2 降价两成、提速三成，Mythos 5.2 仍只对审核机构开放",
+"desc": "同一个底层模型分成两条路：公开版更便宜、更少误拦，受限版收进两个验证计划",
+"date": "2026-11-10T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261110b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "谷歌今年第四套 TPU 登场：TPU 8tx 给政府，TPU 8i Max 吃长上下文",
+"orig": "谷歌今年第四套 TPU 登场：TPU 8tx 给政府，TPU 8i Max 吃长上下文",
+"desc": "今年已是第三、第四套 TPU 系统，谷歌开始按客户场景切分产品线，Anthropic 在客户名单上分量最重",
+"date": "2026-11-10T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261110a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "横盘七个月后，ChatGPT 9 月访问量创下新高",
+"orig": "横盘七个月后，ChatGPT 9 月访问量创下新高",
+"desc": "访问量涨了近两成，份额却只回升 0.27 个百分点——整个市场都在变大",
+"date": "2026-11-10T00:00:00Z",
+"tags": [
+"OpenAI",
+"ChatGPT"
+],
+"url": "https://ip.net.coffee/gpt/news/20261110a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Claude Code v2.1.321",
+"orig": "",
+"desc": "Added Claude Fable 5.2 (claude-fable-5-2), now the default Fable model — 1M context, $8/$40 per Mtok with $0.20/Mtok cache reads · Added --settings <file> to claude remote-control, which applies a settings file to every session it starts; if the file changes, no new session starts until you restart claude remote-control · Fixed MCP OAuth requests sending secrets such as refresh tokens to another host when a server redirected them",
+"date": "2026-11-09T19:22:30Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
+},
+{
+"title": "Elevated ChatGPT Conversation Errors",
+"orig": "Elevated ChatGPT Conversation Errors",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
+"date": "2026-11-09T18:16:30Z",
+"tags": [
+"OpenAI",
+"ChatGPT"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-ok",
+"мелкий сбой · решено"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
 {
 "title": "Оценка Epoch: доход Anthropic от искусственного интеллекта примерно в шесть раз превышает доход шести китайских компаний вместе взятых.",
 "orig": "Epoch 估算：Anthropic 一家的 AI 收入，约是中国六家合计的六倍",
@@ -638,54 +721,6 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "Сравнивая запрет центров обработки данных с голосованием за войну в Ираке, OpenAI раздает памятку потенциальным кандидатам 2028 года",
-"orig": "把数据中心禁令比作伊拉克战争投票，OpenAI 给 2028 潜在参选人递了份备忘录",
-"desc": "Написанный накануне промежуточных выборов, меморандум читается как совет предвыборной кампании и как компания, пытающаяся расширить политическое пространство для своего крупнейшего инфраструктурного плана.",
-"date": "2026-11-03T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261103e.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "GPT-6 Astra напрямую меняет вес Квена: перемещается всего на 0,016%, оценки по математике увеличиваются примерно в 6 раз.",
-"orig": "GPT-6 Astra 直改 Qwen 权重：只动 0.016%，数学成绩涨约 6 倍",
-"desc": "Шестикратное улучшение «программирования в весовом пространстве» в основном происходит за счет устранения повторяющейся ошибки, а не за счет того, что маленькая модель изучает больше математики.",
-"date": "2026-11-03T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261103d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "The New York Times подает в суд на Brave, и Anthropic становится покупателем данных в иске",
-"orig": "纽约时报起诉 Brave，Anthropic 在诉状里成了数据买家",
-"desc": "Единственным ответчиком является Brave, но в жалобе упоминаются все пять клиентов Search API. На этот раз издатель нацелен на восходящий канал передачи данных модельных компаний.",
-"date": "2026-11-03T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261103c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Claude Code v2.1.316",
 "orig": "",
 "desc": "Добавлен CLAUDE_CODE_DISABLE_ULTRATHINK, который отключает ключевое слово ultrathink. · Добавлены объединенные групповые бюджеты в шлюз приложений Claude: один ежемесячный бюджет, который разделяют участники группы, сверх собственного лимита каждого участника, установленного с помощью Pooled_budget в API администратора лимитов расходов. · Добавлен CLAUDE_CODE_DISABLE_LOOPED_CROSS_CERT_DROP для хранения системных перекрестных сертификатов, которые сертифицировать друг друга в цикле для серверов, чей частный центр сертификации нуждается в этом",
@@ -1030,23 +1065,6 @@
 "group": "Статус Claude"
 },
 {
-"title": "Claude Code v2.1.310",
-"orig": "",
-"desc": "Добавлен инструмент «Мониторинг» и подключаемые мониторы в Bedrock, Vertex и Foundry, а также при отключении телеметрии или несущественного трафика; длительный сон на переднем плане теперь также блокируется. · Исправлены сбои запросов за некоторыми шлюзами и совместимыми серверами, которые отклоняли бета-значение «усилие-2025-11-24» или системные сообщения в середине разговора; Клод Код теперь повторяет попытки без них · Исправлена фоновая очистка, приводившая к удалению некоторых последних файлов, например вставленных изображений, если для параметра CleanupPeriodDays установлено очень большое значение.",
-"date": "2026-10-23T23:39:00Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
-},
-{
 "title": "Повышенные ошибки для Claude Fable 5.1, Sonnet 5.5 и Haiku 5.5.",
 "orig": "Elevated errors for Claude Fable 5.1, Sonnet 5.5, and Haiku 5.5",
 "desc": "Исправлена проблема с моделями Клода. Удар произошел с 16:28 по тихоокеанскому времени / 23:28 по всемирному координированному времени 23 октября до 16:59 по тихоокеанскому времени / 23:59 по всемирному координированному времени 23 октября.",
@@ -1193,22 +1211,6 @@
 "kind": [
 "k-ok",
 "мелкий сбой · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
-},
-{
-"title": "Ошибки аутентификации для некоторых пользователей",
-"orig": "Authentication errors for some users",
-"desc": "20 октября с 9:35 до 10:35 по тихоокеанскому времени у некоторых пользователей недалеко от Иллинойса возникли ошибки аутентификации с помощью API, ChatGPT и Codex. Мы откатили изменение конфигурации, и обслуживание было восстановлено.",
-"date": "2026-10-21T22:36:29Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"крупный сбой · решено"
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
