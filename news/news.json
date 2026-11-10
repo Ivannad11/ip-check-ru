@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-10T04:44:35Z",
+"updated": "2026-11-10T13:38:54Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -14,7 +14,7 @@
 {
 "title": "Incorrect cost data in Costs API exports",
 "orig": "Incorrect cost data in Costs API exports",
-"desc": "We have identified an issue causing incorrect cost data in Costs API exports published between November 6 and 9. We are working to correct the affected records and will provide an update once recovery is confirmed.",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
 "date": "2026-11-10T04:42:21Z",
 "tags": [
 "OpenAI",
@@ -22,8 +22,8 @@
 ],
 "url": "https://status.openai.com",
 "kind": [
-"k-inc",
-"событие · наблюдают"
+"k-ok",
+"событие · решено"
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
@@ -44,6 +44,38 @@
 ],
 "src": "GitHub anthropics/claude-code",
 "group": "Claude Code"
+},
+{
+"title": "「定价信息不准确」：Anthropic 发出 IPO 条款后又紧急收回",
+"orig": "「定价信息不准确」：Anthropic 发出 IPO 条款后又紧急收回",
+"desc": "一份流出的文件、一封追回的邮件，和一张几乎等于供应链名单的认购表。",
+"date": "2026-11-10T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261110d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "OpenAI 给内部研究任务装上 35 秒急停开关",
+"orig": "OpenAI 给内部研究任务装上 35 秒急停开关",
+"desc": "Control Room 把叫停做成推理入口的一道授权检查：撤销批准，模型就不再回话。",
+"date": "2026-11-10T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261110d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
 },
 {
 "title": "Meta 发布 Muse Ember：每百万输出 0.5 美元，正面对标 Claude Haiku 5.5",
@@ -701,39 +733,6 @@
 ],
 "src": "GitHub anthropics/claude-code",
 "group": "Claude Code"
-},
-{
-"title": "Используйте математику, чтобы доказать, от какой модели исходит ответ: Anthropic FlashProve с открытым исходным кодом, я пока не буду его развертывать.",
-"orig": "用数学证明回复出自哪个模型：Anthropic 开源 FlashProve，自己暂不部署",
-"desc": "Проверка занимает всего несколько секунд процессора, но для доказательства требуется H100; доверие не пропало, а перешло с каждого звонка на один релиз.",
-"date": "2026-11-04T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261104b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Индия обогнала США и стала крупнейшим рынком ChatGPT, а срок действия бесплатного Go только начал истекать.",
-"orig": "印度超过美国成 ChatGPT 第一大市场，免费 Go 恰好开始到期",
-"desc": "Глава OpenAI India заявил, что с января количество пользователей увеличилось вдвое, а новости UPI появятся в течение нескольких недель, но ни абсолютные цифры, ни доходы не были названы.",
-"date": "2026-11-04T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/gpt/news/20261104b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
 },
 {
 "title": "Claude Code v2.1.317",
