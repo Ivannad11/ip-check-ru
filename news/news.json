@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-09T22:31:45Z",
+"updated": "2026-11-10T04:44:35Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -12,6 +12,72 @@
 "sources_failed": [],
 "items": [
 {
+"title": "Incorrect cost data in Costs API exports",
+"orig": "Incorrect cost data in Costs API exports",
+"desc": "We have identified an issue causing incorrect cost data in Costs API exports published between November 6 and 9. We are working to correct the affected records and will provide an update once recovery is confirmed.",
+"date": "2026-11-10T04:42:21Z",
+"tags": [
+"OpenAI",
+"API"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-inc",
+"событие · наблюдают"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
+{
+"title": "Claude Code v2.1.322",
+"orig": "",
+"desc": "Added fast mode on Vertex in the global, us and eu regions, falling back to standard speed if Vertex refuses it",
+"date": "2026-11-10T02:29:43Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
+},
+{
+"title": "Meta 发布 Muse Ember：每百万输出 0.5 美元，正面对标 Claude Haiku 5.5",
+"orig": "Meta 发布 Muse Ember：每百万输出 0.5 美元，正面对标 Claude Haiku 5.5",
+"desc": "Meta 把最小的模型推到了智能体子任务这块战场，点名的对手是 Anthropic 的 Haiku",
+"date": "2026-11-10T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261110c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "苹果开始为 AI 额度单独收费，第一站是 Logic Pro 的 49.99 美元用量包",
+"orig": "苹果开始为 AI 额度单独收费，第一站是 Logic Pro 的 49.99 美元用量包",
+"desc": "订阅之外再卖一次性额度，苹果第一次把云端模型的调用成本明码标价",
+"date": "2026-11-10T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261110c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
 "title": "Fable 5.2 降价两成、提速三成，Mythos 5.2 仍只对审核机构开放",
 "orig": "Fable 5.2 降价两成、提速三成，Mythos 5.2 仍只对审核机构开放",
 "desc": "同一个底层模型分成两条路：公开版更便宜、更少误拦，受限版收进两个验证计划",
@@ -20,6 +86,22 @@
 "Claude"
 ],
 "url": "https://ip.net.coffee/claude/news/20261110b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Terminal-Bench 40.9% 对 16.4%：Meta 新小模型 Muse Ember 拿 GPT-6 Luna 做靶子",
+"orig": "Terminal-Bench 40.9% 对 16.4%：Meta 新小模型 Muse Ember 拿 GPT-6 Luna 做靶子",
+"desc": "Meta 公布的对比表里，OpenAI 的轻量模型在终端与操作电脑类任务上掉得最狠",
+"date": "2026-11-10T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261110b.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -59,6 +141,23 @@
 ],
 "src": "ip.net.coffee/news",
 "group": "Статьи net.coffee"
+},
+{
+"title": "Elevated Errors On API",
+"orig": "Elevated Errors On API",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
+"date": "2026-11-09T23:08:12Z",
+"tags": [
+"OpenAI",
+"API"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-ok",
+"мелкий сбой · решено"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
 },
 {
 "title": "Claude Code v2.1.321",
@@ -637,39 +736,6 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "Среднемесячные затраты Anthropic на одного сотрудника превышают 100 000 долларов США, более 60% из которых фактически составляют акции.",
-"orig": "Anthropic 人均月成本破 10 万美元，六成多其实是股票",
-"desc": "Число в заголовке уже довольно велико, но RSU с условиями листинга еще не зарегистрированы, и реальный счет за акции придется подождать до дня завершения выпуска.",
-"date": "2026-11-04T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261104a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "OpenAI утверждает, что объем поиска ChatGPT достиг 20% от Google, но не говорит, откуда берется знаменатель",
-"orig": "OpenAI 称 ChatGPT 搜索量已达 Google 两成，但没说分母从哪来",
-"desc": "Если учитывать только те запросы, которые на самом деле вызывают поиск по веб-страницам, то эта пропорция кажется довольно большой; А вот откуда берутся цифры со стороны Google, Фрай не пояснил.",
-"date": "2026-11-04T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/gpt/news/20261104a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Claude Code v2.1.317",
 "orig": "",
 "desc": "Добавлено предупреждение в /schedule, когда новая запланированная в облаке задача получает соединители, которые вы не запрашивали, и способы их удаления. · Добавлена проверка, которая запрашивает перед тем, как вызов веб-инструмента или инструмента оболочки отправит адрес электронной почты вашей учетной записи в сеть. · Добавлен onFailure: «блокировать» для обратных вызовов перехвата агента SDK, поэтому обратный вызов, который завершается неудачно, блокирует действие, а не позволяет ему выполняться.",
@@ -702,23 +768,6 @@
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
-},
-{
-"title": "ChatGPT Classic будет деактивирован 30 января следующего года, а в следующем году Chat и Work будут объединены.",
-"orig": "ChatGPT Classic 明年 1 月 30 日停用，Chat 和 Work 接下来也要合并",
-"desc": "Между сменой имени в июле и датой выхода на пенсию прошло менее четырех месяцев. Конец нативных приложений Mac предрешен, и вкладка «Работа» может работать быстрее.",
-"date": "2026-11-03T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/gpt/news/20261103f.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
 },
 {
 "title": "Claude Code v2.1.316",
@@ -960,23 +1009,6 @@
 "group": "Статус OpenAI"
 },
 {
-"title": "Claude Code v2.1.311",
-"orig": "",
-"desc": "Добавлены --hold-idle-file и --max-hold-min в self-hosted-runner, чтобы поддерживать сеанс бездействия, пока ваш хост сообщает, что процессы продолжают работать. · Добавлена подсказка для стиля вывода «Пояснительный», который отображается, когда вы просите Клода объясниться. · Исправлены длительные зависания при запуске и после чтения или редактирования файлов, когда файл CLAUDE.md содержит очень длинный элемент списка.",
-"date": "2026-10-26T21:51:23Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.311",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
-},
-{
 "title": "Повышенная частота ошибок для запросов POST объявлений.",
 "orig": "Elevated error rates for Ads POST requests",
 "desc": "Все затронутые службы теперь полностью восстановлены.",
@@ -1116,23 +1148,6 @@
 "group": "Статус OpenAI"
 },
 {
-"title": "Codex CLI 0.164.0",
-"orig": "",
-"desc": "Сохраняйте многоразовые подсказки и команды с косой чертой в десяти пронумерованных слотах/предварительных настройках с помощью меню клавиатуры для быстрого доступа. · Устанавливайте модель, усилия по рассуждению, скорость и профили разрешений напрямую с помощью встроенных аргументов /model и /permissions. · Предварительный просмотр просмотренных и сгенерированных изображений в полноэкранной расшифровке на терминалах, поддерживающих графику Kitty или Sixel.",
-"date": "2026-10-23T04:48:10Z",
-"tags": [
-"Codex",
-"OpenAI"
-],
-"url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub openai/codex",
-"group": "Codex"
-},
-{
 "title": "Задержки с ответами службы поддержки клиентов",
 "orig": "Delays in customer support responses",
 "desc": "Все затронутые службы теперь полностью восстановлены.",
@@ -1234,23 +1249,6 @@
 "group": "Статус Claude"
 },
 {
-"title": "Повышенная частота ошибок для запросов API gpt-5.6-luna.",
-"orig": "Elevated error rates for gpt-5.6-luna API requests",
-"desc": "Все затронутые службы теперь полностью восстановлены.",
-"date": "2026-10-21T15:34:47Z",
-"tags": [
-"OpenAI",
-"API"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
-},
-{
 "title": "Повышенная частота ошибок API FedRAMP для Astra и Sol.",
 "orig": "Elevated FedRAMP API error rates for Astra and Sol",
 "desc": "Все затронутые службы теперь полностью восстановлены.",
@@ -1258,24 +1256,6 @@
 "tags": [
 "OpenAI",
 "API"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
-},
-{
-"title": "Снижение производительности ChatGPT, Codex и API.",
-"orig": "Degraded performance in ChatGPT, Codex, and APIs",
-"desc": "Все затронутые службы теперь полностью восстановлены.",
-"date": "2026-10-21T02:26:28Z",
-"tags": [
-"OpenAI",
-"Codex",
-"ChatGPT"
 ],
 "url": "https://status.openai.com",
 "kind": [
