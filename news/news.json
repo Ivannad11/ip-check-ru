@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-11T01:17:22Z",
+"updated": "2026-11-11T07:53:34Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,55 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "微软专利盯上了你电脑闲着的那块显卡",
+"orig": "微软专利盯上了你电脑闲着的那块显卡",
+"desc": "一份 2025 年 4 月提交、本月才公开的申请：训练任务切碎后派给闲置设备，算完记积分，可换软件、模型使用权或现金",
+"date": "2026-11-11T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261111i.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Qwen4-Max 预览版先进 Token Plan，限时最低一折",
+"orig": "Qwen4-Max 预览版先进 Token Plan，限时最低一折",
+"desc": "九月云栖大会上只露了个名字，两个月后先以预览版的身份出现在订阅套餐里。阿里选的首发渠道，比模型本身更能说明它现在想要什么。",
+"date": "2026-11-11T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261111h.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "谷歌把 Gemini 4 Carbon 放给所有人，价格照搬 Argon",
+"orig": "谷歌把 Gemini 4 Carbon 放给所有人，价格照搬 Argon",
+"desc": "十月底它还只给少数网络安全防御方用，两周后就进了 API 和 AI Studio。比开放本身更值得看的，是那张和 Argon 一模一样的价目表。",
+"date": "2026-11-11T00:00:00Z",
+"tags": [
+"OpenAI",
+"Gemini"
+],
+"url": "https://ip.net.coffee/ai/news/20261111g.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "Прежде чем использовать модели изображений 4K с открытым исходным кодом, сначала подумайте об этих четырех вещах.",
 "orig": "用开源 4K 图像模型之前，先想清这四件事",
@@ -85,6 +134,22 @@
 "OpenAI"
 ],
 "url": "https://ip.net.coffee/ai/news/20261111b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Claude 再发一次全量重置，这回能留到 12 月 10 日",
+"orig": "Claude 再发一次全量重置，这回能留到 12 月 10 日",
+"desc": "这是今年第几次重置已经不好数了，但这次的设计有点不同：不是统一清零，而是一张由用户自己决定什么时候用的券。",
+"date": "2026-11-11T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261111a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -640,72 +705,6 @@
 "Claude"
 ],
 "url": "https://ip.net.coffee/claude/news/20261106c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Демократы побеждают в Конгрессе, об инциденте безопасности OpenAI, возможно, придется сообщить в течение 48 часов",
-"orig": "民主党拿下国会，OpenAI 安全事故或须 48 小时内上报",
-"desc": "От взлома Hugging Face до приказа Федеральной торговой комиссии о расследовании — разрозненные вопросы собираются в анкету с ограниченным сроком действия.",
-"date": "2026-11-06T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261106c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "У ChatGPT более 100 000 рекламодателей, но Клод до сих пор не размещает рекламу.",
-"orig": "ChatGPT 广告主破 10 万，Claude 仍不挂广告",
-"desc": "Бизнес-модель чат-ботов разделена на два направления: одно — рекламное пространство, другое — подписка и API.",
-"date": "2026-11-06T00:00:00Z",
-"tags": [
-"Claude",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/claude/news/20261106b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "100 000 рекламодателей устремились в ChatGPT, но рейтинг кликов по-прежнему не догоняет поиск.",
-"orig": "10 万家广告主涌进 ChatGPT，点击率仍追不上搜索",
-"desc": "Реклама в чате быстро выросла с 600 пилотов до 100 000, но данные о производительности все еще неудовлетворительны.",
-"date": "2026-11-06T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/gpt/news/20261106b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Клод может читать банковские выписки, но не может переместить ни копейки.",
-"orig": "Claude 能看银行流水了，但一分钱也动不了",
-"desc": "Доступно только для чтения, без переводов и рекомендаций по акциям. Anthropic следует по пути OpenAI, который прошел полгода назад и вошел в сферу личных финансов. Трудность заключается в доверии, а не в функциональности.",
-"date": "2026-11-06T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261106a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
