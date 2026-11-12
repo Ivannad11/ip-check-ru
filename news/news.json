@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-12T07:22:51Z",
+"updated": "2026-11-12T16:52:49Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,38 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "GPT-image-2.5 and 2.6 Sunburst & Flare High error rate",
+"orig": "GPT-image-2.5 and 2.6 Sunburst & Flare High error rate",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
+"date": "2026-11-12T08:52:35Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-ok",
+"мелкий сбой · решено"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
+{
+"title": "33 年后黄仁勋离开英伟达，CFO 克雷斯临时接任 CEO",
+"orig": "33 年后黄仁勋离开英伟达，CFO 克雷斯临时接任 CEO",
+"desc": "从董事会表态「有信心」到创始人离任只隔四天，公司承诺产品路线不变，但继任人选仍是空白",
+"date": "2026-11-12T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261112e.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "Сообщается, что совет директоров Nvidia готовится заменить Хуан Джен-Сюня и соберется уже на этой неделе, чтобы решить, уходить или нет.",
 "orig": "英伟达董事会据报准备撤换黄仁勋，最快本周开会定去留",
@@ -130,15 +162,15 @@
 {
 "title": "Невозможно запустить новые запуски агента Workspace.",
 "orig": "Unable to start new Workspace Agent runs",
-"desc": "Мы изучаем проблему, не позволяющую пользователям запускать новые запуски агента Workspace. Мы поделимся еще одним обновлением, как только появится дополнительная информация.",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
 "date": "2026-11-11T22:50:17Z",
 "tags": [
 "OpenAI"
 ],
 "url": "https://status.openai.com",
 "kind": [
-"k-inc",
-"авария · разбираются"
+"k-ok",
+"авария · решено"
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
@@ -659,22 +691,6 @@
 "Claude"
 ],
 "url": "https://ip.net.coffee/claude/news/20261109d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Менее 30% трафика DeepSeek проходит на собственном сайте: Epoch устраняет разрыв в доходах от искусственного интеллекта между Китаем и США",
-"orig": "DeepSeek 的流量只有不到三成跑在自家：Epoch 拆解中美 AI 收入差",
-"desc": "Пользователи действительно используют китайские модели, но людям, которые их делают, не платят много денег.",
-"date": "2026-11-09T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261109d.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -1249,22 +1265,6 @@
 "orig": "New Ad Accounts failing to provision admins",
 "desc": "Все затронутые службы теперь полностью восстановлены.",
 "date": "2026-10-22T19:36:53Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
-},
-{
-"title": "Снижение производительности точек на предприятии",
-"orig": "Degraded Performance of Dots on Enterprise",
-"desc": "Все затронутые службы теперь полностью восстановлены.",
-"date": "2026-10-22T18:51:28Z",
 "tags": [
 "OpenAI"
 ],
