@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-12T16:52:49Z",
+"updated": "2026-11-12T22:47:53Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,57 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Claude Code v2.1.323",
+"orig": "",
+"desc": "Added Code Mode, an experimental opt-in in which Claude writes JavaScript to call its tools; see https://code.claude.com/docs/en/code-mode to turn it on, or to turn it off for an organization · Added engines[\"claude-code\"] to plugin.json: plugins outside their stated Claude Code version range are not installed, updated or loaded, and install and update pick the newest version that fits · Added type checking of a plugin's TypeScript hooks module to claude plugin validate; each finding is a warning, and --strict fails on it",
+"date": "2026-11-12T22:12:13Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.323",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
+},
+{
+"title": "Elevated errors affecting the Microsoft 365 connector",
+"orig": "Elevated errors affecting the Microsoft 365 connector",
+"desc": "We’re investigating an issue with Microsoft connectors where new connections may be broken and tools are not working as expected. We’ll share an update when we know more.",
+"date": "2026-11-12T18:29:14Z",
+"tags": [
+"OpenAI",
+"MCP"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-inc",
+"мелкий сбой · разбираются"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
+{
+"title": "Elevated errors affecting the Microsoft 365 connector",
+"orig": "Elevated errors affecting the Microsoft 365 connector",
+"desc": "This issue is caused by a Microsoft 365 service incident, and mail, calendar and search tools in the Microsoft 365 connector are still failing for most requests. Claude for Outlook remains affected. You can follow Microsoft's progress at https://status.cloud.microsoft. We will update this post when service is restored.",
+"date": "2026-11-12T17:52:44.934Z",
+"tags": [
+"Claude",
+"MCP"
+],
+"url": "https://stspg.io/m0rbx38nmy1c",
+"kind": [
+"k-inc",
+"крупный сбой · причина найдена"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
 {
 "title": "GPT-image-2.5 and 2.6 Sunburst & Flare High error rate",
 "orig": "GPT-image-2.5 and 2.6 Sunburst & Flare High error rate",
@@ -1021,23 +1072,6 @@
 "group": "Gemini CLI"
 },
 {
-"title": "Claude Code v2.1.312",
-"orig": "",
-"desc": "Добавлен oidc.user_id_claim в шлюз приложений Claude для идентификации людей по утверждению id_token, отличному от sub, например, oid Microsoft Entra ID. · Добавлен щелчок для отправки: в полноэкранном режиме щелчок по подсказке «отправить сейчас» под сообщением в очереди отправляет его сразу, как это делает его ключ · Исправлены управляемые настройки и политика организации, которые не загружались до конца сеанса после входа в систему из расширения VS Code.",
-"date": "2026-10-27T20:24:20Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
-},
-{
 "title": "Повышенные ошибки для Claude Sonnet 5.5",
 "orig": "Elevated errors for Claude Sonnet 5.5",
 "desc": "Проблема, затрагивающая claude.ai, Claude API, Claude Code и Claude Cowork, решена. Воздействие произошло с 07:42 по тихоокеанскому времени / 14:42 по всемирному координированному времени до 08:17 по тихоокеанскому времени / 15:17 по всемирному координированному времени.",
@@ -1261,22 +1295,6 @@
 "group": "Статус OpenAI"
 },
 {
-"title": "Новым рекламным аккаунтам не удается предоставить администраторов",
-"orig": "New Ad Accounts failing to provision admins",
-"desc": "Все затронутые службы теперь полностью восстановлены.",
-"date": "2026-10-22T19:36:53Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
-},
-{
 "title": "Повышенные ошибки, влияющие на соединители",
 "orig": "Elevated errors affecting Connectors",
 "desc": "Проблема, затрагивающая сайты claude.ai и Claude Cowork, решена.",
@@ -1442,24 +1460,6 @@
 "kind": [
 "k-ok",
 "мелкий сбой · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
-"title": "Повышенные ошибки на claude.ai, Claude Code, Claude Cowork и Claude API.",
-"orig": "Elevated errors on claude.ai, Claude Code, Claude Cowork and the Claude API",
-"desc": "Проблема, затрагивающая Claude.ai, настольные и мобильные приложения Claude, Claude Code, Claude Cowork и Claude API, решена, и после восстановления службы работают нормально. Воздействие произошло с 07:00 по тихоокеанскому времени / 14:00 по всемирному координированному времени до 07:59 по тихоокеанскому времени / 14:59 по всемирному координированному времени.",
-"date": "2026-09-29T14:21:37.188Z",
-"tags": [
-"Claude",
-"Claude Code",
-"API"
-],
-"url": "https://stspg.io/br61xzj05pp5",
-"kind": [
-"k-ok",
-"крупный сбой · решено"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
