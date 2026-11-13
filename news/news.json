@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-13T12:21:11Z",
+"updated": "2026-11-13T20:34:02Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,106 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "约 60 人被裁，Grok Imagine 只剩一支维持运转的小队",
+"orig": "约 60 人被裁，Grok Imagine 只剩一支维持运转的小队",
+"desc": "产品还能用，研发却基本停了——xAI 并入 SpaceX 九个月后，生视频业务先被放下",
+"date": "2026-11-14T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261114c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "DeepSeek 把搜索、读文件和语音都拆成了 API",
+"orig": "DeepSeek 把搜索、读文件和语音都拆成了 API",
+"desc": "从只卖模型到把整套 App 能力交给开发者，DeepSeek 的 API 换了一种卖法",
+"date": "2026-11-14T00:00:00Z",
+"tags": [
+"OpenAI",
+"API"
+],
+"url": "https://ip.net.coffee/ai/news/20261114b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "让智能体替你刷卡之前，OpenAI 先把卡号藏了起来",
+"orig": "让智能体替你刷卡之前，OpenAI 先把卡号藏了起来",
+"desc": "卡组织出令牌、手机出生物识别、ChatGPT 只管下单——这套分工比钱包本身更值得看",
+"date": "2026-11-14T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261114a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "月之暗面拆掉开曼壳，美元股东的股份搬回境内",
+"orig": "月之暗面拆掉开曼壳，美元股东的股份搬回境内",
+"desc": "从开曼到境内，换的不只是注册地，还有上市路线和监管对口",
+"date": "2026-11-14T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261114a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Delayed Costs Data in the Compliance API",
+"orig": "Delayed Costs Data in the Compliance API",
+"desc": "We’ve applied a mitigation and are monitoring the affected services to confirm recovery. Delays in cost data are still expected.",
+"date": "2026-11-13T16:10:07Z",
+"tags": [
+"OpenAI",
+"API"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-inc",
+"мелкий сбой · наблюдают"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
+{
+"title": "Elevated errors on claude.ai, the Claude API, and Claude Code",
+"orig": "Elevated errors on claude.ai, the Claude API, and Claude Code",
+"desc": "The issue affecting multiple surfaces has been resolved.",
+"date": "2026-11-13T13:09:50.199Z",
+"tags": [
+"Claude",
+"Claude Code",
+"API"
+],
+"url": "https://stspg.io/264r547qtkky",
+"kind": [
+"k-ok",
+"крупный сбой · решено"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
 {
 "title": "Повышенные ошибки на сайтах claude.ai, Claude Code и Platform.claude.com.",
 "orig": "Elevated errors on claude.ai, Claude Code, and platform.claude.com",
@@ -198,7 +298,7 @@
 {
 "title": "Повышенные ошибки, влияющие на соединитель Microsoft 365",
 "orig": "Elevated errors affecting the Microsoft 365 connector",
-"desc": "Мы изучаем проблему с соединителями Microsoft, из-за которой новые соединения могут быть нарушены, а инструменты не работают должным образом. Мы поделимся обновленной информацией, когда узнаем больше.",
+"desc": "We’re seeing signs of recovery for the Microsoft 365 connector and are continuing to monitor the affected services to confirm recovery.",
 "date": "2026-11-12T18:29:14Z",
 "tags": [
 "OpenAI",
@@ -207,7 +307,7 @@
 "url": "https://status.openai.com",
 "kind": [
 "k-inc",
-"мелкий сбой · разбираются"
+"мелкий сбой · наблюдают"
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
@@ -215,7 +315,7 @@
 {
 "title": "Повышенные ошибки, влияющие на соединитель Microsoft 365",
 "orig": "Elevated errors affecting the Microsoft 365 connector",
-"desc": "Эта проблема вызвана инцидентом со службой Microsoft 365, а инструменты почты, календаря и поиска в соединителе Microsoft 365 по-прежнему не работают для большинства запросов. Клод для Outlook остается затронутым. Вы можете следить за прогрессом Microsoft по адресу https://status.cloud.microsoft. Мы обновим этот пост, когда сервис будет восстановлен.",
+"desc": "We're seeing signs of recovery for the Microsoft 365 connector. Claude for Outlook is also recovering. Some SharePoint search requests are still returning errors. Microsoft's incident remains open, so errors may return. We're continuing to monitor and will update this post as soon as we have more info.",
 "date": "2026-11-12T17:52:44.934Z",
 "tags": [
 "Claude",
@@ -224,7 +324,7 @@
 "url": "https://stspg.io/m0rbx38nmy1c",
 "kind": [
 "k-inc",
-"крупный сбой · причина найдена"
+"крупный сбой · наблюдают"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -697,70 +797,6 @@
 "Claude"
 ],
 "url": "https://ip.net.coffee/claude/news/20261110e.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "«Неточная информация о ценах»: Anthropic выдала условия IPO, а затем срочно их отозвала",
-"orig": "「定价信息不准确」：Anthropic 发出 IPO 条款后又紧急收回",
-"desc": "Утечка документа, восстановленное электронное письмо и форма подписки, почти эквивалентная списку цепочек поставок.",
-"date": "2026-11-10T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261110d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "OpenAI устанавливает 35-секундный переключатель аварийной остановки для внутренних исследовательских задач",
-"orig": "OpenAI 给内部研究任务装上 35 秒急停开关",
-"desc": "Диспетчерская останавливает проверку авторизации на входе вывода: если одобрение отозвано, модель больше не будет отвечать.",
-"date": "2026-11-10T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261110d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Meta-релизы Muse Ember: 0,5 доллара за миллион выходов, конкурируя с Claude Haiku 5.5",
-"orig": "Meta 发布 Muse Ember：每百万输出 0.5 美元，正面对标 Claude Haiku 5.5",
-"desc": "Meta выдвинула на поле битвы подзадачи интеллектуального агента самую маленькую модель, а названным противником стал Haiku от Anthropic.",
-"date": "2026-11-10T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261110c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Apple начинает взимать отдельную плату за кредиты AI, причем первой остановкой станет пакет использования Logic Pro стоимостью 49,99 долларов.",
-"orig": "苹果开始为 AI 额度单独收费，第一站是 Logic Pro 的 49.99 美元用量包",
-"desc": "Продавая единовременные кредиты в дополнение к подписке, Apple впервые четко оценила стоимость вызовов облачных моделей.",
-"date": "2026-11-10T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261110c.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -1316,22 +1352,6 @@
 "group": "Статус OpenAI"
 },
 {
-"title": "Поддержка чата в Справочном центре ухудшилась",
-"orig": "Help Center Chat Support Degraded",
-"desc": "Все затронутые службы теперь полностью восстановлены.",
-"date": "2026-10-23T21:30:25Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"событие · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
-},
-{
 "title": "Повышенные ошибки, влияющие на соединители",
 "orig": "Elevated errors affecting Connectors",
 "desc": "Проблема, затрагивающая сайты claude.ai и Claude Cowork, решена.",
@@ -1459,24 +1479,6 @@
 "API"
 ],
 "url": "https://stspg.io/bzc81gbv1b99",
-"kind": [
-"k-ok",
-"крупный сбой · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
-"title": "Повышенные ошибки для Claude Mythos 5.1 и Claude Fable 5.1.",
-"orig": "Elevated errors for Claude Mythos 5.1 and Claude Fable 5.1",
-"desc": "Проблема, затрагивающая Claude Mythos 5.1 и Claude Fable 5.1, решена. Воздействие произошло с 05:40 по тихоокеанскому времени / 12:40 по всемирному координированному времени до 06:10 по тихоокеанскому времени / 13:10 по всемирному координированному времени.",
-"date": "2026-10-05T13:05:44.488Z",
-"tags": [
-"Claude",
-"Claude Code",
-"API"
-],
-"url": "https://stspg.io/wdqhxt8xt574",
 "kind": [
 "k-ok",
 "крупный сбой · решено"
