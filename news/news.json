@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-12T22:47:53Z",
+"updated": "2026-11-13T03:30:42Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,56 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "「十年后癌症只是历史」：阿莫代伊在路演周重提生物学愿景",
+"orig": "「十年后癌症只是历史」：阿莫代伊在路演周重提生物学愿景",
+"desc": "三个月前他还说「AI 能治愈癌症」听上去像套话，这次却直接给出了十年的时间表。",
+"date": "2026-11-13T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261113a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "周四的重置卡到账了，ChatGPT dot 也能写自定义指令",
+"orig": "周四的重置卡到账了，ChatGPT dot 也能写自定义指令",
+"desc": "一个给重度用户补额度，一个给常驻智能体立规矩，两件事都指向同一批付费最多的人。",
+"date": "2026-11-13T00:00:00Z",
+"tags": [
+"OpenAI",
+"ChatGPT"
+],
+"url": "https://ip.net.coffee/gpt/news/20261113a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "谷歌把 Gemini 4 Hydrogen 定为智能体的「日常主力」",
+"orig": "谷歌把 Gemini 4 Hydrogen 定为智能体的「日常主力」",
+"desc": "定价更低、跑得更快，官方成绩还略高于自家的 Argon，Gemini 4 的产品线排序被它打乱了。",
+"date": "2026-11-13T00:00:00Z",
+"tags": [
+"OpenAI",
+"Gemini"
+],
+"url": "https://ip.net.coffee/ai/news/20261113a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "Claude Code v2.1.323",
 "orig": "",
@@ -650,23 +700,6 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "После семи месяцев бокового движения ChatGPT достиг нового максимума посещений в сентябре.",
-"orig": "横盘七个月后，ChatGPT 9 月访问量创下新高",
-"desc": "Количество посещений увеличилось почти на 20%, но доля увеличилась всего на 0,27 процентных пункта — весь рынок становится больше.",
-"date": "2026-11-10T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/gpt/news/20261110a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Повышенные ошибки в API",
 "orig": "Elevated Errors On API",
 "desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
@@ -716,38 +749,6 @@
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
-},
-{
-"title": "Оценка Epoch: доход Anthropic от искусственного интеллекта примерно в шесть раз превышает доход шести китайских компаний вместе взятых.",
-"orig": "Epoch 估算：Anthropic 一家的 AI 收入，约是中国六家合计的六倍",
-"desc": "Использование растет, а доходы – нет. Основная разница не в модели, а в том, кто собирает деньги.",
-"date": "2026-11-09T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261109e.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "В 200 000 беседах о научных исследованиях Клод чаще всего используется для обработки данных и редактирования рукописей.",
-"orig": "20 万次科研对话里，Claude 被用得最多的是跑数据和改稿",
-"desc": "Вместо того, чтобы позволить ИИ обдумывать идеи, ученые сначала передали самую трудоемкую часть работы.",
-"date": "2026-11-09T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261109d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
 },
 {
 "title": "Повышенный уровень ошибок при создании изображений",
@@ -1001,23 +1002,6 @@
 ],
 "src": "GitHub anthropics/claude-code",
 "group": "Claude Code"
-},
-{
-"title": "Codex CLI 0.166.0",
-"orig": "",
-"desc": "Добавлен выбор расшифровки с помощью клавиатуры с помощью движений слов, строк и страниц, встроенный поиск и настраиваемые сочетания клавиш. · Последовательное отображение Markdown в асинхронных вопросах, вариантах выбора, ответах и расшифровках ответов. · Добавлен GPT-6.1 Terra в каталоги моделей Vertex AI и Amazon Bedrock.",
-"date": "2026-10-29T19:47:53Z",
-"tags": [
-"Codex",
-"OpenAI"
-],
-"url": "https://github.com/openai/codex/releases/tag/rust-v0.166.0",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub openai/codex",
-"group": "Codex"
 },
 {
 "title": "Повышенные ошибки, влияющие на коннектор Календаря Google.",
