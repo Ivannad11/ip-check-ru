@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-14T01:32:14Z",
+"updated": "2026-11-14T09:09:28Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,71 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Some users unable to sign up with Apple on the Claude iOS app",
+"orig": "Some users unable to sign up with Apple on the Claude iOS app",
+"desc": "We are investigating an issue with Sign in with Apple on the Claude iOS app, which is mainly affecting new accounts. New users can sign up with Google or email instead. We will provide an update as soon as possible.",
+"date": "2026-11-14T07:11:36.117Z",
+"tags": [
+"Claude"
+],
+"url": "https://stspg.io/4858wf40dx89",
+"kind": [
+"k-inc",
+"крупный сбой · разбираются"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
+{
+"title": "Elevated errors with ChatGPT billing and Ads billing",
+"orig": "Elevated errors with ChatGPT billing and Ads billing",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
+"date": "2026-11-14T04:11:04Z",
+"tags": [
+"OpenAI",
+"ChatGPT"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-ok",
+"событие · решено"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
+{
+"title": "Elevated purchasing errors on claude.ai",
+"orig": "Elevated purchasing errors on claude.ai",
+"desc": "The issue affecting purchases and plan changes on claude.ai has been resolved, and delayed plan changes and payments have now been applied. Impact occurred from 18:34 PT on November 13 / 02:34 UTC on November 14 to 20:03 PT on November 13 / 04:03 UTC on November 14.",
+"date": "2026-11-14T02:54:33.309Z",
+"tags": [
+"Claude"
+],
+"url": "https://stspg.io/qqf00d9r7pm4",
+"kind": [
+"k-ok",
+"крупный сбой · решено"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
+{
+"title": "「这不是 AI」：新西兰仓库罢工里，双方争的是一个词",
+"orig": "「这不是 AI」：新西兰仓库罢工里，双方争的是一个词",
+"desc": "技术叫不叫 AI 是公关问题，按秒计时的考核才是工人真正在意的事",
+"date": "2026-11-14T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261114d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "约 60 人被裁，Grok Imagine 只剩一支维持运转的小队",
 "orig": "约 60 人被裁，Grok Imagine 只剩一支维持运转的小队",
@@ -28,6 +93,22 @@
 "group": "Статьи net.coffee"
 },
 {
+"title": "OpenAI 再次解散独立机器人团队，把赌注押在 GPT-6 Astra 身上",
+"orig": "OpenAI 再次解散独立机器人团队，把赌注押在 GPT-6 Astra 身上",
+"desc": "从「做不下去先停」到「不必单独做」，同一个决定背后是两种完全不同的判断",
+"date": "2026-11-14T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261114b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
 "title": "DeepSeek 把搜索、读文件和语音都拆成了 API",
 "orig": "DeepSeek 把搜索、读文件和语音都拆成了 API",
 "desc": "从只卖模型到把整套 App 能力交给开发者，DeepSeek 的 API 换了一种卖法",
@@ -37,6 +118,23 @@
 "API"
 ],
 "url": "https://ip.net.coffee/ai/news/20261114b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Claude Code 桌面版开放自定义主题，配色和动态背景交给 Claude 来写",
+"orig": "Claude Code 桌面版开放自定义主题，配色和动态背景交给 Claude 来写",
+"desc": "主题不再是预设皮肤，而是一段由模型按描述现写的界面改动",
+"date": "2026-11-14T00:00:00Z",
+"tags": [
+"Claude",
+"Claude Code"
+],
+"url": "https://ip.net.coffee/claude/news/20261114a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -96,7 +194,7 @@
 {
 "title": "Delayed Costs Data in the Compliance API",
 "orig": "Delayed Costs Data in the Compliance API",
-"desc": "We’ve applied a mitigation and are monitoring the affected services to confirm recovery. Delays in cost data are still expected.",
+"desc": "We are monitoring the affected services to confirm recovery. Delays in cost data are still expected.",
 "date": "2026-11-13T16:10:07Z",
 "tags": [
 "OpenAI",
@@ -691,22 +789,6 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "Модель изображения 4K с открытым исходным кодом выходит на десятисекундный уровень: выпущено изображение MiniMax H3",
-"orig": "开源 4K 图像模型进入十秒级：MiniMax H3 Image 发布",
-"desc": "Создавайте, сравнивайте и редактируйте одну модель, загружайте 16 эталонных изображений одновременно и получайте изображение 4K примерно за десять секунд.",
-"date": "2026-11-11T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261111a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Повышенные ошибки в Fable 52 и Mythos 52.",
 "orig": "Elevated errors on Fable 52 and Mythos 52",
 "desc": "Перегружал ошибки на Fable 5.2 и Mythos 5.2 на четыре минуты. Инцидент устранен.",
@@ -788,38 +870,6 @@
 ],
 "src": "GitHub anthropics/claude-code",
 "group": "Claude Code"
-},
-{
-"title": "Anthropic изменил доступные регионы на белый список, а материковый Китай, Гонконг и Макао не были включены.",
-"orig": "Anthropic 把可用地区改成白名单，中国大陆与港澳均未列入",
-"desc": "Все, что находится за пределами списка, поддерживаться не будет. Три линии местонахождения, места регистрации и контролирующей стороны вступят в силу одновременно и начнут действовать с 12 ноября.",
-"date": "2026-11-10T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261110f.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "После «Больше не спрашивай» на общественный склад было помещено 2539 ключей.",
-"orig": "一次「不再询问」，让 2539 个密钥躺进公开仓库",
-"desc": "Проблема не в уязвимости, а в команде, которая была записана как есть: правила разрешений вошли в файл конфигурации с токеном и были отправлены на GitHub самим агентом.",
-"date": "2026-11-10T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261110e.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
 },
 {
 "title": "Повышенные ошибки в API",
@@ -1335,23 +1385,6 @@
 "group": "Статус Claude"
 },
 {
-"title": "Ухудшена работа с подключениями приложений ChatGPT с использованием CIMD.",
-"orig": "Degraded experience with ChatGPT app connections using CIMD",
-"desc": "Все затронутые службы теперь полностью восстановлены.",
-"date": "2026-10-23T22:52:56Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
-},
-{
 "title": "Повышенные ошибки, влияющие на соединители",
 "orig": "Elevated errors affecting Connectors",
 "desc": "Проблема, затрагивающая сайты claude.ai и Claude Cowork, решена.",
@@ -1444,41 +1477,6 @@
 "API"
 ],
 "url": "https://stspg.io/sjkw7njwf0mt",
-"kind": [
-"k-ok",
-"крупный сбой · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
-"title": "Повышенные ошибки при загрузке данных об использовании на платформе.claude.com.",
-"orig": "Elevated errors loading usage data on platform.claude.com",
-"desc": "Этот инцидент устранен. С 17:00 по тихоокеанскому времени 6 октября / 00:00 по всемирному координированному времени 7 октября до 18:40 по тихоокеанскому времени 6 октября / 01:40 по всемирному координированному времени 7 октября многие запросы на загрузку данных об использовании на странице использования платформы.claude.com и в отчете об использовании API администратора возвращали ошибки.",
-"date": "2026-10-07T01:20:26.681Z",
-"tags": [
-"Claude",
-"API"
-],
-"url": "https://stspg.io/scdhhnplc2jn",
-"kind": [
-"k-ok",
-"крупный сбой · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
-"title": "Повышенные ошибки для Claude Opus 5.5",
-"orig": "Elevated errors for Claude Opus 5.5",
-"desc": "Проблема, затрагивающая Claude Opus 5.5, решена.",
-"date": "2026-10-06T12:24:32.630Z",
-"tags": [
-"Claude",
-"Claude Code",
-"API"
-],
-"url": "https://stspg.io/bzc81gbv1b99",
 "kind": [
 "k-ok",
 "крупный сбой · решено"
