@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-13T20:34:02Z",
+"updated": "2026-11-14T01:32:14Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -75,6 +75,23 @@
 ],
 "src": "ip.net.coffee/news",
 "group": "Статьи net.coffee"
+},
+{
+"title": "Claude Code v2.1.325",
+"orig": "",
+"desc": "Fixed a security issue in how zstd-compressed responses are decoded · Added a spinner tip in VS Code and similar integrated terminals about re-running a notebook cell, shown once Claude has read or edited a Jupyter notebook · Added a line under the error shown when your organization's policy blocks a request, saying how to continue: run /rewind and change the message, or run /clear",
+"date": "2026-11-13T20:40:01Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.325",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
 },
 {
 "title": "Delayed Costs Data in the Compliance API",
@@ -298,7 +315,7 @@
 {
 "title": "Повышенные ошибки, влияющие на соединитель Microsoft 365",
 "orig": "Elevated errors affecting the Microsoft 365 connector",
-"desc": "We’re seeing signs of recovery for the Microsoft 365 connector and are continuing to monitor the affected services to confirm recovery.",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
 "date": "2026-11-12T18:29:14Z",
 "tags": [
 "OpenAI",
@@ -306,8 +323,8 @@
 ],
 "url": "https://status.openai.com",
 "kind": [
-"k-inc",
-"мелкий сбой · наблюдают"
+"k-ok",
+"мелкий сбой · решено"
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
@@ -315,7 +332,7 @@
 {
 "title": "Повышенные ошибки, влияющие на соединитель Microsoft 365",
 "orig": "Elevated errors affecting the Microsoft 365 connector",
-"desc": "We're seeing signs of recovery for the Microsoft 365 connector. Claude for Outlook is also recovering. Some SharePoint search requests are still returning errors. Microsoft's incident remains open, so errors may return. We're continuing to monitor and will update this post as soon as we have more info.",
+"desc": "This incident has been resolved. From 08:03 PT / 16:03 UTC on November 12 to 08:40 PT / 16:40 UTC on November 13, mail, calendar and search tools in the Microsoft 365 connector and Claude for Outlook returned errors for many requests because of a Microsoft 365 service incident. Microsoft is still completing its recovery, so you may see occasional errors or delays.",
 "date": "2026-11-12T17:52:44.934Z",
 "tags": [
 "Claude",
@@ -323,8 +340,8 @@
 ],
 "url": "https://stspg.io/m0rbx38nmy1c",
 "kind": [
-"k-inc",
-"крупный сбой · наблюдают"
+"k-ok",
+"крупный сбой · решено"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -1090,23 +1107,6 @@
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
-},
-{
-"title": "Claude Code v2.1.314",
-"orig": "",
-"desc": "Добавлены разрешения.blockWritesOutsideWorkingDirectories: запись, редактирование и NotebookEdit запрещают пути за пределами рабочих каталогов в каждом режиме разрешений · Добавлен дополнительный список групп в восходящие потоки шлюза приложений Claude: только разработчики из перечисленных групп IdP отправляются в этот вышестоящий поток, а также при аварийном переключении · Добавлен Guardrail_trace в восходящие потоки шлюза приложений Claude Bedrock, чтобы регистрировать, какой фильтр ограждения Amazon Bedrock активируется по запросу, без сопоставленного текста.",
-"date": "2026-10-30T01:06:26Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
 },
 {
 "title": "Повышенные ошибки, влияющие на коннектор Календаря Google.",
