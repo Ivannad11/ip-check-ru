@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-16T18:40:16Z",
+"updated": "2026-11-17T02:33:30Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -12,9 +12,106 @@
 "sources_failed": [],
 "items": [
 {
+"title": "「未曾考虑」：英伟达董事会给黄仁勋回归泼冷水",
+"orig": "「未曾考虑」：英伟达董事会给黄仁勋回归泼冷水",
+"desc": "一边是回归游说，一边是律所调查：董事会的口径很清楚，先有调查结论，才轮得到谈人事",
+"date": "2026-11-17T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261117e.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "国行 Apple 智能扩到 iPad 和 Mac，云端功能开始按天限额",
+"orig": "国行 Apple 智能扩到 iPad 和 Mac，云端功能开始按天限额",
+"desc": "备案落地后测试版跟上，但多步骤请求和图像生成这些吃云端算力的功能，从这一版起要按天算次数",
+"date": "2026-11-17T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261117d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "美国把 AI 芯片管制伸进海外机房，五国出口改为许可制",
+"orig": "美国把 AI 芯片管制伸进海外机房，五国出口改为许可制",
+"desc": "过去管的是芯片运到哪里，现在管的是谁在用它算。",
+"date": "2026-11-17T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261117c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "AI 代理拿偷来的密钥去找下一把密钥，亚马逊披露 ARTEX 攻击链",
+"orig": "AI 代理拿偷来的密钥去找下一把密钥，亚马逊披露 ARTEX 攻击链",
+"desc": "偷来的大模型额度直接变成攻击算力，攻击者连推理费都省了。",
+"date": "2026-11-17T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261117b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "每百万输入 token 0.07 美元，腾讯混元 Hy4 flash 抢跑量市场",
+"orig": "每百万输入 token 0.07 美元，腾讯混元 Hy4 flash 抢跑量市场",
+"desc": "224B 参数只激活 12B，腾讯把轻量档定价压到了地板，盯的是智能体和批量任务的 token 账单。",
+"date": "2026-11-17T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261117a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Claude Code v2.1.326",
+"orig": "",
+"desc": "Added support for turning on Code Mode while agent teams are enabled; if you already turned it on, sessions with teams on now start in Code Mode · Added a startup warning when an --allowedTools, --disallowedTools or --tools value has an entry that doesn't look like a complete rule · Added a message explaining why MCP servers stop loading when an administrator adds managed-mcp.json during a session",
+"date": "2026-11-16T22:11:05Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.326",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
+},
+{
 "title": "Клод не может присоединиться к собраниям",
 "orig": "Claude unable to join meetings",
-"desc": "Клод по-прежнему не может присоединиться к некоторым звонкам в Claude Meetings (бета-версия), а автоматическое присоединение остается приостановленным. Уже выполняемые вызовы и другие функции Claude не затрагиваются. Мы ожидаем, что для полного решения проблемы потребуется некоторое время, и мы опубликуем обновление, когда статус изменится.",
+"desc": "Claude Meetings (beta) saw higher than expected demand today, and Claude was unable to join many calls. We have put mitigations in place and are continuing to monitor and improve join reliability. Claude Meetings is now re-enabled for all Enterprise customers, though Claude may take a little longer than usual to join. Adding Claude to new calls and Auto-join remain paused for Team customers. We wi",
 "date": "2026-11-16T15:10:15.167Z",
 "tags": [
 "Claude"
@@ -22,7 +119,7 @@
 "url": "https://stspg.io/01qq3kzyyqzl",
 "kind": [
 "k-inc",
-"крупный сбой · разбираются"
+"крупный сбой · причина найдена"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -194,15 +291,15 @@
 {
 "title": "Некоторые пользователи не могут зарегистрироваться в Apple в приложении Claude iOS.",
 "orig": "Some users unable to sign up with Apple on the Claude iOS app",
-"desc": "Мы продолжаем исследовать проблему со входом через Apple в приложении Claude iOS, которая в основном затрагивает новые учетные записи. Вместо этого новые пользователи могут зарегистрироваться через Google или по электронной почте. Мы предоставим еще одно обновление как можно скорее.",
+"desc": "The issue affecting Sign in with Apple on the Claude iOS app has been resolved. Impact occurred from 16:29 PT on November 13 / 00:29 UTC on November 14 to 10:31 PT / 18:31 UTC on November 16.",
 "date": "2026-11-14T07:11:36.117Z",
 "tags": [
 "Claude"
 ],
 "url": "https://stspg.io/4858wf40dx89",
 "kind": [
-"k-inc",
-"крупный сбой · разбираются"
+"k-ok",
+"крупный сбой · решено"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -689,88 +786,6 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "Сообщается, что совет директоров Nvidia готовится заменить Хуан Джен-Сюня и соберется уже на этой неделе, чтобы решить, уходить или нет.",
-"orig": "英伟达董事会据报准备撤换黄仁勋，最快本周开会定去留",
-"desc": "Между тем, как «совет директоров доверяет ему» и «готовится его отпустить», прошло всего три дня. Для компании, которая почти равна вычислительной мощности самого ИИ, оценить это сложнее, чем задержку любого чипа.",
-"date": "2026-11-12T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261112d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Аренда вычислительных мощностей за границей также должна контролироваться: сообщается, что в Соединенных Штатах окончательно утверждены новые правила в отношении чипов, которые блокируют «удаленный доступ».",
-"orig": "租用海外算力也要管：美方据报敲定堵住「远程访问」的芯片新规",
-"desc": "Если чипы не могут быть доставлены, им приходится арендовать компьютерные залы за границей; этот путь обсуждался уже больше года, и теперь говорят, что он официально закрыт.",
-"date": "2026-11-12T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261112c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Срок, который поставил себе Byte: догнать OpenAI и Anthropic с 2029 по 2030 год.",
-"orig": "字节给自己定的期限：2029 到 2030 年追上 OpenAI 与 Anthropic",
-"desc": "Благодаря помощнику, который проверяет Meta Muse, трехлетнему сроку и приговору, не основанному на дистилляции, Byte начал занимать позитивную позицию в догоне передовых моделей в дополнение к видеороликам с искусственным интеллектом.",
-"date": "2026-11-12T00:00:00Z",
-"tags": [
-"OpenAI",
-"Claude"
-],
-"url": "https://ip.net.coffee/gpt/news/20261112b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Половина памяти заменена флэш-памятью: AMD переносит ПО MEXT на сервер Epyc",
-"orig": "一半内存换成闪存：AMD 把 MEXT 软件推给 Epyc 服务器",
-"desc": "Горячие страницы остаются в DRAM, холодные страницы погружаются во флэш-память, а модели используются для извлечения страниц, которые будут использоваться заранее. В годы, когда цены на память выросли, некоторые люди внезапно захотели свести этот счет.",
-"date": "2026-11-12T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261112b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Разговор Claude API можно изменить в середине работы, кэш подсказок не нужно переворачивать и начинать заново.",
-"orig": "Claude API 对话中途可改 effort，提示缓存不用推倒重来",
-"desc": "Пустое системное сообщение плюс новый файл output_config.effort вступят в силу со следующего цикла пользовательского ввода, а предыдущий префикс кэша останется неизменным.",
-"date": "2026-11-12T00:00:00Z",
-"tags": [
-"Claude",
-"API"
-],
-"url": "https://ip.net.coffee/claude/news/20261112a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Невозможно запустить новые запуски агента Workspace.",
 "orig": "Unable to start new Workspace Agent runs",
 "desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
@@ -1138,23 +1153,6 @@
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
-},
-{
-"title": "Claude Code v2.1.316",
-"orig": "",
-"desc": "Добавлен CLAUDE_CODE_DISABLE_ULTRATHINK, который отключает ключевое слово ultrathink. · Добавлены объединенные групповые бюджеты в шлюз приложений Claude: один ежемесячный бюджет, который разделяют участники группы, сверх собственного лимита каждого участника, установленного с помощью Pooled_budget в API администратора лимитов расходов. · Добавлен CLAUDE_CODE_DISABLE_LOOPED_CROSS_CERT_DROP для хранения системных перекрестных сертификатов, которые сертифицировать друг друга в цикле для серверов, чей частный центр сертификации нуждается в этом",
-"date": "2026-10-31T01:01:35Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
 },
 {
 "title": "Повышенный уровень ошибок при поиске в точках, работе ChatGPT и некоторых способах мышления ChatGPT.",
