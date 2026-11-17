@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-17T12:02:35Z",
+"updated": "2026-11-17T21:05:30Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,119 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "403 座超大规模数据中心，一年吃掉全美约 2% 的电",
+"orig": "403 座超大规模数据中心，一年吃掉全美约 2% 的电",
+"desc": "总量不算惊人，扎眼的是电从哪里来：这些机房用的电，碳强度比全美平均高出近一半",
+"date": "2026-11-18T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261118c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "英伟达董事会新设出口管制监督委员会，三名董事每季度至少开一次会",
+"orig": "英伟达董事会新设出口管制监督委员会，三名董事每季度至少开一次会",
+"desc": "黄仁勋去职、Megaspeed 调查、国会追问，几条线索最后汇到同一个问题：董事会到底管没管出口合规",
+"date": "2026-11-18T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261118b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Anthropic 拿到纳斯达克上市批准，股票代码 ANT 本周登场",
+"orig": "Anthropic 拿到纳斯达克上市批准，股票代码 ANT 本周登场",
+"desc": "8.25 亿股、指导价 70 到 78 美元，一家把安全写进公司章程的 AI 公司，要开始面对每个季度的财报电话会",
+"date": "2026-11-18T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261118a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "GPT-6.2 Astra 降价两成，Sol 价格不动却追到半分之内",
+"orig": "GPT-6.2 Astra 降价两成，Sol 价格不动却追到半分之内",
+"desc": "旗舰降价、主力原价，第三方评测里两者只差半分；ChatGPT 菜单的默认项也换成了更便宜的 Sol。",
+"date": "2026-11-18T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261118a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "中国区 App Store 新增 AIGC 合规入口，存量应用限期 2027 年 1 月底补齐",
+"orig": "中国区 App Store 新增 AIGC 合规入口，存量应用限期 2027 年 1 月底补齐",
+"desc": "过去靠应用商店抽查和下架来兜底，现在苹果把备案号直接做成了提交表单里的一栏",
+"date": "2026-11-18T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261118a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Some users unable to sign in with Apple on claude.ai and the Claude iOS app",
+"orig": "Some users unable to sign in with Apple on claude.ai and the Claude iOS app",
+"desc": "We have identified the cause of the issue affecting claude.ai and are working on a fix. We will provide an update as soon as possible.",
+"date": "2026-11-17T18:55:53.499Z",
+"tags": [
+"Claude"
+],
+"url": "https://stspg.io/3tl6h35nnzwm",
+"kind": [
+"k-inc",
+"крупный сбой · причина найдена"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
+{
+"title": "Costs API data is delayed",
+"orig": "Costs API data is delayed",
+"desc": "We've pushed a fix and are monitoring the recovery.",
+"date": "2026-11-17T17:46:15Z",
+"tags": [
+"OpenAI",
+"API"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-inc",
+"мелкий сбой · наблюдают"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
 {
 "title": "«Никогда не рассматривалось»: правление Nvidia проливает холодную воду на возвращение Дженсена Хуанга",
 "orig": "「未曾考虑」：英伟达董事会给黄仁勋回归泼冷水",
@@ -637,88 +750,6 @@
 "group": "Codex"
 },
 {
-"title": "Аутентификация входа в систему Клода не удалась около часа: Неспособность войти в систему не означает, что его забанят.",
-"orig": "Claude 登录认证故障约一小时：登不上不等于被封号",
-"desc": "В четыре входа невозможно войти одновременно. Проблема заключается в уровне унифицированной аутентификации. Официальное исправление появилось в сети в 19:05.",
-"date": "2026-11-13T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261113c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Код Клода 2.1.323 передает вызовы инструментов фрагменту JavaScript.",
-"orig": "Claude Code 2.1.323 把工具调用交给一段 JavaScript",
-"desc": "Экспериментальный режим кода позволяет Клоду писать сценарии для объединения нескольких инструментов, а система плагинов одновременно вводит ограничения совместимости версий.",
-"date": "2026-11-13T00:00:00Z",
-"tags": [
-"Claude",
-"Claude Code"
-],
-"url": "https://ip.net.coffee/claude/news/20261113b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Отпечатки пальцев Блэквелла можно прочитать на весах шести крупных китайских моделей.",
-"orig": "六款中国大模型的权重里，读出了 Blackwell 的指纹",
-"desc": "Аппаратное обеспечение обратной инициализации из публичных весов: модели нового поколения DeepSeek, Dark Side of the Moon, MiniMax и Ant коллективно переключаются с Hopper на Blackwell",
-"date": "2026-11-13T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261113b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "«Через десять лет рак станет историей»: Амодей вновь обращается к биологическому видению во время роуд-шоу",
-"orig": "「十年后癌症只是历史」：阿莫代伊在路演周重提生物学愿景",
-"desc": "Три месяца назад он сказал, что фраза «ИИ может вылечить рак» звучит как клише, но на этот раз он прямо назвал десятилетний график.",
-"date": "2026-11-13T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261113a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Пришла карта сброса в четверг, точка ChatGPT также может писать собственные инструкции",
-"orig": "周四的重置卡到账了，ChatGPT dot 也能写自定义指令",
-"desc": "Один — пополнить квоту для активных пользователей, а другой — установить правила для резидентного агента. Оба они указывают на одну и ту же группу людей, которые платят больше всего.",
-"date": "2026-11-13T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/gpt/news/20261113a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Claude Code v2.1.323",
 "orig": "",
 "desc": "Добавлен режим кода, экспериментальная опция, в которой Клод пишет JavaScript для вызова своих инструментов; см. https://code.claude.com/docs/en/code-mode, чтобы включить или отключить его для организации. · Добавлены механизмы[\"claude-code\"] в плагин.json: плагины за пределами указанного диапазона версий Claude Code не устанавливаются, не обновляются и не загружаются, а при установке и обновлении выбирают самую новую версию, которая подходит. · Добавлена проверка типа модуля перехватчиков TypeScript плагина для проверки плагина Claude; каждое обнаружение является предупреждением, и --strict терпит неудачу в этом случае",
@@ -1292,22 +1323,6 @@
 "group": "Статус OpenAI"
 },
 {
-"title": "Повышенная частота ошибок для запросов POST объявлений.",
-"orig": "Elevated error rates for Ads POST requests",
-"desc": "Все затронутые службы теперь полностью восстановлены.",
-"date": "2026-10-26T18:19:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
-},
-{
 "title": "Повышенные ошибки для Claude Fable 5.1",
 "orig": "Elevated errors for Claude Fable 5.1",
 "desc": "Проблема, влияющая на сервисы Claude, решена. Воздействие произошло с 01:08 по тихоокеанскому времени / 08:08 по всемирному координированному времени до 01:29 по тихоокеанскому времени / 08:29 по всемирному координированному времени.",
@@ -1407,24 +1422,6 @@
 "MCP"
 ],
 "url": "https://stspg.io/4dcr8c005yxc",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
-"title": "Ухудшена производительность Claude Fable 5.",
-"orig": "Degraded performance for Claude Fable 5",
-"desc": "Проблема, затрагивающая другие модели Claude, решена.",
-"date": "2026-10-21T19:49:06.495Z",
-"tags": [
-"Claude",
-"Claude Code",
-"API"
-],
-"url": "https://stspg.io/cgklr4v2sgkh",
 "kind": [
 "k-ok",
 "мелкий сбой · решено"
