@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-17T21:05:30Z",
+"updated": "2026-11-18T03:02:14Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,55 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Elevated errors affecting the Google Docs connector",
+"orig": "Elevated errors affecting the Google Docs connector",
+"desc": "The issue affecting editing documents with the Google Docs connector on claude.ai, Claude Code, and Claude Cowork has been resolved. Impact occurred from 16:19 PT on November 17 / 00:19 UTC on November 18 to 17:33 PT on November 17 / 01:33 UTC on November 18.",
+"date": "2026-11-18T01:13:15.170Z",
+"tags": [
+"Claude",
+"MCP"
+],
+"url": "https://stspg.io/qz7tfhb7sl68",
+"kind": [
+"k-ok",
+"мелкий сбой · решено"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
+{
+"title": "可灵图像 4.0 上线：原生 8K 出图，一次十张同风格组图",
+"orig": "可灵图像 4.0 上线：原生 8K 出图，一次十张同风格组图",
+"desc": "分辨率、长提示词和组图一致性一起升级，目标是印刷和电商这类要直接交付的场景",
+"date": "2026-11-18T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261118e.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "防 AI 作弊，韩国打算让考场手机响起灾难警报",
+"orig": "防 AI 作弊，韩国打算让考场手机响起灾难警报",
+"desc": "警报响铃找藏机，AI 服务器留痕做证据，起因是一副 18 分钟答完数学卷的智能眼镜",
+"date": "2026-11-18T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261118d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "403 座超大规模数据中心，一年吃掉全美约 2% 的电",
 "orig": "403 座超大规模数据中心，一年吃掉全美约 2% 的电",
@@ -92,17 +141,51 @@
 "group": "Статьи net.coffee"
 },
 {
+"title": "Claude Code v2.1.327",
+"orig": "",
+"desc": "Added a confirmation before /install-github-app changes a repository · Added claude mcp add-json <name> - to read the server's JSON from stdin, so tokens can stay off the command line; not available inside a Claude Code session · Added a line when a resumed session's earlier messages can't be loaded",
+"date": "2026-11-17T23:17:45Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.327",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
+},
+{
+"title": "Codex CLI 0.169.1",
+"orig": "",
+"desc": "## Chores No verified release highlights available. ## Changelog Full Changelog: https://github.com/openai/codex/compare/rust-v0.169.0...rust-v0.169.1",
+"date": "2026-11-17T22:21:10Z",
+"tags": [
+"Codex",
+"OpenAI"
+],
+"url": "https://github.com/openai/codex/releases/tag/rust-v0.169.1",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub openai/codex",
+"group": "Codex"
+},
+{
 "title": "Some users unable to sign in with Apple on claude.ai and the Claude iOS app",
 "orig": "Some users unable to sign in with Apple on claude.ai and the Claude iOS app",
-"desc": "We have identified the cause of the issue affecting claude.ai and are working on a fix. We will provide an update as soon as possible.",
+"desc": "The issue affecting Sign in with Apple on claude.ai and the Claude iOS app has been resolved. Impact occurred from 08:40 PT / 16:40 UTC to 12:20 PT / 20:20 UTC.",
 "date": "2026-11-17T18:55:53.499Z",
 "tags": [
 "Claude"
 ],
 "url": "https://stspg.io/3tl6h35nnzwm",
 "kind": [
-"k-inc",
-"крупный сбой · причина найдена"
+"k-ok",
+"крупный сбой · решено"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -257,7 +340,7 @@
 {
 "title": "Клод не может присоединиться к собраниям",
 "orig": "Claude unable to join meetings",
-"desc": "Сегодня спрос на Claude Meetings (бета-версия) превысил ожидаемый, и Клод не смог присоединиться ко многим звонкам. Мы внедрили меры по снижению риска и продолжаем отслеживать и повышать надежность соединений. Claude Meetings теперь снова включен для всех корпоративных клиентов, хотя присоединение Claude может занять немного больше времени, чем обычно. Добавление Клода к новым звонкам и автоматическое присоединение остаются приостановленными для клиентов Team. Мы будем",
+"desc": "Claude Meetings (beta) is joining calls more reliably, and we are monitoring it. It remains enabled for all Enterprise customers. Team customers can again add Claude to new calls manually, and Auto-join is being restored gradually for Team customers.",
 "date": "2026-11-16T15:10:15.167Z",
 "tags": [
 "Claude"
@@ -265,7 +348,7 @@
 "url": "https://stspg.io/01qq3kzyyqzl",
 "kind": [
 "k-inc",
-"крупный сбой · причина найдена"
+"мелкий сбой · причина найдена"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -590,38 +673,6 @@
 "Claude Code"
 ],
 "url": "https://ip.net.coffee/claude/news/20261114a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Прежде чем позволить агенту украсть вашу карту, OpenAI сначала скрывает номер карты.",
-"orig": "让智能体替你刷卡之前，OpenAI 先把卡号藏了起来",
-"desc": "Карточная организация генерирует токены, мобильный телефон генерирует биометрические данные, а ChatGPT только размещает заказы — на это разделение труда стоит смотреть больше, чем на сам кошелек.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261114a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Dark Side of the Moon демонтирует оболочку Каймановых островов и возвращает акции долларовых акционеров обратно на берег",
-"orig": "月之暗面拆掉开曼壳，美元股东的股份搬回境内",
-"desc": "От Каймана до Китая меняется не только место регистрации, но и маршрут листинга и нормативный аналог.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261114a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -1135,23 +1186,6 @@
 "group": "Claude Code"
 },
 {
-"title": "Claude Code v2.1.317",
-"orig": "",
-"desc": "Добавлено предупреждение в /schedule, когда новая запланированная в облаке задача получает соединители, которые вы не запрашивали, и способы их удаления. · Добавлена проверка, которая запрашивает перед тем, как вызов веб-инструмента или инструмента оболочки отправит адрес электронной почты вашей учетной записи в сеть. · Добавлен onFailure: «блокировать» для обратных вызовов перехвата агента SDK, поэтому обратный вызов, который завершается неудачно, блокирует действие, а не позволяет ему выполняться.",
-"date": "2026-11-03T01:25:46Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.317",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
-},
-{
 "title": "Ошибки загрузки файлов в ChatGPT",
 "orig": "File upload errors in ChatGPT",
 "desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
@@ -1408,23 +1442,6 @@
 "kind": [
 "k-ok",
 "авария · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
-"title": "Повышенные ошибки, влияющие на соединители",
-"orig": "Elevated errors affecting Connectors",
-"desc": "Проблема, затрагивающая сайты claude.ai и Claude Cowork, решена.",
-"date": "2026-10-22T03:50:12.630Z",
-"tags": [
-"Claude",
-"MCP"
-],
-"url": "https://stspg.io/4dcr8c005yxc",
-"kind": [
-"k-ok",
-"мелкий сбой · решено"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
