@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-18T11:59:18Z",
+"updated": "2026-11-18T20:46:51Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,70 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "3000 万人在用的微信小微，靠一个小模型压成本",
+"orig": "3000 万人在用的微信小微，靠一个小模型压成本",
+"desc": "同样是 AI 助手，元宝靠投放抢用户，小微靠微信的入口和一个便宜的模型，腾讯这次的思路明显换了",
+"date": "2026-11-19T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261119c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "腾讯一个季度砸 814 亿资本开支，自由现金流转负 691 亿",
+"orig": "腾讯一个季度砸 814 亿资本开支，自由现金流转负 691 亿",
+"desc": "营收和利润都很平稳，真正的大新闻藏在现金流量表里：腾讯第一次为 AI 把账上的净现金花成了净债务",
+"date": "2026-11-19T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261119b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "芯片远程访问也要许可证，一笔 4.8 亿美元 GPU 贷款先停了",
+"orig": "芯片远程访问也要许可证，一笔 4.8 亿美元 GPU 贷款先停了",
+"desc": "规则还没被律师们读透，银行已经先把钱收住了：出口管制第一次实打实地卡在了融资这一环",
+"date": "2026-11-19T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261119a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Elevated conversation errors for Free and Go users",
+"orig": "Elevated conversation errors for Free and Go users",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
+"date": "2026-11-18T12:15:02Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://status.openai.com",
+"kind": [
+"k-ok",
+"мелкий сбой · решено"
+],
+"src": "status.openai.com",
+"group": "Статус OpenAI"
+},
 {
 "title": "Codex CLI 0.170.0",
 "orig": "",
@@ -227,7 +291,7 @@
 {
 "title": "Costs API data is delayed",
 "orig": "Costs API data is delayed",
-"desc": "We've pushed a fix and are monitoring the recovery.",
+"desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
 "date": "2026-11-17T17:46:15Z",
 "tags": [
 "OpenAI",
@@ -235,8 +299,8 @@
 ],
 "url": "https://status.openai.com",
 "kind": [
-"k-inc",
-"мелкий сбой · наблюдают"
+"k-ok",
+"мелкий сбой · решено"
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
@@ -641,55 +705,6 @@
 "OpenAI"
 ],
 "url": "https://ip.net.coffee/ai/news/20261114c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Anthropic IPO отказалась от подписки из материкового Китая и Гонконга, а экспортный контроль затронул книгу андеррайтинга.",
-"orig": "Anthropic IPO 婉拒中国内地与香港认购，出口管制伸进了承销簿",
-"desc": "Одно дело ограничить то, где можно использовать Клода, и другое дело ограничить тех, кто может покупать акции Anthropic. Эта компания переносит прежнюю логику на рынок капитала.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261114b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "OpenAI в очередной раз распускает свою независимую команду по робототехнике и делает ставку на GPT-6 Astra",
-"orig": "OpenAI 再次解散独立机器人团队，把赌注押在 GPT-6 Astra 身上",
-"desc": "От «остановись, если не можешь продолжать» до «не обязательно делать это в одиночку» за одним и тем же решением стоят два совершенно разных суждения.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261114b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "DeepSeek разделяет поиск, чтение файлов и речь на API",
-"orig": "DeepSeek 把搜索、读文件和语音都拆成了 API",
-"desc": "API DeepSeek изменил метод продаж: от продажи моделей до передачи всего набора возможностей приложения разработчикам.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"OpenAI",
-"API"
-],
-"url": "https://ip.net.coffee/ai/news/20261114b.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -1356,22 +1371,6 @@
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
-},
-{
-"title": "Повышенная частота ошибок для большинства размещенных проверок кода и проверок безопасности в частных репозиториях GitHub.",
-"orig": "Elevated error rates for most hosted Code Reviews and Security Reviews on private GitHub repositories",
-"desc": "Теперь проблема решена.",
-"date": "2026-10-27T08:00:50Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://status.openai.com",
-"kind": [
-"k-ok",
-"событие · решено"
-],
-"src": "status.openai.com",
-"group": "Статус OpenAI"
 },
 {
 "title": "Повышенные ошибки для Claude Fable 5.1",
