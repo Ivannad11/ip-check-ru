@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-18T03:02:14Z",
+"updated": "2026-11-18T11:59:18Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,23 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Codex CLI 0.170.0",
+"orig": "",
+"desc": "Added WebRTC negotiation for realtime voice calls in the TUI. · Added automatically refreshed authentication headers for OpenTelemetry HTTP exporters. · Added experimental support for using identically named MCP servers across environments.",
+"date": "2026-11-18T03:40:48Z",
+"tags": [
+"Codex",
+"OpenAI"
+],
+"url": "https://github.com/openai/codex/releases/tag/rust-v0.170.0",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub openai/codex",
+"group": "Codex"
+},
 {
 "title": "Elevated errors affecting the Google Docs connector",
 "orig": "Elevated errors affecting the Google Docs connector",
@@ -69,6 +86,23 @@
 "OpenAI"
 ],
 "url": "https://ip.net.coffee/ai/news/20261118c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Anthropic 让 Claude 应用的 API 账单改由客户来付",
+"orig": "Anthropic 让 Claude 应用的 API 账单改由客户来付",
+"desc": "新上线的 Linked billing 测试版只改变谁掏钱，不改变谁在调用；云厂商渠道、订阅用户和数据保护条款都被划在了范围之外",
+"date": "2026-11-18T00:00:00Z",
+"tags": [
+"Claude",
+"API"
+],
+"url": "https://ip.net.coffee/claude/news/20261118b.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -656,23 +690,6 @@
 "API"
 ],
 "url": "https://ip.net.coffee/ai/news/20261114b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Версия Claude Code для настольных компьютеров открыта для настраиваемых тем, а подбор цветов и динамический фон остается на усмотрение Клода.",
-"orig": "Claude Code 桌面版开放自定义主题，配色和动态背景交给 Claude 来写",
-"desc": "Тема больше не дефолтный скин, а изменение интерфейса, написанное моделью по описанию.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"Claude",
-"Claude Code"
-],
-"url": "https://ip.net.coffee/claude/news/20261114a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
