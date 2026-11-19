@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-19T02:46:50Z",
+"updated": "2026-11-19T11:58:24Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -12,9 +12,27 @@
 "sources_failed": [],
 "items": [
 {
+"title": "Повышенные ошибки для Claude Mythos 5.2 и Claude Fable 5.2.",
+"orig": "Elevated errors for Claude Mythos 5.2 and Claude Fable 5.2",
+"desc": "Проблема, затрагивающая claude.ai, Claude API, Claude Code и Claude Cowork, решена. Воздействие произошло с 00:56 по тихоокеанскому времени / 08:56 по всемирному координированному времени до 01:11 по тихоокеанскому времени / 09:11 по всемирному координированному времени.",
+"date": "2026-11-19T09:10:24.815Z",
+"tags": [
+"Claude",
+"Claude Code",
+"API"
+],
+"url": "https://stspg.io/nlb5fptv28h5",
+"kind": [
+"k-ok",
+"крупный сбой · решено"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
+{
 "title": "Gemini CLI v0.69.0",
 "orig": "",
-"desc": "fix(core,cli): preserve literal $ characters during template placeholder replacement · feat(cli): add /stats heatmap subcommand for daily token usage · fix(core): prevent __GCLI_EXPAND_TARGET__ env collision in expandEnvVars",
+"desc": "fix(core,cli): сохранить литеральные символы $ во время замены заполнителя шаблона · feat(cli): добавить подкоманду /stats Heatmap для ежедневного использования токенов · fix(core): предотвратить коллизию __GCLI_EXPAND_TARGET__ env в expandEnvVars",
 "date": "2026-11-19T01:45:47Z",
 "tags": [
 "Gemini"
@@ -30,7 +48,7 @@
 {
 "title": "Claude Code v2.1.328",
 "orig": "",
-"desc": "Added auto mode for Claude Opus 4.6 and Sonnet 4.6 on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude apps gateway; interactive sessions with no permission mode start in it · Added \"onFailure\": \"block\" for mcp_tool hooks, as for command and HTTP hooks: a hook whose call fails blocks the action · Added a warning when a message from a session that skips permission prompts may be held and dropped by a cloud session",
+"desc": "Добавлен автоматический режим для Claude Opus 4.6 и Sonnet 4.6 на Amazon Bedrock, платформе агентов Google Cloud, Microsoft Foundry и шлюзе приложений Claude; в нем запускаются интерактивные сеансы без режима разрешений. · Добавлен «onFailure»: «block» для перехватчиков mcp_tool, а также для перехватчиков команд и HTTP: перехватчик, вызов которого завершается неудачно, блокирует действие · Добавлено предупреждение, когда сообщение из сеанса, который пропускает запросы разрешений, может быть удержано и удалено облачным сеансом.",
 "date": "2026-11-19T01:14:04Z",
 "tags": [
 "Claude Code",
@@ -43,6 +61,22 @@
 ],
 "src": "GitHub anthropics/claude-code",
 "group": "Claude Code"
+},
+{
+"title": "美国拟让企业公开「在用哪家中国 AI」",
+"orig": "美国拟让企业公开「在用哪家中国 AI」",
+"desc": "不禁用，只让企业自己说出来：一份披露要求能改变公关算盘，未必改变得了成本表。",
+"date": "2026-11-19T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261119e.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
 },
 {
 "title": "三倍速度、六成价钱：谷歌给 Gemini 4 补上中间档 Neon",
@@ -78,6 +112,22 @@
 "group": "Статьи net.coffee"
 },
 {
+"title": "OpenAI 让模型下场画芯片，AMD GPU 指标最高提升 14%",
+"orig": "OpenAI 让模型下场画芯片，AMD GPU 指标最高提升 14%",
+"desc": "自研推理芯片省下一成面积、替 AMD 改出两位数提升，OpenAI 想证明大模型能在最讲究正确性的芯片后端干活。",
+"date": "2026-11-19T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261119b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
 "title": "腾讯一个季度砸 814 亿资本开支，自由现金流转负 691 亿",
 "orig": "腾讯一个季度砸 814 亿资本开支，自由现金流转负 691 亿",
 "desc": "营收和利润都很平稳，真正的大新闻藏在现金流量表里：腾讯第一次为 AI 把账上的净现金花成了净债务",
@@ -86,6 +136,38 @@
 "OpenAI"
 ],
 "url": "https://ip.net.coffee/ai/news/20261119b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Anthropic IPO 定价 83 美元，比区间上沿高出 5 美元",
+"orig": "Anthropic IPO 定价 83 美元，比区间上沿高出 5 美元",
+"desc": "价格和股数同时上调，老股东几乎没卖，这次上市几乎全是给公司补血。",
+"date": "2026-11-19T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261119a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "富士康旗下富智康拿下 OpenAI 手机组装订单",
+"orig": "富士康旗下富智康拿下 OpenAI 手机组装订单",
+"desc": "此前外界只知道 OpenAI 在做无屏设备，供应链里冒出的手机订单让它的硬件路线图看上去更宽。",
+"date": "2026-11-19T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261119a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -110,7 +192,7 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "Elevated conversation errors for Free and Go users",
+"title": "Повышенный уровень ошибок диалога для пользователей Free и Go.",
 "orig": "Elevated conversation errors for Free and Go users",
 "desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
 "date": "2026-11-18T12:15:02Z",
@@ -128,7 +210,7 @@
 {
 "title": "Codex CLI 0.170.0",
 "orig": "",
-"desc": "Added WebRTC negotiation for realtime voice calls in the TUI. · Added automatically refreshed authentication headers for OpenTelemetry HTTP exporters. · Added experimental support for using identically named MCP servers across environments.",
+"desc": "Добавлено согласование WebRTC для голосовых вызовов в реальном времени в TUI. · Добавлены автоматически обновляемые заголовки аутентификации для экспортеров HTTP OpenTelemetry. · Добавлена экспериментальная поддержка использования серверов MCP с одинаковыми именами в разных средах.",
 "date": "2026-11-18T03:40:48Z",
 "tags": [
 "Codex",
@@ -143,9 +225,9 @@
 "group": "Codex"
 },
 {
-"title": "Elevated errors affecting the Google Docs connector",
+"title": "Повышенные ошибки, влияющие на коннектор Google Docs.",
 "orig": "Elevated errors affecting the Google Docs connector",
-"desc": "The issue affecting editing documents with the Google Docs connector on claude.ai, Claude Code, and Claude Cowork has been resolved. Impact occurred from 16:19 PT on November 17 / 00:19 UTC on November 18 to 17:33 PT on November 17 / 01:33 UTC on November 18.",
+"desc": "Решена проблема, связанная с редактированием документов с помощью коннектора Google Docs на сайтах claude.ai, Claude Code и Claude Cowork. Удар произошел с 16:19 по тихоокеанскому времени 17 ноября / 00:19 по всемирному координированному времени 18 ноября до 17:33 по тихоокеанскому времени 17 ноября / 01:33 по всемирному координированному времени 18 ноября.",
 "date": "2026-11-18T01:13:15.170Z",
 "tags": [
 "Claude",
@@ -291,7 +373,7 @@
 {
 "title": "Claude Code v2.1.327",
 "orig": "",
-"desc": "Added a confirmation before /install-github-app changes a repository · Added claude mcp add-json <name> - to read the server's JSON from stdin, so tokens can stay off the command line; not available inside a Claude Code session · Added a line when a resumed session's earlier messages can't be loaded",
+"desc": "Добавлено подтверждение перед тем, как /install-github-app меняет репозиторий · Добавлен claude mcp add-json <name> — для чтения JSON сервера из стандартного ввода, чтобы токены не попадали в командную строку; недоступно внутри сеанса Claude Code · Добавлена строка, когда предыдущие сообщения возобновленного сеанса не могут быть загружены.",
 "date": "2026-11-17T23:17:45Z",
 "tags": [
 "Claude Code",
@@ -308,7 +390,7 @@
 {
 "title": "Codex CLI 0.169.1",
 "orig": "",
-"desc": "## Chores No verified release highlights available. ## Changelog Full Changelog: https://github.com/openai/codex/compare/rust-v0.169.0...rust-v0.169.1",
+"desc": "## Домашняя работа Нет проверенных основных моментов выпуска. ## Список изменений Полный список изменений: https://github.com/openai/codex/compare/rust-v0.169.0...rust-v0.169.1",
 "date": "2026-11-17T22:21:10Z",
 "tags": [
 "Codex",
@@ -323,9 +405,9 @@
 "group": "Codex"
 },
 {
-"title": "Some users unable to sign in with Apple on claude.ai and the Claude iOS app",
+"title": "Некоторые пользователи не могут войти в систему с помощью Apple на сайте claude.ai и в приложении Claude для iOS.",
 "orig": "Some users unable to sign in with Apple on claude.ai and the Claude iOS app",
-"desc": "The issue affecting Sign in with Apple on claude.ai and the Claude iOS app has been resolved. Impact occurred from 08:40 PT / 16:40 UTC to 12:20 PT / 20:20 UTC.",
+"desc": "Проблема, влияющая на вход с помощью Apple на сайте claude.ai и в приложении Claude iOS, решена. Воздействие произошло с 08:40 по тихоокеанскому времени / 16:40 по всемирному координированному времени до 12:20 по тихоокеанскому времени / 20:20 по всемирному координированному времени.",
 "date": "2026-11-17T18:55:53.499Z",
 "tags": [
 "Claude"
@@ -339,7 +421,7 @@
 "group": "Статус Claude"
 },
 {
-"title": "Costs API data is delayed",
+"title": "Данные API затрат задерживаются",
 "orig": "Costs API data is delayed",
 "desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
 "date": "2026-11-17T17:46:15Z",
@@ -486,9 +568,9 @@
 "group": "Claude Code"
 },
 {
-"title": "Claude Meetings auto-join limited on the Team plan",
+"title": "Автоматическое присоединение к Claude Meetings ограничено в плане Team.",
 "orig": "Claude Meetings auto-join limited on the Team plan",
-"desc": "Claude Meetings (beta) is joining calls normally. Enterprise and Team customers can add Claude to calls. Auto-join is available for all Enterprise customers and some Team customers. We'll continue rolling out auto-join to additional Team customers in the coming days.",
+"desc": "Claude Meetings (бета-версия) присоединяется к звонкам в обычном режиме. Клиенты Enterprise и Team могут добавлять Клода к звонкам. Автоматическое присоединение доступно для всех клиентов Enterprise и некоторых клиентов Team. В ближайшие дни мы продолжим внедрение автоматического присоединения для дополнительных клиентов Team.",
 "date": "2026-11-16T15:10:15.167Z",
 "tags": [
 "Claude"
@@ -634,38 +716,6 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "0,7 балла не хватает догнать Клода Опуса 5? Два табеля успеваемости Meituan LongCat-2.5",
-"orig": "差 0.7 分追上 Claude Opus 5？美团 LongCat-2.5 的两张成绩单",
-"desc": "Он почти равен старому эталону, но все же немного отстает от нового; больше всего стоит обратить внимание на лицензию MIT и маршрут обучения, который не зависит от NVIDIA.",
-"date": "2026-11-15T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261115b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "На фоне разногласий по поводу отставки Джен-Сюня Хуана Anthropic был вовлечен в спекуляции о том, «кто дал подсказки».",
-"orig": "黄仁勋去职风波里，Anthropic 被卷进「谁递的线索」猜测",
-"desc": "The Post описала этот вопрос как тайную битву за ухо Трампа; независимо от того, причастен ли Anthropic или нет, в настоящее время существуют только предположения и никаких доказательств.",
-"date": "2026-11-15T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261115a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Некоторые пользователи не могут зарегистрироваться в Apple в приложении Claude iOS.",
 "orig": "Some users unable to sign up with Apple on the Claude iOS app",
 "desc": "Проблема, влияющая на вход с помощью Apple в приложении Claude для iOS, решена. Удар произошел с 16:29 по тихоокеанскому времени 13 ноября / 00:29 по всемирному координированному времени 14 ноября до 10:31 по тихоокеанскому времени / 18:31 по всемирному координированному времени 16 ноября.",
@@ -713,38 +763,6 @@
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
-},
-{
-"title": "Cloudflare с открытым исходным кодом Kitesurf: браузер для агентов искусственного интеллекта, обходящий Chromium",
-"orig": "Cloudflare 开源 Kitesurf：给 AI 智能体用的浏览器，绕开了 Chromium",
-"desc": "Агенту не нужны окна, вкладки или рендеринг шрифтов для просмотра веб-страниц. Что ему нужно, так это возможность запускать сценарии, читать DOM и выбрасывать их после использования. Кайтсерфинг делает ставку на эту разницу.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261114e.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "«Это не ИИ»: во время забастовки складов в Новой Зеландии обе стороны ругаются из-за одного слова",
-"orig": "「这不是 AI」：新西兰仓库罢工里，双方争的是一个词",
-"desc": "Будет ли эта технология называться ИИ или нет, это вопрос связей с общественностью. Посекундная оценка — это то, что действительно волнует работников.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261114d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
 },
 {
 "title": "Claude Code v2.1.325",
@@ -1462,24 +1480,6 @@
 "group": "Статус Claude"
 },
 {
-"title": "Повышенные ошибки для Claude Fable 5.1, Sonnet 5.5 и Haiku 5.5.",
-"orig": "Elevated errors for Claude Fable 5.1, Sonnet 5.5, and Haiku 5.5",
-"desc": "Исправлена проблема с моделями Клода. Удар произошел с 16:28 по тихоокеанскому времени / 23:28 по всемирному координированному времени 23 октября до 16:59 по тихоокеанскому времени / 23:59 по всемирному координированному времени 23 октября.",
-"date": "2026-10-23T23:37:42.667Z",
-"tags": [
-"Claude",
-"Claude Code",
-"API"
-],
-"url": "https://stspg.io/gqp288t3qzpt",
-"kind": [
-"k-ok",
-"авария · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
 "title": "Gemini CLI v0.65.0",
 "orig": "",
 "desc": "fix(cli): принудительно применять настройки рабочей области только для чтения в ненадежных папках · fix(core): избегать дублирования ответов инструмента при возобновлении сеансов · fix(core): предотвращать удаление истории возобновленных сеансов при быстром выходе",
@@ -1931,6 +1931,21 @@
 "6c638bb1a79ccd32": "Параметр 224B активирует только 12B. Tencent снизила цену до минимума, сосредоточив внимание на токенах для агентов и пакетных задачах.",
 "b4b7eeedc03a80d2": "Проблема, влияющая на вход с помощью Apple в приложении Claude для iOS, решена. Удар произошел с 16:29 по тихоокеанскому времени 13 ноября / 00:29 по всемирному координированному времени 14 ноября до 10:31 по тихоокеанскому времени / 18:31 по всемирному координированному времени 16 ноября.",
 "9033551a603ba592": "Сегодня спрос на Claude Meetings (бета-версия) превысил ожидаемый, и Клод не смог присоединиться ко многим звонкам. Мы внедрили меры по снижению риска и продолжаем отслеживать и повышать надежность соединений. Claude Meetings теперь снова включен для всех корпоративных клиентов, хотя присоединение Claude может занять немного больше времени, чем обычно. Добавление Клода к новым звонкам и автоматическое присоединение остаются приостановленными для клиентов Team. Мы будем",
-"4476ce544a0dd302": "Добавлена поддержка включения режима кода при включенных командах агентов; если вы уже включили его, сеансы с включенными командами теперь начинаются в режиме кода. · Добавлено предупреждение при запуске, когда значение --allowedTools, --disallowedTools или --tools имеет запись, которая не выглядит как полное правило. · Добавлено сообщение, объясняющее, почему серверы MCP перестают загружаться, когда администратор добавляет управляемый-mcp.json во время сеанса."
+"4476ce544a0dd302": "Добавлена поддержка включения режима кода при включенных командах агентов; если вы уже включили его, сеансы с включенными командами теперь начинаются в режиме кода. · Добавлено предупреждение при запуске, когда значение --allowedTools, --disallowedTools или --tools имеет запись, которая не выглядит как полное правило. · Добавлено сообщение, объясняющее, почему серверы MCP перестают загружаться, когда администратор добавляет управляемый-mcp.json во время сеанса.",
+"663881b751193799": "Повышенные ошибки для Claude Mythos 5.2 и Claude Fable 5.2.",
+"04232f4adb64b943": "Проблема, затрагивающая claude.ai, Claude API, Claude Code и Claude Cowork, решена. Воздействие произошло с 00:56 по тихоокеанскому времени / 08:56 по всемирному координированному времени до 01:11 по тихоокеанскому времени / 09:11 по всемирному координированному времени.",
+"ded12eaa9a614a5c": "Автоматическое присоединение к Claude Meetings ограничено в плане Team.",
+"3758a19bb6957ccb": "Claude Meetings (бета-версия) присоединяется к звонкам в обычном режиме. Клиенты Enterprise и Team могут добавлять Клода к звонкам. Автоматическое присоединение доступно для всех клиентов Enterprise и некоторых клиентов Team. В ближайшие дни мы продолжим внедрение автоматического присоединения для дополнительных клиентов Team.",
+"c226c5b304390fe8": "Повышенные ошибки, влияющие на коннектор Google Docs.",
+"93e01d5afc768e40": "Решена проблема, связанная с редактированием документов с помощью коннектора Google Docs на сайтах claude.ai, Claude Code и Claude Cowork. Удар произошел с 16:19 по тихоокеанскому времени 17 ноября / 00:19 по всемирному координированному времени 18 ноября до 17:33 по тихоокеанскому времени 17 ноября / 01:33 по всемирному координированному времени 18 ноября.",
+"65062c91f2ca447c": "Некоторые пользователи не могут войти в систему с помощью Apple на сайте claude.ai и в приложении Claude для iOS.",
+"295fead7f46ada4a": "Проблема, влияющая на вход с помощью Apple на сайте claude.ai и в приложении Claude iOS, решена. Воздействие произошло с 08:40 по тихоокеанскому времени / 16:40 по всемирному координированному времени до 12:20 по тихоокеанскому времени / 20:20 по всемирному координированному времени.",
+"2840a649119c68f5": "Данные API затрат задерживаются",
+"fb79304f8d974dbd": "Повышенный уровень ошибок диалога для пользователей Free и Go.",
+"e4439fcd241c623e": "Добавлен автоматический режим для Claude Opus 4.6 и Sonnet 4.6 на Amazon Bedrock, платформе агентов Google Cloud, Microsoft Foundry и шлюзе приложений Claude; в нем запускаются интерактивные сеансы без режима разрешений. · Добавлен «onFailure»: «block» для перехватчиков mcp_tool, а также для перехватчиков команд и HTTP: перехватчик, вызов которого завершается неудачно, блокирует действие · Добавлено предупреждение, когда сообщение из сеанса, который пропускает запросы разрешений, может быть удержано и удалено облачным сеансом.",
+"40f515615c6977f1": "Добавлено подтверждение перед тем, как /install-github-app меняет репозиторий · Добавлен claude mcp add-json <name> — для чтения JSON сервера из стандартного ввода, чтобы токены не попадали в командную строку; недоступно внутри сеанса Claude Code · Добавлена строка, когда предыдущие сообщения возобновленного сеанса не могут быть загружены.",
+"37d27c2c74846141": "Добавлено согласование WebRTC для голосовых вызовов в реальном времени в TUI. · Добавлены автоматически обновляемые заголовки аутентификации для экспортеров HTTP OpenTelemetry. · Добавлена экспериментальная поддержка использования серверов MCP с одинаковыми именами в разных средах.",
+"ba3ef4af29f4a053": "## Домашняя работа Нет проверенных основных моментов выпуска. ## Список изменений Полный список изменений: https://github.com/openai/codex/compare/rust-v0.169.0...rust-v0.169.1",
+"d8a272ecbcbfe5d4": "fix(core,cli): сохранить литеральные символы $ во время замены заполнителя шаблона · feat(cli): добавить подкоманду /stats Heatmap для ежедневного использования токенов · fix(core): предотвратить коллизию __GCLI_EXPAND_TARGET__ env в expandEnvVars"
 }
 }
