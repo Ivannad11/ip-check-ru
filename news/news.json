@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-18T20:46:51Z",
+"updated": "2026-11-19T02:46:50Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,56 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Gemini CLI v0.69.0",
+"orig": "",
+"desc": "fix(core,cli): preserve literal $ characters during template placeholder replacement · feat(cli): add /stats heatmap subcommand for daily token usage · fix(core): prevent __GCLI_EXPAND_TARGET__ env collision in expandEnvVars",
+"date": "2026-11-19T01:45:47Z",
+"tags": [
+"Gemini"
+],
+"url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.69.0",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub google-gemini/gemini-cli",
+"group": "Gemini CLI"
+},
+{
+"title": "Claude Code v2.1.328",
+"orig": "",
+"desc": "Added auto mode for Claude Opus 4.6 and Sonnet 4.6 on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry and Claude apps gateway; interactive sessions with no permission mode start in it · Added \"onFailure\": \"block\" for mcp_tool hooks, as for command and HTTP hooks: a hook whose call fails blocks the action · Added a warning when a message from a session that skips permission prompts may be held and dropped by a cloud session",
+"date": "2026-11-19T01:14:04Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.328",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
+},
+{
+"title": "三倍速度、六成价钱：谷歌给 Gemini 4 补上中间档 Neon",
+"orig": "三倍速度、六成价钱：谷歌给 Gemini 4 补上中间档 Neon",
+"desc": "Gemini 4 产品线一个月内补齐三档，Neon 主打复杂编程与知识工作，账要按任务而不是按单价算。",
+"date": "2026-11-19T00:00:00Z",
+"tags": [
+"OpenAI",
+"Gemini"
+],
+"url": "https://ip.net.coffee/ai/news/20261119d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "3000 万人在用的微信小微，靠一个小模型压成本",
 "orig": "3000 万人在用的微信小微，靠一个小模型压成本",
@@ -436,17 +486,17 @@
 "group": "Claude Code"
 },
 {
-"title": "Клод не может присоединиться к собраниям",
-"orig": "Claude unable to join meetings",
-"desc": "Claude Meetings (beta) is joining calls more reliably, and we are monitoring it. It remains enabled for all Enterprise customers. Team customers can again add Claude to new calls manually, and Auto-join is being restored gradually for Team customers.",
+"title": "Claude Meetings auto-join limited on the Team plan",
+"orig": "Claude Meetings auto-join limited on the Team plan",
+"desc": "Claude Meetings (beta) is joining calls normally. Enterprise and Team customers can add Claude to calls. Auto-join is available for all Enterprise customers and some Team customers. We'll continue rolling out auto-join to additional Team customers in the coming days.",
 "date": "2026-11-16T15:10:15.167Z",
 "tags": [
 "Claude"
 ],
 "url": "https://stspg.io/01qq3kzyyqzl",
 "kind": [
-"k-inc",
-"мелкий сбой · причина найдена"
+"k-ok",
+"мелкий сбой · решено"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -689,22 +739,6 @@
 "OpenAI"
 ],
 "url": "https://ip.net.coffee/ai/news/20261114d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Около 60 человек были уволены, в результате чего у Grok Imagine осталась лишь небольшая команда, которая поддерживала свет.",
-"orig": "约 60 人被裁，Grok Imagine 只剩一支维持运转的小队",
-"desc": "Продукт по-прежнему можно использовать, но исследования и разработки практически прекратились — через девять месяцев после слияния xAI с SpaceX сначала был закрыт видеобизнес.",
-"date": "2026-11-14T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261114c.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -1201,23 +1235,6 @@
 "group": "Gemini CLI"
 },
 {
-"title": "Claude Code v2.1.318",
-"orig": "",
-"desc": "Добавлена запись вашего ответа, когда Claude Code запрашивает включить моды, которые он пишет во время сеанса. · Добавлена take_role в мантии выше шлюза приложений Claude, для роли в другой учетной записи AWS и для распределения затрат AWS для каждого разработчика. · Добавлена опция усилий в $.model.fork мода, поэтому быстрая дополнительная работа может выполняться с минимальными усилиями, которые использует сеанс; результат сообщает об отправленных усилиях",
-"date": "2026-11-04T00:01:03Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
-},
-{
 "title": "Ошибки загрузки файлов в ChatGPT",
 "orig": "File upload errors in ChatGPT",
 "desc": "Все затронутые службы снова работают в обычном режиме. Приносим извинения за сбои и ценим ваше терпение.",
@@ -1471,22 +1488,6 @@
 "Gemini"
 ],
 "url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.65.0",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub google-gemini/gemini-cli",
-"group": "Gemini CLI"
-},
-{
-"title": "Gemini CLI v0.64.0",
-"orig": "",
-"desc": "refactor(a2a-server): реализовать логику миграции настроек V1 на V2 · fix(acp): соединить PromptResponse.usage и отправить уведомления об обновлении use_update · Журнал изменений для v0.63.0-preview.0",
-"date": "2026-10-13T20:44:46Z",
-"tags": [
-"Gemini"
-],
-"url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.64.0",
 "kind": [
 "k-rel",
 "новая версия"
