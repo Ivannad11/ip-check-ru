@@ -1,17 +1,196 @@
 {
-"updated": "2026-11-20T02:23:45Z",
+"updated": "2026-11-20T11:56:15Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
-"Статус OpenAI"
-],
-"sources_failed": [
+"Статус OpenAI",
 "Claude Code",
 "Codex",
 "Gemini CLI",
 "MCP"
 ],
+"sources_failed": [],
 "items": [
+{
+"title": "Codex CLI 0.171.0",
+"orig": "",
+"desc": "Added GPT-6.2 Sol and Astra to model catalogs, with Sol as the default catalog selection. · Enabled the TUI workspace by default, with searchable document previews, image previews, and subagent transcripts alongside the main conversation. · Added configurable undo and redo shortcuts to the non-Vim prompt composer, including restoration of attachments and large pastes.",
+"date": "2026-11-20T00:44:47Z",
+"tags": [
+"Codex",
+"OpenAI"
+],
+"url": "https://github.com/openai/codex/releases/tag/rust-v0.171.0",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub openai/codex",
+"group": "Codex"
+},
+{
+"title": "21 个工作台，豆包把 AI 办公按职业切开",
+"orig": "21 个工作台，豆包把 AI 办公按职业切开",
+"desc": "先摊开模型和计费，再用职业化工作台留住用户",
+"date": "2026-11-20T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261120e.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "「这不是我」：TikTok 把深伪提醒推向全球",
+"orig": "「这不是我」：TikTok 把深伪提醒推向全球",
+"desc": "肖像检测从美国测试走向全球，公开检测器也有清晰的能力边界",
+"date": "2026-11-20T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261120d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Gemini 接管 Mac 光标，但给用户留了暂停键",
+"orig": "Gemini 接管 Mac 光标，但给用户留了暂停键",
+"desc": "「电脑操作」能力从 Ultra 下放到 Plus、Pro 订阅，跑在独立后台窗口里，关键步骤要用户点头",
+"date": "2026-11-20T00:00:00Z",
+"tags": [
+"OpenAI",
+"Gemini"
+],
+"url": "https://ip.net.coffee/ai/news/20261120c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "苹果一边给外部 AI 代理加门槛，一边自己造代理",
+"orig": "苹果一边给外部 AI 代理加门槛，一边自己造代理",
+"desc": "一则招聘启事和一次权限收紧，同时出现在 Mac 上",
+"date": "2026-11-20T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261120b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "新规落地次日，一笔 4.8 亿美元的 GPU 贷款先停了",
+"orig": "新规落地次日，一笔 4.8 亿美元的 GPU 贷款先停了",
+"desc": "借款方是新加坡云服务商 Aolani，算力最终给字节跳动在马来西亚用；五家银行在新的许可门槛面前选择先按暂停键",
+"date": "2026-11-20T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261120b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Anthropic 上市次日，亚洲芯片股集体失血",
+"orig": "Anthropic 上市次日，亚洲芯片股集体失血",
+"desc": "一场创纪录的上市没能给 AI 交易续命，资金反而借着高点离场。",
+"date": "2026-11-20T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261120a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "dot 开始向 Plus 放量，ChatGPT 手机端同步改版",
+"orig": "dot 开始向 Plus 放量，ChatGPT 手机端同步改版",
+"desc": "一个主动型助手要从 Pro 专属走向更多人，入口也跟着重新排了一遍。",
+"date": "2026-11-20T00:00:00Z",
+"tags": [
+"OpenAI",
+"ChatGPT"
+],
+"url": "https://ip.net.coffee/gpt/news/20261120a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "99.94% 相似的固件，让 AMD 一天跌去近 8%",
+"orig": "99.94% 相似的固件，让 AMD 一天跌去近 8%",
+"desc": "报告没有证明 AMD 违法，但它把出口管制的焦点从芯片本身推到了软件更新上。",
+"date": "2026-11-20T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261120a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Claude Code v2.1.329",
+"orig": "",
+"desc": "Added a trust dialog warning that says where a folder's hooks are declared · Added a warning in the conversation, in Claude Desktop and other non-interactive hosts, when hooks in managed settings fail to load · Added this session's scheduled tasks, /loop wakeups, the goal and this conversation's forks to /tasks; x stops one after asking",
+"date": "2026-11-19T22:14:41Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
+},
+{
+"title": "Gemini CLI v0.70.0",
+"orig": "",
+"desc": "Changelog for v0.69.0-preview.0 · Changelog for v0.68.0 · chore(release): bump version to 0.70.0-nightly.20261110.g1603e9bab",
+"date": "2026-11-19T21:08:05Z",
+"tags": [
+"Gemini"
+],
+"url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.70.0",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub google-gemini/gemini-cli",
+"group": "Gemini CLI"
+},
 {
 "title": "Повышенная частота ошибок для запросов gpt-6 Luna API.",
 "orig": "Elevated error rates for gpt-6 Luna API requests",
@@ -553,22 +732,6 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "При цене 0,07 доллара США за миллион входных токенов флэш-память Tencent Hunyuan Hy4 занимает лидирующие позиции на рынке.",
-"orig": "每百万输入 token 0.07 美元，腾讯混元 Hy4 flash 抢跑量市场",
-"desc": "Параметр 224B активирует только 12B. Tencent снизила цену до минимума, сосредоточив внимание на токенах для агентов и пакетных задачах.",
-"date": "2026-11-17T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261117a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Claude Code v2.1.326",
 "orig": "",
 "desc": "Добавлена поддержка включения режима кода при включенных командах агентов; если вы уже включили его, сеансы с включенными командами теперь начинаются в режиме кода. · Добавлено предупреждение при запуске, когда значение --allowedTools, --disallowedTools или --tools имеет запись, которая не выглядит как полное правило. · Добавлено сообщение, объясняющее, почему серверы MCP перестают загружаться, когда администратор добавляет управляемый-mcp.json во время сеанса.",
@@ -618,120 +781,6 @@
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
-},
-{
-"title": "Apple набирает 200 000 человек для тестирования искусственного интеллекта в области здравоохранения, но данные исследований не будут использоваться для обучения моделей",
-"orig": "苹果招募 20 万人测试健康 AI，研究数据不拿去训练模型",
-"desc": "Ответ кроется в медицинской литературе: 200 000 человек сначала наблюдаются, прежде чем подключиться к Интернету. Apple установила более высокий порог для ИИ в сфере здравоохранения.",
-"date": "2026-11-16T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261116e.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Прервав долгие разговоры и нажав ограничение на ввод, DeepSeek назвал причиной ограничения недостаточную вычислительную мощность.",
-"orig": "砍长对话、压输入上限，DeepSeek 以算力不足为由限额",
-"desc": "Все три ограничения касаются слова «длинный»: чем длиннее контекст, тем дороже обходится вывод. Трудно одновременно удерживать свободный, неограниченный и длинный контекст.",
-"date": "2026-11-16T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261116d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "2,4 триллиона параметров, стоимость одной задачи снижена на 60%: Alibaba выпускает Qwen4-Max",
-"orig": "2.4 万亿参数、单任务成本降六成：阿里发布 Qwen4-Max",
-"desc": "На этот раз Alibaba попросила клиентов посчитать «сколько стоит один заказ» вместо «сколько стоит миллион токенов?»",
-"date": "2026-11-16T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261116c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Текстовый водяной знак Grok по умолчанию отключен, ChatGPT по-прежнему используется только для меток в ЕС.",
-"orig": "Grok 文本水印改回默认关闭，ChatGPT 仍只在欧盟打标",
-"desc": "xAI, которая дважды в течение недели меняла формулировку, и OpenAI, которая включает и выключает водяные знаки в зависимости от региона, превратили вопрос о том, следует ли отмечать текст AI или нет, в вопрос о соответствии требованиям.",
-"date": "2026-11-16T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/gpt/news/20261116b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Сообщается, что количество петиций превысило 150 000, и Хуан Жэньсюнь рассматривает возможность возвращения в Nvidia.",
-"orig": "请愿书过十五万，黄仁勋据报考虑重返英伟达",
-"desc": "С одной стороны, сотни тысяч людей подписали подписи с просьбой вернуться, а с другой стороны, совет директоров постучался в дверь Арма: до того, как стало известно заключение расследования, кадровый спор гиганта по производству ИИ-чипов все еще продолжался с обеих сторон.",
-"date": "2026-11-16T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261116b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Команда Кодекса сообщила, что ошибка емкости исправлена, но пользователь ответил, что она еще не исправлена.",
-"orig": "Codex 团队称容量报错已修好，用户回帖说还没好",
-"desc": "Было объявлено, что с июня по ноябрь эта строка отчетов об ошибках обрабатывалась более одного раза; проблема с емкостью была «исправлена», а пользователь «все еще был там», что может быть правдой одновременно.",
-"date": "2026-11-16T00:00:00Z",
-"tags": [
-"OpenAI",
-"Codex"
-],
-"url": "https://ip.net.coffee/gpt/news/20261116a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Huawei делает ставку на Pangu 2.1 Pro на коде Hongmeng ArkTS",
-"orig": "华为把盘古 2.1 Pro 押在鸿蒙 ArkTS 代码上",
-"desc": "Маленький номер версии, большой поворот: 2.1 Pro больше не борется за общий список, а сначала пишет код для разработчиков Hongmeng и инженеров Ascend",
-"date": "2026-11-16T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261116a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
 },
 {
 "title": "Некоторые пользователи не могут зарегистрироваться в Apple в приложении Claude iOS.",
@@ -1036,23 +1085,6 @@
 "group": "Статус Claude"
 },
 {
-"title": "Codex CLI 0.167.1",
-"orig": "",
-"desc": "## Список изменений Полный список изменений: https://github.com/openai/codex/compare/rust-v0.167.0...rust-v0.167.1",
-"date": "2026-11-10T21:32:01Z",
-"tags": [
-"Codex",
-"OpenAI"
-],
-"url": "https://github.com/openai/codex/releases/tag/rust-v0.167.1",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub openai/codex",
-"group": "Codex"
-},
-{
 "title": "Gemini CLI v0.68.0",
 "orig": "",
 "desc": "Журнал изменений для версии 0.67.0-preview.0 · Журнал изменений для версии 0.66.0 · Документация (файл сведений): пояснение области применения, ограничений и набора инструментов Gemini CLI.",
@@ -1202,23 +1234,6 @@
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
-},
-{
-"title": "Claude Code v2.1.319",
-"orig": "",
-"desc": "Изменен автоматический режим с отключением телеметрии или флагов функций, в том числе за шлюзами LLM: вызовы, которые сервер не может проверить, запрашиваются или отклоняются, без возврата к встроенному классификатору; установите CLAUDE_CODE_AUTO_MODE_SERVER=0, чтобы продолжать его использовать (Bedrock, Vertex и Foundry остались без изменений) · Изменен автоматический режим за шлюзом LLM: CLAUDE_CODE_AUTO_MODE_SERVER=1 включает проверку на стороне сервера даже при установленном CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS; если в управляемых настройках установлено последнее, они также должны установить 1. · Добавлена поддержка задач MCP в терминале: когда сервер MCP запускает вызов инструмента как задачу, Claude Code сразу же перемещает его в фоновый режим и сообщает Клоду результат после его завершения.",
-"date": "2026-11-06T17:04:01Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
 },
 {
 "title": "Работа ChatGPT и ошибки точек",
