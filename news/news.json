@@ -1,15 +1,16 @@
 {
-"updated": "2026-11-19T20:46:26Z",
+"updated": "2026-11-20T02:23:45Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
-"Статус OpenAI",
+"Статус OpenAI"
+],
+"sources_failed": [
 "Claude Code",
 "Codex",
 "Gemini CLI",
 "MCP"
 ],
-"sources_failed": [],
 "items": [
 {
 "title": "Повышенная частота ошибок для запросов gpt-6 Luna API.",
