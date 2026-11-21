@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-20T20:32:12Z",
+"updated": "2026-11-21T02:29:42Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -12,6 +12,40 @@
 "sources_failed": [],
 "items": [
 {
+"title": "台积电对大陆客户的先进制程线，从 7nm 退到了 16nm",
+"orig": "台积电对大陆客户的先进制程线，从 7nm 退到了 16nm",
+"desc": "规则条文没写纳米数，16nm 是代工厂自己划的线；获批名单里有英伟达、AMD、苹果，没有大陆企业。",
+"date": "2026-11-21T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261121c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "三秒循环动图，Gemini 跟着 ChatGPT 做起了 GIF",
+"orig": "三秒循环动图，Gemini 跟着 ChatGPT 做起了 GIF",
+"desc": "需要 Google AI 订阅，首批八国逐步放量；ChatGPT 约两周前已上线同类功能。",
+"date": "2026-11-21T00:00:00Z",
+"tags": [
+"OpenAI",
+"ChatGPT",
+"Gemini"
+],
+"url": "https://ip.net.coffee/ai/news/20261121b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
 "title": "Anthropic 数学家称借 Claude 证出黎曼猜想，25 万页证明还在等人读完",
 "orig": "Anthropic 数学家称借 Claude 证出黎曼猜想，25 万页证明还在等人读完",
 "desc": "证明以 Lean 代码公开，机器检查通过；但尚无外部专家完成审阅，作者自己也说没有完全吃透其中的数学。",
@@ -20,6 +54,22 @@
 "Claude"
 ],
 "url": "https://ip.net.coffee/claude/news/20261121a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "OpenAI 给推理链上锁，红队提取成功率从 54% 掉到 0.2%",
+"orig": "OpenAI 给推理链上锁，红队提取成功率从 54% 掉到 0.2%",
+"desc": "数字来自 OpenAI 内部评测；同一篇文章里还有封号规模、API 新限制和一份立法支持清单。",
+"date": "2026-11-21T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261121a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -42,6 +92,23 @@
 ],
 "src": "ip.net.coffee/news",
 "group": "Статьи net.coffee"
+},
+{
+"title": "Claude Code v2.1.330",
+"orig": "",
+"desc": "Added sign-in to organizations managed in Anthropic's Enterprise Admin Console: after claude auth login, Claude Code applies the organization's settings and uses its cloud provider or gateway · Added easel, a built-in mod that draws charts when asked and under MCP metrics results, on Pro, Max and, where available, Team and Enterprise on macOS and Linux; turn automatic charts off in /config · Added CLAUDE_CODE_FULL_SIGN_IN_LINK=1 to print the full sign-in link, if the short one shows an error or a script reads values from it",
+"date": "2026-11-20T22:32:56Z",
+"tags": [
+"Claude Code",
+"Claude"
+],
+"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub anthropics/claude-code",
+"group": "Claude Code"
 },
 {
 "title": "Codex CLI 0.171.0",
@@ -683,54 +750,6 @@
 "group": "Статус OpenAI"
 },
 {
-"title": "«Никогда не рассматривалось»: правление Nvidia проливает холодную воду на возвращение Дженсена Хуанга",
-"orig": "「未曾考虑」：英伟达董事会给黄仁勋回归泼冷水",
-"desc": "С одной стороны — лоббирование возвращения, а с другой — расследование юридической фирмы: уровень совета директоров очень ясен. Сначала будет достигнуто заключение следствия, а затем наступит очередь говорить о кадровых вопросах.",
-"date": "2026-11-17T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261117e.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Apple Smart Банка Китая распространяется на iPad и Mac, а на облачные функции начинают распространяться ежедневные квоты",
-"orig": "国行 Apple 智能扩到 iPad 和 Mac，云端功能开始按天限额",
-"desc": "Бета-версия появится после реализации регистрации, но такие функции, как многоэтапные запросы и генерация изображений, которые потребляют мощность облачных вычислений, будут учитываться ежедневно, начиная с этой версии.",
-"date": "2026-11-17T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261117d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Соединенные Штаты распространяют контроль над чипами искусственного интеллекта на зарубежные компьютерные залы, а экспорт из пяти стран переходит на систему лицензирования.",
-"orig": "美国把 AI 芯片管制伸进海外机房，五国出口改为许可制",
-"desc": "Раньше речь шла о том, куда был доставлен чип, а теперь речь идет о том, кто использует его для вычислений.",
-"date": "2026-11-17T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261117c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Claude Code v2.1.326",
 "orig": "",
 "desc": "Добавлена поддержка включения режима кода при включенных командах агентов; если вы уже включили его, сеансы с включенными командами теперь начинаются в режиме кода. · Добавлено предупреждение при запуске, когда значение --allowedTools, --disallowedTools или --tools имеет запись, которая не выглядит как полное правило. · Добавлено сообщение, объясняющее, почему серверы MCP перестают загружаться, когда администратор добавляет управляемый-mcp.json во время сеанса.",
@@ -1149,23 +1168,6 @@
 ],
 "src": "status.openai.com",
 "group": "Статус OpenAI"
-},
-{
-"title": "Claude Code v2.1.321",
-"orig": "",
-"desc": "Добавлен Claude Fable 5.2 (claude-fable-5-2), теперь модель Fable по умолчанию — контекст 1M, 8/40 долларов за Mtok с чтением кэша 0,20 доллара за Mtok. · Добавлен параметр --settings <file> для удаленного управления Claude, который применяет файл настроек к каждому запускаемому сеансу; если файл изменяется, новый сеанс не начинается, пока вы не перезапустите удаленное управление Claude · Исправлены запросы MCP OAuth, отправляющие секреты, такие как токены обновления, на другой хост, когда сервер перенаправлял их.",
-"date": "2026-11-09T19:22:30Z",
-"tags": [
-"Claude Code",
-"Claude"
-],
-"url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.321",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub anthropics/claude-code",
-"group": "Claude Code"
 },
 {
 "title": "Повышенные ошибки разговора ChatGPT",
