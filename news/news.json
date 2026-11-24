@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-24T02:18:48Z",
+"updated": "2026-11-24T13:57:40Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,22 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "Gemini CLI v0.71.1",
+"orig": "",
+"desc": "fix(patch): cherry-pick aafdfdf to release/v0.71.0-pr-30420 to patch version v0.71.0 and create version 0.71.1",
+"date": "2026-11-24T03:50:24Z",
+"tags": [
+"Gemini"
+],
+"url": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.71.1",
+"kind": [
+"k-rel",
+"новая версия"
+],
+"src": "GitHub google-gemini/gemini-cli",
+"group": "Gemini CLI"
+},
 {
 "title": "Gemini CLI v0.71.0",
 "orig": "",
@@ -61,6 +77,86 @@
 "group": "Codex"
 },
 {
+"title": "T3 Code 被指默认开启遥测并读取本机 Claude 凭证文件，官方尚未回应",
+"orig": "T3 Code 被指默认开启遥测并读取本机 Claude 凭证文件，官方尚未回应",
+"desc": "指控来自 X 用户 @realchendahuang，附有 PR 编号；项目方与 Theo 在发帖时尚未回应，说法未经独立核实。",
+"date": "2026-11-24T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261124g.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Claude Duet 老用户每周领 500 美元额度，累计 3000 美元，名单已封闭",
+"orig": "Claude Duet 老用户每周领 500 美元额度，累计 3000 美元，名单已封闭",
+"desc": "仅限截止日前已同时开通 Duet 和付费订阅的美国账户，累计上限 3000 美元，当周用不完作废。",
+"date": "2026-11-24T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261124f.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "诺华 CEO 泼冷水：AI 十年治不好癌症，只够把新药研发从 12 年压到 8 年",
+"orig": "诺华 CEO 泼冷水：AI 十年治不好癌症，只够把新药研发从 12 年压到 8 年",
+"desc": "诺华 CEO、Anthropic 董事纳拉辛汉对《金融时报》说，科技行业在用工程思维看医学，人类对人体的了解只有约 5%。",
+"date": "2026-11-24T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261124e.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Anthropic 公开 VP≠VNP 的 Lean 4 证明，说明里先写了「没有人类检查过」",
+"orig": "Anthropic 公开 VP≠VNP 的 Lean 4 证明，说明里先写了「没有人类检查过」",
+"desc": "内部 Claude 模型给出哈密顿圈多项式的超多项式电路下界，机器核过推理，命题抄没抄对还得人来读",
+"date": "2026-11-24T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261124d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "280B 参数只激活 14B，百度以 Apache 2.0 开源文心 5.5 Flash Preview",
+"orig": "280B 参数只激活 14B，百度以 Apache 2.0 开源文心 5.5 Flash Preview",
+"desc": "权重以 Apache 2.0 协议上架 Hugging Face 与魔搭，上下文 100 万 token；流传的跑分尚无第三方验证。",
+"date": "2026-11-24T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261124d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
 "title": "Арендовать вычислительные мощности Anthropic выгоднее, чем использовать их самому, и Маск признает, что внутренне отстает",
 "orig": "把算力租给 Anthropic 比自己用更赚钱，马斯克对内认了落后",
 "desc": "С мая этого года SpaceX ежемесячно собирала миллиарды долларов за аренду вычислительных мощностей у Anthropic, Google и других компаний; Новый стандарт Маска — это доход на каждый графический процессор, а не подсчет показателей.",
@@ -69,6 +165,39 @@
 "Claude"
 ],
 "url": "https://ip.net.coffee/claude/news/20261124c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "关遥测的 PR 四次被拒，T3 Code 被指读取 Codex 登录文件并上传账号哈希",
+"orig": "关遥测的 PR 四次被拒，T3 Code 被指读取 Codex 登录文件并上传账号哈希",
+"desc": "开发者在 X 上列出两个 PR 编号，称该工具默认开启 PostHog 遥测；项目方暂未回应，指控未经独立核实。",
+"date": "2026-11-24T00:00:00Z",
+"tags": [
+"OpenAI",
+"Codex"
+],
+"url": "https://ip.net.coffee/gpt/news/20261124c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "Megaspeed 进黑名单次日，黄循财称新加坡不做芯片管制的绕行通道",
+"orig": "Megaspeed 进黑名单次日，黄循财称新加坡不做芯片管制的绕行通道",
+"desc": "美国商务部一次列入 7 家东南亚企业，阿里新加坡子公司在内；新加坡要保的是整个国家的芯片准入",
+"date": "2026-11-24T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261124c.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -102,6 +231,22 @@
 "ChatGPT"
 ],
 "url": "https://ip.net.coffee/gpt/news/20261124b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "豆包个人助理「小豆」开启公测，凭邀请码进场，附送免费额度",
+"orig": "豆包个人助理「小豆」开启公测，凭邀请码进场，附送免费额度",
+"desc": "内测七个多月后对外放量，独立产品先行，能力再逐步搬进豆包 App",
+"date": "2026-11-24T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261124b.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -469,89 +614,6 @@
 "group": "Статьи net.coffee"
 },
 {
-"title": "Менее чем за два месяца ChatGPT Space был переведен с эксклюзивной версии Pro на Plus.",
-"orig": "不到两个月，ChatGPT Space 从 Pro 专属下放到 Plus",
-"desc": "Мобильную версию можно редактировать, а страницы и слайды можно автоматически обновлять с помощью подключенных инструментов; три элемента, отсутствовавшие в первом выпуске, на этот раз будут восполнены.",
-"date": "2026-11-21T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT"
-],
-"url": "https://ip.net.coffee/gpt/news/20261121b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Трехсекундная циклическая анимация: Близнецы подписались на ChatGPT и запустили GIF.",
-"orig": "三秒循环动图，Gemini 跟着 ChatGPT 做起了 GIF",
-"desc": "Требуется подписка на Google AI, и первые восемь стран постепенно увеличивают ее объем; ChatGPT запустил аналогичные функции около двух недель назад.",
-"date": "2026-11-21T00:00:00Z",
-"tags": [
-"OpenAI",
-"ChatGPT",
-"Gemini"
-],
-"url": "https://ip.net.coffee/ai/news/20261121b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Антропный математик утверждает, что доказал гипотезу Римана через Клода, а доказательство на 250 000 страниц все еще ждет, пока кто-нибудь его закончит.",
-"orig": "Anthropic 数学家称借 Claude 证出黎曼猜想，25 万页证明还在等人读完",
-"desc": "Доказательство является общедоступным в коде Lean и прошло машинную проверку; однако ни один внешний эксперт не завершил обзор, а сам автор сказал, что он не до конца разобрался в математике.",
-"date": "2026-11-21T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261121a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "OpenAI блокирует цепочку вывода, и вероятность успеха красной команды падает с 54% до 0,2%.",
-"orig": "OpenAI 给推理链上锁，红队提取成功率从 54% 掉到 0.2%",
-"desc": "Цифры взяты из внутренних обзоров OpenAI; В той же статье также указаны размер блокировки учетной записи, новые ограничения API и список законодательной поддержки.",
-"date": "2026-11-21T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261121a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Курсор уступает Конгрессу и рассматривает возможность постепенного отказа от китайской модели взвешивания с открытым исходным кодом",
-"orig": "Cursor 向国会松口，考虑逐步停用中国开源权重模型",
-"desc": "Заявление было включено в отчеты двух комитетов Палаты представителей США; основой Composer 2 является Кими К2.5 из «Темной стороны луны», а в самом отчете признается, что в настоящее время в Соединенных Штатах не существует альтернативы открытого веса по равной цене.",
-"date": "2026-11-21T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261121a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
 "title": "Claude Code v2.1.330",
 "orig": "",
 "desc": "Добавлен вход в организации, управляемые в консоли администрирования предприятия Anthropic: после входа в систему с аутентификацией Claude Claude Code применяет настройки организации и использует ее облачного провайдера или шлюз. · Добавлен мольберт, встроенный мод, который рисует диаграммы по запросу и в соответствии с результатами метрик MCP в Pro, Max и, если доступно, Team и Enterprise в macOS и Linux; отключить автоматические диаграммы в /config · Добавлен CLAUDE_CODE_FULL_SIGN_IN_LINK=1 для печати полной ссылки для входа, если короткая ссылка показывает ошибку или скрипт считывает из нее значения.",
@@ -584,54 +646,6 @@
 ],
 "src": "GitHub openai/codex",
 "group": "Codex"
-},
-{
-"title": "21 рабочее место, Дубао делит офис ИИ на профессии",
-"orig": "21 个工作台，豆包把 AI 办公按职业切开",
-"desc": "Сначала распределите модель и биллинг, а затем используйте профессиональную среду для удержания пользователей.",
-"date": "2026-11-20T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261120e.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "«Это не я»: TikTok приносит миру глубокое фейковое напоминание",
-"orig": "「这不是我」：TikTok 把深伪提醒推向全球",
-"desc": "Обнаружение портретов перешло от испытаний в Соединенных Штатах к миру, и общественные детекторы также имеют явные возможности.",
-"date": "2026-11-20T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261120d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Если вы готовы подождать 8 часов, вы получите скидку 40%. OpenAI устанавливает цену за фоновые запросы.",
-"orig": "肯等 8 小时就打六折，OpenAI 给后台请求定了价",
-"desc": "Фоновый режим API ответов добавляет два ограничения по времени завершения: 2 часа и 8 часов. Если вы готовы стоять в очереди, вы можете сэкономить от 30% до 40%. Однако скидка является лишь целевым сроком, и данные по ZDR все равно будут временно размещены на рынке.",
-"date": "2026-11-20T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261120c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
 },
 {
 "title": "Claude Code v2.1.329",
