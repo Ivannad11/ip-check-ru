@@ -1,5 +1,5 @@
 {
-"updated": "2026-11-25T19:24:04Z",
+"updated": "2026-11-26T02:55:56Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
@@ -11,6 +11,90 @@
 ],
 "sources_failed": [],
 "items": [
+{
+"title": "「员工看不到内容」：OpenAI 私有推理进入小范围测试",
+"orig": "「员工看不到内容」：OpenAI 私有推理进入小范围测试",
+"desc": "零数据保留解决「存不存」，私有推理想解决「谁能看」，安全审查则要在两者之间找路",
+"date": "2026-11-26T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/gpt/news/20261126b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "缓存命中率涨 4.5%，Antigravity 配额能多跑 28% 任务",
+"orig": "缓存命中率涨 4.5%，Antigravity 配额能多跑 28% 任务",
+"desc": "配额重置是安抚，缓存提效才是长期账：智能体的成本大头在反复重读的上下文",
+"date": "2026-11-26T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261126b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "离职 32 天后，Claude Code 工程师 Thariq 落脚 OpenAI",
+"orig": "离职 32 天后，Claude Code 工程师 Thariq 落脚 OpenAI",
+"desc": "10 月底离开 Anthropic，11 月 25 日官宣新东家；新岗位细节本人尚未说明",
+"date": "2026-11-26T00:00:00Z",
+"tags": [
+"Claude",
+"Claude Code",
+"OpenAI"
+],
+"url": "https://ip.net.coffee/claude/news/20261126a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "一个月内第二位 Claude Code 老将投奔 OpenAI",
+"orig": "一个月内第二位 Claude Code 老将投奔 OpenAI",
+"desc": "Cat Wu 之后再添一员，OpenAI 的编程产品线越来越像一张「竞品校友录」",
+"date": "2026-11-26T00:00:00Z",
+"tags": [
+"OpenAI",
+"Claude Code",
+"Claude"
+],
+"url": "https://ip.net.coffee/gpt/news/20261126a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "B300 租价一个月跌 7%，亚洲数据中心开始找美国买家",
+"orig": "B300 租价一个月跌 7%，亚洲数据中心开始找美国买家",
+"desc": "租给谁也成了出口行为，东南亚机房的闲置算力正流向西方。",
+"date": "2026-11-26T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261126a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "Повышенный уровень ошибок в обзорах Codex GitHub и слияниях запросов на включение",
 "orig": "Elevated errors with Codex GitHub reviews and pull request merges",
@@ -278,7 +362,7 @@
 {
 "title": "Надстройка Claude для Microsoft 365 отсутствует у некоторых пользователей",
 "orig": "Claude for Microsoft 365 add-in missing for some users",
-"desc": "Мы продолжаем исследовать проблему, из-за которой надстройка Claude исчезает из Excel, Word и PowerPoint на Mac для пользователей, вошедших в Microsoft Office с личной учетной записью Microsoft. А пока мы рекомендуем использовать веб-версии Excel, Word и PowerPoint на сайте office.com, где Claude остается доступным для многих пользователей. Рабочие и учебные учетные записи не затронуты. мы будем п",
+"desc": "We have identified an issue with an upstream provider that is causing the Claude add-in to disappear from Excel, Word, and PowerPoint on Mac for users signed in to Microsoft Office with a personal Microsoft account. We are in contact with them. In the meantime, we recommend using the web versions of Excel, Word, and PowerPoint at office.com, where Claude remains available for many users. We will p",
 "date": "2026-11-24T00:10:40.018Z",
 "tags": [
 "Claude"
@@ -286,7 +370,7 @@
 "url": "https://stspg.io/ffdq2qfv8frk",
 "kind": [
 "k-inc",
-"крупный сбой · разбираются"
+"крупный сбой · причина найдена"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -612,86 +696,6 @@
 "OpenAI"
 ],
 "url": "https://ip.net.coffee/ai/news/20261123d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "16 месяцев, оценка в 1,6 миллиарда долларов США, Ant возглавляет инвестиции в компанию по производству идеальных роботов Zhijian Power.",
-"orig": "16 个月、16 亿美元估值，蚂蚁领投理想系机器人公司至简动力",
-"desc": "В ходе предыдущих пяти раундов было собрано 2 миллиарда юаней, а в этом раунде 100 миллионов долларов США были обменены только на около 6% акций; Ant, которая возглавила инвестиции, также имеет под своей крышей компанию по производству робототехники, которая привлекает средства извне.",
-"date": "2026-11-23T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261123c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "После разгрома в 1,7 триллиона долларов DeepSeek и Dark Side of the Moon все еще выстраиваются в очередь, чтобы выйти на биржу",
-"orig": "1.7 万亿美元溃退之后，DeepSeek 和月之暗面还在排队上市",
-"desc": "Говорят, что «Темная сторона Луны» оценивается примерно в 50 миллиардов долларов США и планирует выйти в Гонконге в первом квартале следующего года; Zhipu и MiniMax, вышедшие на листинг первыми, завершили полный оборот рынка.",
-"date": "2026-11-23T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261123b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Чтобы протестировать ИИ-агент Chrome, Google создал фальшивый Интернет",
-"orig": "为了测 Chrome 的 AI 代理，谷歌造了一个假互联网",
-"desc": "Веб-сайт в Mirror Dimension создается, доменное имя является реальным, а атаки осуществляются автоматически; раскрывается только скорость вопросов, но не раскрывается счет.",
-"date": "2026-11-23T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261123b.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Anthropic устанавливает правила для 22 андеррайтинговых фирм: команды ограничены четырьмя людьми, а соперники не допускаются в течение полугода.",
-"orig": "Anthropic 给 22 家承销行立规矩：团队限四人，半年不碰对手",
-"desc": "Reuters раскрыло закулисные подробности этого рекордного IPO: ограниченное количество людей, подписание конкурсов, водяные знаки на документах, процесс точно такой же, как у SpaceX",
-"date": "2026-11-23T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261123a.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "OpenAI был включен в список конкурентов по инвестиционно-банковской деятельности своего конкурента, и те же банкиры не смогут обслуживать его в течение шести месяцев.",
-"orig": "OpenAI 被写进对手的投行竞业名单，半年内同一批银行家不得为它服务",
-"desc": "В условиях IPO Anthropic OpenAI указан в качестве основной цели уклонения, и пострадала группа банкиров с Уолл-стрит, работающих с обеих сторон.",
-"date": "2026-11-23T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/gpt/news/20261123a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -1120,23 +1124,6 @@
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
-},
-{
-"title": "Codex CLI 0.169.0",
-"orig": "",
-"desc": "Рабочая область терминала с возможностью подписки поддерживает несколько вкладок бокового чата. Переключайтесь между ними с помощью клавиатуры или мыши и снова открывайте сохраненные локальные чаты после перезапуска Кодекса. · Поиск старых задач в командном центре агента по имени, предварительному просмотру приглашения или рабочему каталогу. · Включите параметр «Свернуть сведения о повороте» в полноэкранной расшифровке, чтобы складывать выполненные действия под каждым запросом, сохраняя при этом ответы видимыми, а выходные данные инструмента — доступными для поиска.",
-"date": "2026-11-13T08:37:05Z",
-"tags": [
-"Codex",
-"OpenAI"
-],
-"url": "https://github.com/openai/codex/releases/tag/rust-v0.169.0",
-"kind": [
-"k-rel",
-"новая версия"
-],
-"src": "GitHub openai/codex",
-"group": "Codex"
 },
 {
 "title": "Сайты: сбой публикации",
