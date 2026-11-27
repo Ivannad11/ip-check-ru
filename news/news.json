@@ -1,16 +1,83 @@
 {
-"updated": "2026-11-27T05:06:56Z",
+"updated": "2026-11-27T15:15:38Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
-"Статус OpenAI",
+"Статус OpenAI"
+],
+"sources_failed": [
 "Claude Code",
 "Codex",
 "Gemini CLI",
 "MCP"
 ],
-"sources_failed": [],
 "items": [
+{
+"title": "Degraded performance for Claude Fable 5.2",
+"orig": "Degraded performance for Claude Fable 5.2",
+"desc": "The issue affecting claude.ai has been resolved. Impact occurred from 02:20 PT / 10:20 UTC to 02:40 PT / 10:40 UTC.",
+"date": "2026-11-27T10:34:01.804Z",
+"tags": [
+"Claude",
+"Claude Code",
+"API"
+],
+"url": "https://stspg.io/n4l14k7m49zw",
+"kind": [
+"k-ok",
+"крупный сбой · решено"
+],
+"src": "status.claude.com",
+"group": "Статус Claude"
+},
+{
+"title": "Artex 再被点名：这次的目标是美国情报机构",
+"orig": "Artex 再被点名：这次的目标是美国情报机构",
+"desc": "一个原作者已删库的开源框架，一个月内被三家安全机构和 FBI 相继点名",
+"date": "2026-11-27T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261127d.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "一句话剪辑落进剪映多轨草稿，豆包工作拿下独家插件",
+"orig": "一句话剪辑落进剪映多轨草稿，豆包工作拿下独家插件",
+"desc": "AI 先粗剪，人再精修：这次的关键不在一句话，而在草稿",
+"date": "2026-11-27T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261127c.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "千亿元融资名单上，出现了一家卖柠檬水的公司",
+"orig": "千亿元融资名单上，出现了一家卖柠檬水的公司",
+"desc": "近 30 家投资方里，有云厂商、电池厂、芯片厂、手机厂，还有一家茶饮连锁。",
+"date": "2026-11-27T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261127b.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "Антидистилляционный затвор упал, GLM-5.5 и Kimi K4 могут быть задержаны | Клод Ньюс",
 "orig": "反蒸馏闸门落下，GLM-5.5 与 Kimi K4 或双双推迟 | Claude 资讯",
@@ -36,6 +103,22 @@
 "OpenAI"
 ],
 "url": "https://ip.net.coffee/gpt/news/20261127a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
+{
+"title": "“用完 AI 预算再加人”：纳德拉承认微软应届生招聘放缓",
+"orig": "“用完 AI 预算再加人”：纳德拉承认微软应届生招聘放缓",
+"desc": "微软的说法是重组期暂时放缓；可公司人数和外部研究的数字都在同一个方向上。",
+"date": "2026-11-27T00:00:00Z",
+"tags": [
+"OpenAI"
+],
+"url": "https://ip.net.coffee/ai/news/20261127a.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -577,71 +660,6 @@
 "OpenAI"
 ],
 "url": "https://ip.net.coffee/ai/news/20261124d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Арендовать вычислительные мощности Anthropic выгоднее, чем использовать их самому, и Маск признает, что внутренне отстает",
-"orig": "把算力租给 Anthropic 比自己用更赚钱，马斯克对内认了落后",
-"desc": "С мая этого года SpaceX ежемесячно собирала миллиарды долларов за аренду вычислительных мощностей у Anthropic, Google и других компаний; Новый стандарт Маска — это доход на каждый графический процессор, а не подсчет показателей.",
-"date": "2026-11-24T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261124c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Пиар о телеметрии был отклонен четыре раза, а T3 Code обвинили в чтении файла входа в Кодекс и загрузке хэша учетной записи.",
-"orig": "关遥测的 PR 四次被拒，T3 Code 被指读取 Codex 登录文件并上传账号哈希",
-"desc": "Разработчик указал два PR-номера на X, заявив, что инструмент по умолчанию включает телеметрию PostHog; проект еще не ответил, и обвинение не прошло независимую проверку.",
-"date": "2026-11-24T00:00:00Z",
-"tags": [
-"OpenAI",
-"Codex"
-],
-"url": "https://ip.net.coffee/gpt/news/20261124c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "На следующий день после того, как Megaspeed была занесена в черный список, Лоуренс Вонг заявил, что Сингапур не предоставляет обходной путь для контроля чипов.",
-"orig": "Megaspeed 进黑名单次日，黄循财称新加坡不做芯片管制的绕行通道",
-"desc": "Министерство торговли США одновременно включило в листинг семь компаний Юго-Восточной Азии, включая сингапурскую дочернюю компанию Alibaba; Сингапур хочет обеспечить доступ к чипам для всей страны.",
-"date": "2026-11-24T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261124c.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Бережливое доказательство гипотезы Римана было обвинено в бездействии. Автор признал, что код полный мусора, но его можно скомпилировать.",
-"orig": "黎曼猜想的 Lean 证明被指空转，作者承认代码满是垃圾但能编译",
-"desc": "Здесь около 17 миллионов строк и 175 000 файлов, а удобочитаемой версии нет; скептики говорят, что ключевое определение всегда верно, а автор говорит, что вывод верен, но код грязный.",
-"date": "2026-11-24T00:00:00Z",
-"tags": [
-"Claude"
-],
-"url": "https://ip.net.coffee/claude/news/20261124b.html",
 "kind": [
 "k-art",
 "статья net.coffee"
@@ -1468,24 +1486,6 @@
 "API"
 ],
 "url": "https://stspg.io/39x7qh3sd7bd",
-"kind": [
-"k-ok",
-"крупный сбой · решено"
-],
-"src": "status.claude.com",
-"group": "Статус Claude"
-},
-{
-"title": "Повышенные ошибки для Claude Sonnet 5.5",
-"orig": "Elevated errors for Claude Sonnet 5.5",
-"desc": "Проблема, влияющая на сервисы Claude, решена.",
-"date": "2026-10-27T09:14:35.052Z",
-"tags": [
-"Claude",
-"Claude Code",
-"API"
-],
-"url": "https://stspg.io/rql9h590npxd",
 "kind": [
 "k-ok",
 "крупный сбой · решено"
