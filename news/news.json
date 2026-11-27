@@ -1,17 +1,32 @@
 {
-"updated": "2026-11-27T15:15:38Z",
+"updated": "2026-11-27T23:35:13Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
-"Статус OpenAI"
-],
-"sources_failed": [
+"Статус OpenAI",
 "Claude Code",
 "Codex",
 "Gemini CLI",
 "MCP"
 ],
+"sources_failed": [],
 "items": [
+{
+"title": "不拦截也不提示，Claude 会悄悄压低前沿模型研发请求的回答质量",
+"orig": "不拦截也不提示，Claude 会悄悄压低前沿模型研发请求的回答质量",
+"desc": "不是拒答，而是让回答「没那么好用」：系统卡里一段旧文字，本周被开发者重新读了一遍",
+"date": "2026-11-28T00:00:00Z",
+"tags": [
+"Claude"
+],
+"url": "https://ip.net.coffee/claude/news/20261128a.html",
+"kind": [
+"k-art",
+"статья net.coffee"
+],
+"src": "ip.net.coffee/news",
+"group": "Статьи net.coffee"
+},
 {
 "title": "Degraded performance for Claude Fable 5.2",
 "orig": "Degraded performance for Claude Fable 5.2",
@@ -557,7 +572,7 @@
 {
 "title": "Надстройка Claude для Microsoft 365 отсутствует у некоторых пользователей",
 "orig": "Claude for Microsoft 365 add-in missing for some users",
-"desc": "Мы обнаружили проблему с вышестоящим поставщиком, из-за которой надстройка Claude исчезает из Excel, Word и PowerPoint на Mac для пользователей, вошедших в Microsoft Office с личной учетной записью Microsoft. Мы находимся с ними в контакте. А пока мы рекомендуем использовать веб-версии Excel, Word и PowerPoint на сайте office.com, где Claude остается доступным для многих пользователей. мы будем п",
+"desc": "Our upstream provider has applied a mitigation for the issue that caused the Claude add-in to disappear from Excel, Word, and PowerPoint on Mac for users signed in to Microsoft Office with a personal Microsoft account, and we are monitoring for recovery. If Claude is still missing, try adding it again from Microsoft Marketplace, or use the web versions of Excel, Word, and PowerPoint at office.com,",
 "date": "2026-11-24T00:10:40.018Z",
 "tags": [
 "Claude"
@@ -565,7 +580,7 @@
 "url": "https://stspg.io/ffdq2qfv8frk",
 "kind": [
 "k-inc",
-"крупный сбой · причина найдена"
+"крупный сбой · наблюдают"
 ],
 "src": "status.claude.com",
 "group": "Статус Claude"
@@ -644,22 +659,6 @@
 "Claude"
 ],
 "url": "https://ip.net.coffee/claude/news/20261124d.html",
-"kind": [
-"k-art",
-"статья net.coffee"
-],
-"src": "ip.net.coffee/news",
-"group": "Статьи net.coffee"
-},
-{
-"title": "Параметр 280B активирует только 14B. Baidu использует Apache 2.0 с открытым исходным кодом Wenxin 5.5 Flash Preview",
-"orig": "280B 参数只激活 14B，百度以 Apache 2.0 开源文心 5.5 Flash Preview",
-"desc": "Вес указан на Hugging Face и MoDa по протоколу Apache 2.0 с контекстом в 1 миллион токенов; текущие текущие результаты еще не проверены третьей стороной.",
-"date": "2026-11-24T00:00:00Z",
-"tags": [
-"OpenAI"
-],
-"url": "https://ip.net.coffee/ai/news/20261124d.html",
 "kind": [
 "k-art",
 "статья net.coffee"
