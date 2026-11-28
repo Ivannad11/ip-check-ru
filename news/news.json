@@ -1,15 +1,16 @@
 {
-"updated": "2026-11-27T23:35:13Z",
+"updated": "2026-11-28T08:01:57Z",
 "sources_ok": [
 "Статьи net.coffee",
 "Статус Claude",
-"Статус OpenAI",
+"Статус OpenAI"
+],
+"sources_failed": [
 "Claude Code",
 "Codex",
 "Gemini CLI",
 "MCP"
 ],
-"sources_failed": [],
 "items": [
 {
 "title": "不拦截也不提示，Claude 会悄悄压低前沿模型研发请求的回答质量",
